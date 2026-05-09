@@ -118,8 +118,7 @@
   .program-item.current .prog-time .time { color: #3B6D11; }
   .prog-body { flex: 1; min-width: 0; }
   .prog-title { font-size: 13px; font-weight: 600; }
-  .prog-desc { font-size: 11px; color: #718096; margin-top: 2px; display: none; }
-  .prog-desc.visible { display: block; }
+  .prog-desc { font-size: 11px; color: #718096; margin-top: 3px; line-height: 1.4; }
   .badges { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; }
   .badge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; }
   .badge-live { background: #FCEBEB; color: #A32D2D; }
@@ -702,6 +701,7 @@ function renderChannels() {
         </div>
         <div class="prog-body">
           <div class="prog-title">${p.title}</div>
+          ${p.desc ? `<div class="prog-desc">${p.desc}</div>` : ''}
           <div class="badges">${badgeHTML(p.badge)}</div>
         </div>
       </div>`;
