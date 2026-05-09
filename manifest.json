@@ -1,0 +1,13 @@
+{
+  "name": "Guide TV Israël",
+  "short_name": "TV Guide IL",
+  "description": "Programmes TV en heure israélienne",
+  "start_url": "/tv-guide-israel/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#185FA5",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

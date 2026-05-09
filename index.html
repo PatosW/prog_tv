@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide TV Israël</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#185FA5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="TV Guide IL">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: #1a1a2e; }
+
+  #app { max-width: 600px; margin: 0 auto; min-height: 100vh; background: #fff; }
+
+  /* HEADER */
+  header {
+    background: #185FA5;
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .logo-tv {
+    background: #fff;
+    color: #185FA5;
+    font-weight: 900;
+    font-size: 18px;
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  header h1 { font-size: 17px; font-weight: 700; }
+  header p { font-size: 11px; opacity: 0.8; }
+  #clock { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  #clock-label { font-size: 10px; opacity: 0.75; text-align: right; }
+
+  /* SEARCH & CONTROLS */
+  .controls { padding: 10px 12px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+  .search-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  #search {
+    flex: 1; padding: 8px 12px; border: 1.5px solid #cbd5e0; border-radius: 20px;
+    font-size: 14px; outline: none; background: #fff;
+  }
+  #search:focus { border-color: #185FA5; }
+  #btn-refresh {
+    padding: 8px 14px; background: #185FA5; color: #fff; border: none;
+    border-radius: 20px; font-size: 13px; cursor: pointer; white-space: nowrap;
+  }
+  #btn-refresh:hover { background: #0f4a8a; }
+
+  /* TABS */
+  .tabs { display: flex; overflow-x: auto; gap: 4px; padding: 0 0 4px; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0; padding: 6px 12px; border-radius: 16px; font-size: 13px; font-weight: 500;
+    cursor: pointer; border: 1.5px solid #cbd5e0; background: #fff; color: #4a5568;
+    transition: all 0.15s;
+  }
+  .tab.active { background: #185FA5; color: #fff; border-color: #185FA5; }
+
+  /* GENRE FILTERS */
+  .genre-filters { display: flex; gap: 6px; overflow-x: auto; padding: 8px 12px; scrollbar-width: none; background: #fff; border-bottom: 1px solid #e2e8f0; }
+  .genre-filters::-webkit-scrollbar { display: none; }
+  .gf {
+    flex-shrink: 0; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 500;
+    cursor: pointer; border: 1.5px solid #cbd5e0; background: #f8fafc; color: #4a5568;
+  }
+  .gf.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+
+  /* CHANNEL CARDS */
+  .channels-list { padding: 8px 0; }
+  .channel-card {
+    margin: 6px 10px; border-radius: 12px; overflow: hidden;
+    border: 1px solid #e2e8f0; background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .channel-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; cursor: pointer; user-select: none;
+  }
+  .channel-logo {
+    width: 44px; height: 44px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 11px; text-align: center; line-height: 1.2;
+  }
+  .channel-info { flex: 1; min-width: 0; }
+  .channel-name { font-size: 14px; font-weight: 700; }
+  .channel-now { font-size: 12px; color: #4a5568; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .channel-now .now-time { color: #3B6D11; font-weight: 600; }
+  .fav-btn {
+    background: none; border: none; font-size: 20px; cursor: pointer;
+    padding: 4px; line-height: 1; flex-shrink: 0;
+  }
+  .expand-btn { background: none; border: none; font-size: 16px; cursor: pointer; color: #718096; padding: 4px; }
+
+  /* PROGRAM LIST */
+  .program-list { border-top: 1px solid #e2e8f0; display: none; }
+  .program-list.open { display: block; }
+  .program-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 12px; border-bottom: 1px solid #f0f4f8; cursor: pointer;
+  }
+  .program-item:last-child { border-bottom: none; }
+  .program-item.current { background: #EAF3DE; }
+  .prog-time { min-width: 48px; }
+  .prog-time .time { font-size: 13px; font-weight: 600; color: #1a1a2e; }
+  .prog-time .now-indicator { font-size: 10px; color: #3B6D11; font-weight: 600; }
+  .program-item.current .prog-time .time { color: #3B6D11; }
+  .prog-body { flex: 1; min-width: 0; }
+  .prog-title { font-size: 13px; font-weight: 600; }
+  .prog-desc { font-size: 11px; color: #718096; margin-top: 2px; display: none; }
+  .prog-desc.visible { display: block; }
+  .badges { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; }
+  .badge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; }
+  .badge-live { background: #FCEBEB; color: #A32D2D; }
+  .badge-new { background: #E6F1FB; color: #185FA5; }
+  .badge-film { background: #EEEDFE; color: #534AB7; }
+  .badge-doc { background: #E1F5EE; color: #0F6E56; }
+  .badge-sport { background: #FAEEDA; color: #633806; }
+
+  /* EMPTY STATE */
+  .empty { text-align: center; padding: 60px 20px; color: #718096; }
+  .empty .icon { font-size: 48px; margin-bottom: 12px; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 200; align-items: flex-end; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff; border-radius: 16px 16px 0 0; padding: 20px;
+    max-width: 600px; width: 100%; max-height: 70vh; overflow-y: auto;
+  }
+  .modal h3 { font-size: 16px; margin-bottom: 8px; }
+  .modal p { font-size: 14px; color: #4a5568; line-height: 1.5; }
+  .modal .meta { font-size: 12px; color: #718096; margin-bottom: 12px; }
+  .modal-close { float: right; background: #e2e8f0; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 16px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="header-left">
+      <div class="logo-tv">TV</div>
+      <div>
+        <h1>Guide TV Israël</h1>
+        <p>Heure locale (UTC+3)</p>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div id="clock">--:--:--</div>
+      <div id="clock-label">Heure IL</div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="search-row">
+      <input id="search" type="search" placeholder="🔍 Rechercher une chaîne ou émission…">
+      <button id="btn-refresh">↺ Actualiser</button>
+    </div>
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-tab="all">Toutes</div>
+      <div class="tab" data-tab="fr">Françaises</div>
+      <div class="tab" data-tab="be">Belges</div>
+      <div class="tab" data-tab="il">Israéliennes</div>
+      <div class="tab" data-tab="sport">Sport</div>
+      <div class="tab" data-tab="cinema">Cinéma</div>
+      <div class="tab" data-tab="info">Info</div>
+      <div class="tab" data-tab="fav">⭐ Favoris</div>
+    </div>
+  </div>
+
+  <div class="genre-filters" id="genre-filters">
+    <div class="gf active" data-genre="all">Tout</div>
+    <div class="gf" data-genre="film">Films</div>
+    <div class="gf" data-genre="série">Séries</div>
+    <div class="gf" data-genre="sport">Sport</div>
+    <div class="gf" data-genre="info">Info</div>
+    <div class="gf" data-genre="doc">Docs</div>
+  </div>
+
+  <div class="channels-list" id="channels-list"></div>
+  <div class="empty" id="empty" style="display:none">
+    <div class="icon">📺</div>
+    <p>Aucune chaîne trouvée</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="meta" id="modal-meta"></div>
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+
+const CHANNELS = [
+  // FRANÇAISES
+  { id:'tf1', name:'TF1', cat:'fr', subcats:['fr'], logo:{bg:'#B5D4F4',fg:'#042C53'}, programs:[
+    {time:'07:50',title:'Télématin',genre:'magazine',badge:'',desc:'Magazine matinal : actus, météo, reportages de société.'},
+    {time:'11:00',title:'Les Douze Coups de Midi',genre:'divertissement',badge:'',desc:'Jeu culte animé par Jean-Luc Reichmann. Trouvez l\'Étoile Mystérieuse !'},
+    {time:'13:00',title:'Journal de 13h',genre:'info',badge:'live',desc:'Actualités nationales et internationales avec Adel Hana.'},
+    {time:'14:55',title:'Plus belle la vie, encore plus belle',genre:'série',badge:'',desc:'Nouveaux rebondissements au Mistral — la série culte continue.'},
+    {time:'15:55',title:'Demain nous appartient',genre:'série',badge:'',desc:'Intrigues et mystères à Sète — série quotidienne.'},
+    {time:'17:25',title:'NCIS Los Angeles',genre:'série',badge:'',desc:'L\'équipe résout une affaire de trafic d\'armes impliquant des militaires.'},
+    {time:'21:00',title:'Journal de 20h',genre:'info',badge:'live',desc:'Le rendez-vous incontournable avec Gilles Bouleau.'},
+    {time:'22:10',title:'Film du soir',genre:'film',badge:'film',desc:'Grand film en première diffusion — thriller ou comédie.'},
+    {time:'00:20',title:'Le 23h',genre:'info',badge:'',desc:'Résumé de la soirée et dernières nouvelles.'}
+  ]},
+  { id:'france2', name:'France 2', cat:'fr', subcats:['fr'], logo:{bg:'#C0DD97',fg:'#173404'}, programs:[
+    {time:'08:00',title:'Télématin',genre:'magazine',badge:'',desc:'Émission matinale : actualités, tendances, reportages.'},
+    {time:'10:40',title:'Slam',genre:'divertissement',badge:'',desc:'Jeu de lettres animé par Cyril Féraud.'},
+    {time:'13:00',title:'Journal de 13h',genre:'info',badge:'live',desc:'Midi Info avec toute l\'actualité du jour.'},
+    {time:'14:40',title:'Toute une histoire',genre:'magazine',badge:'',desc:'Histoires de vie et témoignages poignants.'},
+    {time:'18:00',title:'Questions pour un champion',genre:'divertissement',badge:'',desc:'Le célèbre jeu de culture générale de Samuel Étienne.'},
+    {time:'20:00',title:'Journal de 20h',genre:'info',badge:'live',desc:'Le journal avec Laurent Delahousse ou Anne-Sophie Lapix.'},
+    {time:'22:10',title:'Infrarouge / Documentaire',genre:'doc',badge:'doc',desc:'Documentaire de société ou reportage d\'investigation.'},
+    {time:'23:40',title:'Complément d\'enquête',genre:'magazine',badge:'',desc:'Magazine d\'investigation sur un grand sujet d\'actualité.'}
+  ]},
+  { id:'france3', name:'France 3', cat:'fr', subcats:['fr'], logo:{bg:'#9FE1CB',fg:'#04342C'}, programs:[
+    {time:'08:00',title:'Matinales régionales',genre:'info',badge:'live',desc:'L\'info locale et nationale pour bien commencer la journée.'},
+    {time:'13:00',title:'12/13',genre:'info',badge:'live',desc:'Journal national et régional de midi.'},
+    {time:'15:00',title:'Inspecteur Barnaby',genre:'série',badge:'',desc:'Série policière britannique — meurtre mystérieux dans la campagne anglaise.'},
+    {time:'20:00',title:'19/20',genre:'info',badge:'live',desc:'Journal régional de France 3.'},
+    {time:'21:00',title:'Journal de 20h',genre:'info',badge:'live',desc:'Actualités nationales en direct.'},
+    {time:'22:10',title:'Téléfilm du soir',genre:'film',badge:'film',desc:'Téléfilm ou film de cinéma en soirée sur France 3.'},
+    {time:'00:00',title:'Soir 3',genre:'info',badge:'live',desc:'Journal de la nuit sur France 3.'}
+  ]},
+  { id:'france4', name:'France 4', cat:'fr', subcats:['fr'], logo:{bg:'#5DCAA5',fg:'#04342C'}, programs:[
+    {time:'10:00',title:'Programmes jeunesse',genre:'animation',badge:'',desc:'Dessins animés et programmes pour enfants.'},
+    {time:'12:00',title:'Zorro',genre:'série',badge:'',desc:'La série d\'aventure classique.'},
+    {time:'15:00',title:'Au nom de la vérité',genre:'magazine',badge:'',desc:'Émission de société animée par Rachid M\'Barki.'},
+    {time:'18:00',title:'Outremer.le mag',genre:'magazine',badge:'',desc:'Magazine dédié aux territoires d\'Outre-mer.'},
+    {time:'21:35',title:'Quotidien',genre:'divertissement',badge:'new',desc:'Le magazine décalé de Yann Barthès — reportages, interviews, humour.'},
+    {time:'22:35',title:'Série de soirée',genre:'série',badge:'',desc:'Série en soirée sur France 4.'}
+  ]},
+  { id:'france5', name:'France 5', cat:'fr', subcats:['fr'], logo:{bg:'#1D9E75',fg:'#E1F5EE'}, programs:[
+    {time:'09:00',title:'C dans l\'air',genre:'magazine',badge:'',desc:'Débat d\'actualité avec experts autour d\'un grand thème du jour.'},
+    {time:'12:30',title:'Le Magazine de la santé',genre:'magazine',badge:'',desc:'Conseils santé avec Dr. Marina Carrère d\'Encausse.'},
+    {time:'15:00',title:'Documentaires',genre:'doc',badge:'doc',desc:'Documentaires scientifiques, historiques ou nature.'},
+    {time:'18:45',title:'C à vous',genre:'magazine',badge:'',desc:'Talk-show culturel animé par Anne-Élisabeth Lemoine.'},
+    {time:'20:00',title:'C à vous la suite',genre:'magazine',badge:'',desc:'Prolongation avec invités et culture.'},
+    {time:'21:35',title:'C dans l\'air (rediff)',genre:'magazine',badge:'',desc:'Rediffusion du magazine d\'analyse politique et sociale.'},
+    {time:'23:30',title:'Documentaire de nuit',genre:'doc',badge:'doc',desc:'Grand documentaire en seconde partie de soirée.'}
+  ]},
+  { id:'m6', name:'M6', cat:'fr', subcats:['fr'], logo:{bg:'#FAC775',fg:'#412402'}, programs:[
+    {time:'08:00',title:'Météo à 6',genre:'magazine',badge:'',desc:'Prévisions météo et informations pratiques du matin.'},
+    {time:'10:00',title:'Capital (rediff)',genre:'doc',badge:'doc',desc:'Enquêtes sur les grandes tendances de consommation.'},
+    {time:'13:45',title:'Le 12h45',genre:'info',badge:'live',desc:'Journal de midi de M6.'},
+    {time:'14:50',title:'Mariés au premier regard',genre:'divertissement',badge:'',desc:'Des inconnus acceptent de se marier sans se connaître.'},
+    {time:'19:45',title:'Le 19:45',genre:'info',badge:'live',desc:'Journal du soir présenté par Nathalie Renoux.'},
+    {time:'22:10',title:'Zone Interdite / Capital',genre:'doc',badge:'doc',desc:'Grand reportage en prime time : enquête immersive société.'},
+    {time:'00:00',title:'66 Minutes',genre:'magazine',badge:'',desc:'Magazine de reportages 66 minutes.'}
+  ]},
+  { id:'w9', name:'W9', cat:'fr', subcats:['fr'], logo:{bg:'#EF9F27',fg:'#412402'}, programs:[
+    {time:'10:00',title:'Séries du matin',genre:'série',badge:'',desc:'Séries américaines en matinée.'},
+    {time:'13:30',title:'Météo',genre:'info',badge:'',desc:'Bulletin météo national.'},
+    {time:'15:00',title:'Scènes de ménages',genre:'série',badge:'',desc:'La comédie culte de M6 en rediffusion.'},
+    {time:'19:30',title:'Scènes de ménages',genre:'série',badge:'',desc:'Nouveaux épisodes de la sitcom familiale.'},
+    {time:'22:10',title:'Film ou série',genre:'film',badge:'film',desc:'Film ou série en prime time sur W9.'}
+  ]},
+  { id:'tfx', name:'TFX', cat:'fr', subcats:['fr'], logo:{bg:'#378ADD',fg:'#042C53'}, programs:[
+    {time:'10:00',title:'Séries du matin',genre:'série',badge:'',desc:'Séries en matinée sur TFX.'},
+    {time:'14:00',title:'Confessions intimes',genre:'magazine',badge:'',desc:'Témoignages et confidences de familles françaises.'},
+    {time:'18:00',title:'Météo',genre:'info',badge:'',desc:'Bulletin météo.'},
+    {time:'22:10',title:'Alien',genre:'film',badge:'film',desc:'Chef-d\'œuvre de Ridley Scott — l\'équipage du Nostromo face à une créature mortelle.'},
+    {time:'00:30',title:'Alien 3',genre:'film',badge:'film',desc:'Troisième volet — Ripley échoue sur une planète-prison.'}
+  ]},
+  { id:'tmc', name:'TMC', cat:'fr', subcats:['fr'], logo:{bg:'#85B7EB',fg:'#042C53'}, programs:[
+    {time:'10:00',title:'Météo',genre:'info',badge:'',desc:'Prévisions météo nationales.'},
+    {time:'14:00',title:'Jour J',genre:'magazine',badge:'',desc:'Magazine d\'actualité de TMC.'},
+    {time:'19:45',title:'Quotidien',genre:'divertissement',badge:'',desc:'Rediffusion du magazine de Yann Barthès.'},
+    {time:'22:10',title:'Série américaine',genre:'série',badge:'',desc:'Série policière ou comédie en prime time.'}
+  ]},
+  { id:'tf1sf', name:'TF1 Séries Films', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#185FA5',fg:'#E6F1FB'}, programs:[
+    {time:'09:00',title:'Séries du matin',genre:'série',badge:'',desc:'Séries policières et drames en matinée.'},
+    {time:'14:00',title:'Film de l\'après-midi',genre:'film',badge:'film',desc:'Film en après-midi sur TF1 Séries Films.'},
+    {time:'19:00',title:'Série en soirée',genre:'série',badge:'',desc:'Série en début de soirée.'},
+    {time:'22:10',title:'Film en prime time',genre:'film',badge:'film',desc:'Grand film policier ou thriller en soirée.'},
+    {time:'00:10',title:'Série de nuit',genre:'série',badge:'',desc:'Série en deuxième partie de nuit.'}
+  ]},
+  { id:'canalplus', name:'Canal+', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#CECBF6',fg:'#26215C'}, programs:[
+    {time:'08:30',title:'Canal News',genre:'info',badge:'live',desc:'Actualités Canal+ en direct le matin.'},
+    {time:'10:00',title:'Série Canal+',genre:'série',badge:'new',desc:'Création originale Canal+ en matinée.'},
+    {time:'13:00',title:'Le Grand Journal',genre:'magazine',badge:'',desc:'Magazine culturel et d\'actualité de Canal+.'},
+    {time:'22:00',title:'Film ou série en clair',genre:'film',badge:'film',desc:'Grande fiction en prime time sur Canal+.'},
+    {time:'00:00',title:'Late Canal+',genre:'magazine',badge:'',desc:'Magazine de fin de soirée Canal+.'}
+  ]},
+  { id:'canalbo', name:'Canal+ Box Office', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#AFA9EC',fg:'#26215C'}, programs:[
+    {time:'11:00',title:'Film récent',genre:'film',badge:'film',desc:'Films récents en avant-première sur Canal+ Box Office.'},
+    {time:'15:00',title:'Film de l\'après-midi',genre:'film',badge:'film',desc:'Seconde diffusion d\'un film Box Office.'},
+    {time:'22:00',title:'Film en soirée',genre:'film',badge:'film',desc:'Film récemment sorti en salle, en avant-première.'}
+  ]},
+  { id:'canalcine', name:'Canal+ Cinéma(s)', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#7F77DD',fg:'#EEEDFE'}, programs:[
+    {time:'10:00',title:'Film classique',genre:'film',badge:'film',desc:'Classique du cinéma mondial en matinée.'},
+    {time:'15:00',title:'Film français',genre:'film',badge:'film',desc:'Film français contemporain ou culte.'},
+    {time:'22:00',title:'Film en soirée',genre:'film',badge:'film',desc:'Grand film de cinéma en prime time.'},
+    {time:'00:15',title:'Film de nuit',genre:'film',badge:'film',desc:'Film en deuxième partie de soirée.'}
+  ]},
+  { id:'canaldocs', name:'Canal+ Docs', cat:'fr', subcats:['fr'], logo:{bg:'#534AB7',fg:'#EEEDFE'}, programs:[
+    {time:'09:00',title:'Documentaire nature',genre:'doc',badge:'doc',desc:'Documentaire animalier ou environnemental.'},
+    {time:'13:00',title:'Docu société',genre:'doc',badge:'doc',desc:'Reportage de société ou enquête.'},
+    {time:'22:00',title:'Grand documentaire',genre:'doc',badge:'doc',desc:'Documentaire en prime time — histoire, science ou société.'}
+  ]},
+  { id:'canalfoot', name:'Canal+ Foot', cat:'fr', subcats:['fr','sport'], logo:{bg:'#3C3489',fg:'#EEEDFE'}, programs:[
+    {time:'09:00',title:'Foot Mercato',genre:'sport',badge:'',desc:'Transferts, rumeurs et actualités du football mondial.'},
+    {time:'13:00',title:'Canal Football Club',genre:'sport',badge:'',desc:'Magazine football : analyses et interviews.'},
+    {time:'22:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Match de Ligue 1, Champions League ou Liga en direct.'}
+  ]},
+  { id:'canalge', name:'Canal+ Grand Écran', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#26215C',fg:'#CECBF6'}, programs:[
+    {time:'10:00',title:'Grand film du matin',genre:'film',badge:'film',desc:'Chef-d\'œuvre du cinéma mondial en matinée.'},
+    {time:'15:00',title:'Film de l\'après-midi',genre:'film',badge:'film',desc:'Film en grand format pour l\'après-midi.'},
+    {time:'22:00',title:'Film du soir',genre:'film',badge:'film',desc:'Grand film en prime time sur Canal+ Grand Écran.'}
+  ]},
+  { id:'canalkids', name:'Canal+ Kids', cat:'fr', subcats:['fr'], logo:{bg:'#F5C4B3',fg:'#4A1B0C'}, programs:[
+    {time:'08:00',title:'Dessins animés',genre:'animation',badge:'',desc:'Programmes animés pour les enfants.'},
+    {time:'13:00',title:'Films d\'animation',genre:'film',badge:'film',desc:'Long-métrage d\'animation pour toute la famille.'},
+    {time:'18:00',title:'Séries kids',genre:'série',badge:'',desc:'Séries d\'aventure pour enfants et préados.'},
+    {time:'21:00',title:'Film famille',genre:'film',badge:'film',desc:'Film pour toute la famille en soirée.'}
+  ]},
+  { id:'canalsport', name:'Canal+ Sport', cat:'fr', subcats:['fr','sport'], logo:{bg:'#D85A30',fg:'#FAECE7'}, programs:[
+    {time:'09:00',title:'Morning Sport',genre:'sport',badge:'',desc:'Actualités sportives du matin.'},
+    {time:'13:00',title:'Magazine sport',genre:'sport',badge:'',desc:'Résultats et analyses des compétitions.'},
+    {time:'22:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Retransmission en direct d\'un match.'}
+  ]},
+  { id:'canalsport360', name:'Canal+ Sport 360', cat:'fr', subcats:['fr','sport'], logo:{bg:'#993C1D',fg:'#FAECE7'}, programs:[
+    {time:'10:00',title:'Sport en continu',genre:'sport',badge:'live',desc:'Sports en direct et différé toute la journée.'},
+    {time:'15:00',title:'Cyclisme / Tennis',genre:'sport',badge:'live',desc:'Retransmission de compétitions internationales.'},
+    {time:'22:00',title:'Sport en soirée',genre:'sport',badge:'live',desc:'Grand événement sportif en prime time.'}
+  ]},
+  { id:'cineclassic', name:'Ciné+ Classic', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#888780',fg:'#F1EFE8'}, programs:[
+    {time:'10:00',title:'Classique du cinéma',genre:'film',badge:'film',desc:'Chef-d\'œuvre du 7e art, films de patrimoine.'},
+    {time:'15:30',title:'Film années 70-80',genre:'film',badge:'film',desc:'Cinéma classique français et étranger.'},
+    {time:'22:00',title:'Grand classique',genre:'film',badge:'film',desc:'Film culte en prime time.'}
+  ]},
+  { id:'cineemotion', name:'Ciné+ Émotion', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#B4B2A9',fg:'#2C2C2A'}, programs:[
+    {time:'10:00',title:'Comédie romantique',genre:'film',badge:'film',desc:'Films d\'émotion et d\'amour en matinée.'},
+    {time:'15:00',title:'Drame',genre:'film',badge:'film',desc:'Film dramatique de l\'après-midi.'},
+    {time:'22:00',title:'Film d\'émotion',genre:'film',badge:'film',desc:'Grand film touchant en prime time.'}
+  ]},
+  { id:'cinefamily', name:'Ciné+ Family', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#D3D1C7',fg:'#2C2C2A'}, programs:[
+    {time:'10:00',title:'Film famille matin',genre:'film',badge:'film',desc:'Film pour toute la famille en matinée.'},
+    {time:'15:00',title:'Animation',genre:'film',badge:'film',desc:'Long-métrage d\'animation.'},
+    {time:'22:00',title:'Film famille soir',genre:'film',badge:'film',desc:'Film familial en prime time.'}
+  ]},
+  { id:'cinefestival', name:'Ciné+ Festival', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#F1EFE8',fg:'#2C2C2A'}, programs:[
+    {time:'10:00',title:'Film de festival',genre:'film',badge:'film',desc:'Film primé dans les grands festivals mondiaux.'},
+    {time:'15:00',title:'Cinéma du monde',genre:'film',badge:'film',desc:'Film international en après-midi.'},
+    {time:'22:00',title:'Avant-première festival',genre:'film',badge:'new',desc:'Découverte d\'un film primé en prime time.'}
+  ]},
+  { id:'cinefrisson', name:'Ciné+ Frisson', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#444441',fg:'#D3D1C7'}, programs:[
+    {time:'10:00',title:'Thriller du matin',genre:'film',badge:'film',desc:'Film d\'horreur ou thriller en matinée.'},
+    {time:'15:00',title:'Horreur classique',genre:'film',badge:'film',desc:'Classique du cinéma d\'épouvante.'},
+    {time:'22:00',title:'Film de frisson',genre:'film',badge:'film',desc:'Grand film d\'horreur ou thriller en prime time.'},
+    {time:'00:00',title:'Horreur de nuit',genre:'film',badge:'film',desc:'Film d\'horreur en deuxième partie de soirée.'}
+  ]},
+  { id:'cnews', name:'CNews', cat:'fr', subcats:['fr','info'], logo:{bg:'#E6F1FB',fg:'#042C53'}, programs:[
+    {time:'08:00',title:'La Matinale CNews',genre:'info',badge:'live',desc:'Journal du matin en direct avec débats et invités.'},
+    {time:'13:00',title:'Midi Info',genre:'info',badge:'live',desc:'Journal de midi avec analyses.'},
+    {time:'19:00',title:'Face à l\'info',genre:'info',badge:'live',desc:'Débat d\'actualité avec Christine Kelly.'},
+    {time:'21:00',title:'Journal du soir',genre:'info',badge:'live',desc:'Journal télévisé de CNews.'},
+    {time:'22:00',title:'L\'heure des pros',genre:'magazine',badge:'',desc:'Débat économique et politique avec Pascal Praud.'}
+  ]},
+  { id:'bfmtv', name:'BFM TV', cat:'fr', subcats:['fr','info'], logo:{bg:'#378ADD',fg:'#E6F1FB'}, programs:[
+    {time:'07:00',title:'BFM Matin',genre:'info',badge:'live',desc:'Information en continu dès 7h, journaux toutes les heures.'},
+    {time:'13:00',title:'BFM Midi',genre:'info',badge:'live',desc:'Journal de midi et analyses.'},
+    {time:'18:00',title:'BFM Story',genre:'info',badge:'live',desc:'Retour sur les grands faits du jour.'},
+    {time:'21:00',title:'BFM Soir',genre:'info',badge:'live',desc:'Journal du soir et débats.'},
+    {time:'23:00',title:'Nuit BFM',genre:'info',badge:'live',desc:'Information en continu toute la nuit.'}
+  ]},
+  { id:'lequipe', name:'L\'Équipe', cat:'fr', subcats:['fr','sport'], logo:{bg:'#639922',fg:'#EAF3DE'}, programs:[
+    {time:'08:00',title:'Matinale sport',genre:'sport',badge:'',desc:'Revue de presse sportive et résultats de la nuit.'},
+    {time:'13:00',title:'Journal du Sport',genre:'sport',badge:'live',desc:'Actualités sportives de midi.'},
+    {time:'19:30',title:'Journal du Sport',genre:'sport',badge:'live',desc:'Journal sportif du soir.'},
+    {time:'22:00',title:'Match ou magazine',genre:'sport',badge:'live',desc:'Match en direct ou grand magazine sport.'}
+  ]},
+  { id:'eurosport1', name:'Eurosport 1', cat:'fr', subcats:['fr','sport'], logo:{bg:'#97C459',fg:'#173404'}, programs:[
+    {time:'08:00',title:'Eurosport Matin',genre:'sport',badge:'',desc:'Actualités et compétitions en direct le matin.'},
+    {time:'13:00',title:'Tennis / Cyclisme',genre:'sport',badge:'live',desc:'Compétition sportive en direct ou en différé.'},
+    {time:'19:00',title:'Résultats du jour',genre:'sport',badge:'',desc:'Bilan des compétitions et analyses.'},
+    {time:'22:00',title:'Grand événement sportif',genre:'sport',badge:'live',desc:'Retransmission en prime time.'}
+  ]},
+  { id:'eurosport2', name:'Eurosport 2', cat:'fr', subcats:['fr','sport'], logo:{bg:'#3B6D11',fg:'#EAF3DE'}, programs:[
+    {time:'09:00',title:'Sport matinal',genre:'sport',badge:'',desc:'Sports moins médiatisés en direct.'},
+    {time:'15:00',title:'Compétitions live',genre:'sport',badge:'live',desc:'Événements sportifs en direct.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
+  ]},
+  { id:'infosport', name:'Infosport+', cat:'fr', subcats:['fr','sport'], logo:{bg:'#185FA5',fg:'#E6F1FB'}, programs:[
+    {time:'08:00',title:'Matinale sport',genre:'sport',badge:'live',desc:'Revue de sport et résultats.'},
+    {time:'13:00',title:'Journal sportif',genre:'sport',badge:'live',desc:'Actualités des sports en direct.'},
+    {time:'22:00',title:'Magazine sport',genre:'sport',badge:'',desc:'Analyses et résumés des compétitions.'}
+  ]},
+  { id:'bein1', name:'beIN Sports 1', cat:'fr', subcats:['fr','sport'], logo:{bg:'#E24B4A',fg:'#FCEBEB'}, programs:[
+    {time:'09:00',title:'beIN Sports News',genre:'sport',badge:'live',desc:'Actualités sportives mondiales en direct.'},
+    {time:'13:30',title:'Football Live',genre:'sport',badge:'live',desc:'Match de championnat européen en direct.'},
+    {time:'19:00',title:'La Liga / Premier League',genre:'sport',badge:'live',desc:'Match de football européen en direct.'},
+    {time:'22:00',title:'Match du soir',genre:'sport',badge:'live',desc:'Grand match de football — Liga, Serie A ou autre.'}
+  ]},
+  { id:'bein2', name:'beIN Sports 2', cat:'fr', subcats:['fr','sport'], logo:{bg:'#A32D2D',fg:'#FCEBEB'}, programs:[
+    {time:'10:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Football ou basket en direct le matin.'},
+    {time:'15:00',title:'Tennis / Basket',genre:'sport',badge:'live',desc:'Compétition en direct ou différé.'},
+    {time:'22:00',title:'Match du soir',genre:'sport',badge:'live',desc:'Match de football ou autre sport en prime time.'}
+  ]},
+  { id:'bein3', name:'beIN Sports 3', cat:'fr', subcats:['fr','sport'], logo:{bg:'#791F1F',fg:'#F7C1C1'}, programs:[
+    {time:'11:00',title:'Sport en direct',genre:'sport',badge:'live',desc:'Compétition internationale en direct.'},
+    {time:'17:00',title:'Replay',genre:'sport',badge:'',desc:'Rediffusion d\'un grand match.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
+  ]},
+
+  // BELGES
+  { id:'laune', name:'La Une', cat:'be', subcats:['be'], logo:{bg:'#FAC775',fg:'#412402'}, programs:[
+    {time:'08:00',title:'Télématin RTBF',genre:'magazine',badge:'',desc:'Magazine matinal belge avec actus et météo.'},
+    {time:'13:00',title:'Journal de midi',genre:'info',badge:'live',desc:'Journal télévisé de la RTBF à 13h.'},
+    {time:'20:30',title:'Journal télévisé',genre:'info',badge:'live',desc:'JT de 19h30 de La Une — actualités belges et internationales.'},
+    {time:'21:30',title:'Série ou film belge',genre:'série',badge:'',desc:'Production belge ou coproduction européenne en prime time.'},
+    {time:'23:30',title:'Questions à la une',genre:'doc',badge:'doc',desc:'Magazine d\'investigation de la RTBF.'}
+  ]},
+  { id:'tipik', name:'Tipik', cat:'be', subcats:['be'], logo:{bg:'#F09595',fg:'#501313'}, programs:[
+    {time:'10:00',title:'Séries jeunesse',genre:'série',badge:'',desc:'Séries pour jeunes adultes en matinée.'},
+    {time:'15:00',title:'Clip TV',genre:'divertissement',badge:'',desc:'Vidéos musicales et émissions tendances.'},
+    {time:'21:30',title:'Série tendance',genre:'série',badge:'new',desc:'Série en vogue en prime time sur Tipik.'}
+  ]},
+  { id:'latrois', name:'La Trois', cat:'be', subcats:['be'], logo:{bg:'#9FE1CB',fg:'#04342C'}, programs:[
+    {time:'10:00',title:'Documentaires',genre:'doc',badge:'doc',desc:'Documentaires culturels et de société.'},
+    {time:'15:00',title:'Culturama',genre:'magazine',badge:'',desc:'Magazine culturel de La Trois.'},
+    {time:'21:30',title:'Grand documentaire',genre:'doc',badge:'doc',desc:'Documentaire en prime time.'}
+  ]},
+  { id:'rtltvi', name:'RTL tvi', cat:'be', subcats:['be','info'], logo:{bg:'#E24B4A',fg:'#FCEBEB'}, programs:[
+    {time:'08:00',title:'RTL Info Matin',genre:'info',badge:'live',desc:'Journal du matin sur RTL tvi.'},
+    {time:'14:00',title:'RTL Info 13h',genre:'info',badge:'live',desc:'Journal de midi de RTL tvi.'},
+    {time:'20:00',title:'RTL Info 19h',genre:'info',badge:'live',desc:'Journal du soir de RTL tvi.'},
+    {time:'21:10',title:'Série ou film',genre:'série',badge:'',desc:'Série ou film en prime time sur RTL tvi.'}
+  ]},
+  { id:'rtlclub', name:'RTL club', cat:'be', subcats:['be'], logo:{bg:'#F09595',fg:'#501313'}, programs:[
+    {time:'10:00',title:'Séries comédies',genre:'série',badge:'',desc:'Comédies en matinée.'},
+    {time:'21:30',title:'Film ou série',genre:'film',badge:'film',desc:'Film ou série en prime time sur RTL club.'}
+  ]},
+  { id:'ln24', name:'LN24', cat:'be', subcats:['be','info'], logo:{bg:'#B5D4F4',fg:'#042C53'}, programs:[
+    {time:'07:00',title:'LN24 Matin',genre:'info',badge:'live',desc:'Information belge en continu dès 7h.'},
+    {time:'13:00',title:'LN24 Midi',genre:'info',badge:'live',desc:'Journal et analyses de midi.'},
+    {time:'21:00',title:'LN24 Soir',genre:'info',badge:'live',desc:'Journal du soir et débats d\'actualité.'}
+  ]},
+  { id:'be1', name:'Be 1', cat:'be', subcats:['be'], logo:{bg:'#C0DD97',fg:'#173404'}, programs:[
+    {time:'10:00',title:'Magazine matin',genre:'magazine',badge:'',desc:'Émission de divertissement matinal.'},
+    {time:'14:00',title:'Film après-midi',genre:'film',badge:'film',desc:'Film en après-midi sur Be 1.'},
+    {time:'21:30',title:'Soirée Be 1',genre:'série',badge:'',desc:'Série ou divertissement en prime time.'}
+  ]},
+  { id:'becine', name:'Be Ciné', cat:'be', subcats:['be','cinema'], logo:{bg:'#AFA9EC',fg:'#26215C'}, programs:[
+    {time:'10:00',title:'Cinéma belge',genre:'film',badge:'film',desc:'Films belges ou coproductions en matinée.'},
+    {time:'15:00',title:'Film classique',genre:'film',badge:'film',desc:'Classique du cinéma mondial.'},
+    {time:'22:00',title:'Film du soir',genre:'film',badge:'film',desc:'Grand film en prime time sur Be Ciné.'}
+  ]},
+  { id:'beseries', name:'Be Séries', cat:'be', subcats:['be'], logo:{bg:'#CECBF6',fg:'#26215C'}, programs:[
+    {time:'10:00',title:'Série matinale',genre:'série',badge:'',desc:'Série en début de journée.'},
+    {time:'15:00',title:'Série après-midi',genre:'série',badge:'',desc:'Série américaine ou européenne.'},
+    {time:'22:00',title:'Série prime time',genre:'série',badge:'new',desc:'Série en prime time sur Be Séries.'}
+  ]},
+  { id:'voosport1', name:'VOOsport World 1', cat:'be', subcats:['be','sport'], logo:{bg:'#5DCAA5',fg:'#04342C'}, programs:[
+    {time:'09:00',title:'Sport matinal',genre:'sport',badge:'',desc:'Sports en direct le matin.'},
+    {time:'14:00',title:'Football belge',genre:'sport',badge:'live',desc:'Match de Pro League belge en direct.'},
+    {time:'22:00',title:'Grand match',genre:'sport',badge:'live',desc:'Match en prime time sur VOOsport World 1.'}
+  ]},
+  { id:'voosport2', name:'VOOsport World 2', cat:'be', subcats:['be','sport'], logo:{bg:'#1D9E75',fg:'#E1F5EE'}, programs:[
+    {time:'11:00',title:'Sport 2',genre:'sport',badge:'live',desc:'Compétition sportive en direct.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
+  ]},
+  { id:'voosport3', name:'VOOsport World 3', cat:'be', subcats:['be','sport'], logo:{bg:'#0F6E56',fg:'#E1F5EE'}, programs:[
+    {time:'11:00',title:'Sport 3',genre:'sport',badge:'live',desc:'Compétition en direct ou différé.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match en prime time sur VOOsport World 3.'}
+  ]},
+  { id:'proximus', name:'Proximus Sports', cat:'be', subcats:['be','sport'], logo:{bg:'#085041',fg:'#9FE1CB'}, programs:[
+    {time:'09:00',title:'Proximus Matin',genre:'sport',badge:'',desc:'Actus sport et compétitions matinales.'},
+    {time:'22:00',title:'Match Proximus',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
+  ]},
+  { id:'epl1', name:'Eleven Pro League 1', cat:'be', subcats:['be','sport'], logo:{bg:'#F7C1C1',fg:'#501313'}, programs:[
+    {time:'14:00',title:'Pro League Live',genre:'sport',badge:'live',desc:'Match de la Jupiler Pro League en direct.'},
+    {time:'22:00',title:'Pro League Soir',genre:'sport',badge:'live',desc:'Match de football belge en prime time.'}
+  ]},
+  { id:'epl2', name:'Eleven Pro League 2', cat:'be', subcats:['be','sport'], logo:{bg:'#F09595',fg:'#501313'}, programs:[
+    {time:'15:00',title:'Pro League 2',genre:'sport',badge:'live',desc:'Deuxième match de Pro League en direct.'},
+    {time:'22:00',title:'Football soir',genre:'sport',badge:'live',desc:'Match de football en prime time.'}
+  ]},
+  { id:'epl3', name:'Eleven Pro League 3', cat:'be', subcats:['be','sport'], logo:{bg:'#E24B4A',fg:'#FCEBEB'}, programs:[
+    {time:'16:00',title:'Pro League 3',genre:'sport',badge:'live',desc:'Troisième match de journée en direct.'},
+    {time:'22:00',title:'Match de nuit',genre:'sport',badge:'live',desc:'Match tardif de football.'}
+  ]},
+  { id:'eleven1', name:'Eleven Sports 1', cat:'be', subcats:['be','sport'], logo:{bg:'#A32D2D',fg:'#FCEBEB'}, programs:[
+    {time:'13:00',title:'Football international',genre:'sport',badge:'live',desc:'Compétition internationale en direct.'},
+    {time:'22:00',title:'Grand match Eleven',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 1.'}
+  ]},
+  { id:'eleven2', name:'Eleven Sports 2', cat:'be', subcats:['be','sport'], logo:{bg:'#791F1F',fg:'#F7C1C1'}, programs:[
+    {time:'14:00',title:'Sport live',genre:'sport',badge:'live',desc:'Compétition sportive en direct.'},
+    {time:'22:00',title:'Match soirée',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 2.'}
+  ]},
+  { id:'eleven3', name:'Eleven Sports 3', cat:'be', subcats:['be','sport'], logo:{bg:'#501313',fg:'#F09595'}, programs:[
+    {time:'15:00',title:'Sport continu',genre:'sport',badge:'live',desc:'Événements sportifs en direct.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 3.'}
+  ]},
+  { id:'ladeux', name:'La Deux', cat:'be', subcats:['be'], logo:{bg:'#EF9F27',fg:'#412402'}, programs:[
+    {time:'09:00',title:'Magazine RTBF',genre:'magazine',badge:'',desc:'Émission culturelle ou de société en matinée.'},
+    {time:'13:00',title:'Midi en direct',genre:'info',badge:'live',desc:'Magazine d\'information de La Deux.'},
+    {time:'21:30',title:'Grand documentaire',genre:'doc',badge:'doc',desc:'Documentaire de société ou historique en prime time.'},
+    {time:'23:30',title:'Débat',genre:'magazine',badge:'',desc:'Magazine de débat en deuxième partie de soirée.'}
+  ]},
+
+  // ISRAÉLIENNES
+  { id:'keshet12', name:'Keshet 12', cat:'il', subcats:['il'], logo:{bg:'#F5C4B3',fg:'#4A1B0C'}, programs:[
+    {time:'08:00',title:'חדשות הבוקר',genre:'info',badge:'live',desc:'Journal du matin de Keshet 12 — actus israéliennes et internationales.'},
+    {time:'09:00',title:'חצי חינם',genre:'divertissement',badge:'',desc:'Émission matinale de divertissement et société.'},
+    {time:'13:00',title:'חדשות הצהריים',genre:'info',badge:'live',desc:'Journal de midi sur Keshet 12.'},
+    {time:'15:00',title:'סדרה אמריקאית',genre:'série',badge:'',desc:'Série américaine en après-midi.'},
+    {time:'20:00',title:'חדשות ערב',genre:'info',badge:'live',desc:'Journal du soir — principal rendez-vous info d\'Israël.'},
+    {time:'21:00',title:'פריים טיים ישראלי',genre:'série',badge:'new',desc:'Série ou émission israélienne en prime time — sitcom, drama ou télé-réalité.'},
+    {time:'22:30',title:'מועדון לילה',genre:'divertissement',badge:'',desc:'Talk-show ou émission d\'humour en deuxième partie de soirée.'}
+  ]},
+  { id:'reshet13', name:'Reshet 13', cat:'il', subcats:['il'], logo:{bg:'#9FE1CB',fg:'#04342C'}, programs:[
+    {time:'08:00',title:'בוקר טוב',genre:'magazine',badge:'',desc:'Magazine matinal de Reshet 13.'},
+    {time:'13:00',title:'חדשות 13',genre:'info',badge:'live',desc:'Journal de midi sur la chaîne 13.'},
+    {time:'20:00',title:'מבט',genre:'info',badge:'live',desc:'Journal du soir — actualités israéliennes et internationales.'},
+    {time:'21:00',title:'אח גדול / פריים',genre:'divertissement',badge:'',desc:'Big Brother Israël ou grand format en prime time.'},
+    {time:'23:00',title:'סדרה ישראלית',genre:'série',badge:'',desc:'Série israélienne originale en deuxième partie de soirée.'}
+  ]},
+  { id:'kan11', name:'Kan 11', cat:'il', subcats:['il'], logo:{bg:'#D3D1C7',fg:'#2C2C2A'}, programs:[
+    {time:'08:00',title:'תאגיד חדשות',genre:'info',badge:'live',desc:'Journal du service public Kan — information indépendante.'},
+    {time:'09:00',title:'כאן 11 בוקר',genre:'magazine',badge:'',desc:'Magazine culturel et société du matin.'},
+    {time:'13:00',title:'חדשות הצהריים',genre:'info',badge:'live',desc:'Journal de midi du service public israélien.'},
+    {time:'21:00',title:'מהות החיים',genre:'doc',badge:'doc',desc:'Documentaire ou magazine culturel en prime time sur Kan.'},
+    {time:'22:30',title:'פסטיבל / תיאטרון',genre:'culture',badge:'',desc:'Diffusion d\'un spectacle, concert ou événement culturel.'}
+  ]}
+];
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+
+function getILTime() {
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  return new Date(utc + 3 * 3600000);
+}
+
+function toMins(timeStr) {
+  const [h, m] = timeStr.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function getCurrentProgram(programs) {
+  const il = getILTime();
+  const nowMins = il.getHours() * 60 + il.getMinutes();
+  let current = null;
+  for (let i = 0; i < programs.length; i++) {
+    const pm = toMins(programs[i].time);
+    const nm = i + 1 < programs.length ? toMins(programs[i + 1].time) : 24 * 60;
+    if (nowMins >= pm && nowMins < nm) { current = i; break; }
+  }
+  return current;
+}
+
+function isCurrently(prog, programs, idx) {
+  return getCurrentProgram(programs) === idx;
+}
+
+function badgeHTML(badge) {
+  if (!badge) return '';
+  const labels = { live:'EN DIRECT', new:'NOUVEAU', film:'FILM', doc:'DOC', sport:'SPORT' };
+  return `<span class="badge badge-${badge}">${labels[badge] || badge.toUpperCase()}</span>`;
+}
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+
+let activeTab = 'all';
+let activeGenre = 'all';
+let searchQuery = '';
+let favorites = JSON.parse(localStorage.getItem('tv-favs') || '[]');
+let expandedChannels = new Set();
+
+function saveFavs() { localStorage.setItem('tv-favs', JSON.stringify(favorites)); }
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+
+function filterChannels() {
+  let list = CHANNELS.slice();
+
+  if (activeTab === 'fav') list = list.filter(c => favorites.includes(c.id));
+  else if (activeTab !== 'all') list = list.filter(c => c.subcats.includes(activeTab));
+
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    list = list.filter(c =>
+      c.name.toLowerCase().includes(q) ||
+      c.programs.some(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
+    );
+  }
+
+  if (activeGenre !== 'all') {
+    list = list.filter(c => c.programs.some(p => p.genre === activeGenre));
+  }
+
+  return list;
+}
+
+function renderChannels() {
+  const container = document.getElementById('channels-list');
+  const empty = document.getElementById('empty');
+  const list = filterChannels();
+
+  if (!list.length) {
+    container.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  container.innerHTML = list.map(ch => {
+    const curIdx = getCurrentProgram(ch.programs);
+    const curProg = curIdx !== null ? ch.programs[curIdx] : null;
+    const isFav = favorites.includes(ch.id);
+    const isExpanded = expandedChannels.has(ch.id);
+
+    let filteredPrograms = ch.programs;
+    if (activeGenre !== 'all') {
+      filteredPrograms = ch.programs.filter(p => p.genre === activeGenre);
+    }
+
+    const programsHTML = filteredPrograms.map((p, i) => {
+      const origIdx = ch.programs.indexOf(p);
+      const isCurrent = origIdx === curIdx;
+      return `<div class="program-item${isCurrent ? ' current' : ''}" data-ch="${ch.id}" data-prog="${origIdx}">
+        <div class="prog-time">
+          <div class="time">${p.time}</div>
+          ${isCurrent ? '<div class="now-indicator">▶ Maintenant</div>' : ''}
+        </div>
+        <div class="prog-body">
+          <div class="prog-title">${p.title}</div>
+          <div class="badges">${badgeHTML(p.badge)}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    const abbr = ch.name.replace(/[^A-ZÀ-Ÿa-zà-ÿ0-9+]/g, '').substring(0, 4).toUpperCase();
+
+    return `<div class="channel-card" id="card-${ch.id}">
+      <div class="channel-header">
+        <div class="channel-logo" style="background:${ch.logo.bg};color:${ch.logo.fg}">${abbr}</div>
+        <div class="channel-info">
+          <div class="channel-name">${ch.name}</div>
+          <div class="channel-now">
+            ${curProg
+              ? `<span class="now-time">${curProg.time}</span> ${curProg.title}`
+              : '<span style="color:#718096">Aucun programme</span>'}
+          </div>
+        </div>
+        <button class="fav-btn" data-ch="${ch.id}" title="Favoris">${isFav ? '⭐' : '☆'}</button>
+        <button class="expand-btn" data-ch="${ch.id}">${isExpanded ? '▲' : '▼'}</button>
+      </div>
+      <div class="program-list${isExpanded ? ' open' : ''}" id="list-${ch.id}">
+        ${programsHTML}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── EVENTS ────────────────────────────────────────────────────────────────────
+
+document.getElementById('channels-list').addEventListener('click', e => {
+  // Fav button
+  const favBtn = e.target.closest('.fav-btn');
+  if (favBtn) {
+    const id = favBtn.dataset.ch;
+    if (favorites.includes(id)) favorites = favorites.filter(f => f !== id);
+    else favorites.push(id);
+    saveFavs();
+    renderChannels();
+    return;
+  }
+
+  // Expand button
+  const expBtn = e.target.closest('.expand-btn');
+  if (expBtn) {
+    const id = expBtn.dataset.ch;
+    if (expandedChannels.has(id)) expandedChannels.delete(id);
+    else expandedChannels.add(id);
+    renderChannels();
+    return;
+  }
+
+  // Program item click → show description modal
+  const progItem = e.target.closest('.program-item');
+  if (progItem) {
+    const chId = progItem.dataset.ch;
+    const progIdx = parseInt(progItem.dataset.prog);
+    const ch = CHANNELS.find(c => c.id === chId);
+    if (!ch) return;
+    const p = ch.programs[progIdx];
+    document.getElementById('modal-title').textContent = p.title;
+    document.getElementById('modal-desc').textContent = p.desc;
+    document.getElementById('modal-meta').textContent = `${ch.name} — ${p.time} — ${p.genre}`;
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  // Channel header click → expand
+  const chHeader = e.target.closest('.channel-header');
+  if (chHeader && !e.target.closest('.fav-btn') && !e.target.closest('.expand-btn')) {
+    const card = chHeader.closest('.channel-card');
+    const id = card.id.replace('card-', '');
+    if (expandedChannels.has(id)) expandedChannels.delete(id);
+    else expandedChannels.add(id);
+    renderChannels();
+  }
+});
+
+document.getElementById('modal-close').addEventListener('click', () => {
+  document.getElementById('modal-overlay').classList.remove('open');
+});
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-overlay'))
+    document.getElementById('modal-overlay').classList.remove('open');
+});
+
+document.getElementById('tabs').addEventListener('click', e => {
+  const tab = e.target.closest('.tab');
+  if (!tab) return;
+  activeTab = tab.dataset.tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  renderChannels();
+});
+
+document.getElementById('genre-filters').addEventListener('click', e => {
+  const gf = e.target.closest('.gf');
+  if (!gf) return;
+  activeGenre = gf.dataset.genre;
+  document.querySelectorAll('.gf').forEach(g => g.classList.remove('active'));
+  gf.classList.add('active');
+  renderChannels();
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value.trim();
+  renderChannels();
+});
+
+document.getElementById('btn-refresh').addEventListener('click', () => {
+  renderChannels();
+});
+
+// ── CLOCK ─────────────────────────────────────────────────────────────────────
+
+function updateClock() {
+  const il = getILTime();
+  const h = String(il.getHours()).padStart(2,'0');
+  const m = String(il.getMinutes()).padStart(2,'0');
+  const s = String(il.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+
+updateClock();
+setInterval(updateClock, 1000);
+renderChannels();
+
+// Auto-refresh current program every minute
+setInterval(renderChannels, 60000);
+
+// PWA Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
