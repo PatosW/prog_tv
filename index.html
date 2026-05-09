@@ -298,33 +298,42 @@ const CHANNELS = [
     {time:'08:30',title:'Canal News',genre:'info',badge:'live',desc:'Actualités Canal+ en direct le matin.'},
     {time:'10:00',title:'Série Canal+',genre:'série',badge:'new',desc:'Création originale Canal+ en matinée.'},
     {time:'13:00',title:'Le Grand Journal',genre:'magazine',badge:'',desc:'Magazine culturel et d\'actualité de Canal+.'},
+    {time:'16:00',title:'Série Canal+ (rediff)',genre:'série',badge:'',desc:'Rediffusion d\'une création originale Canal+.'},
+    {time:'19:00',title:'Zapping Canal+',genre:'magazine',badge:'',desc:'Le meilleur de la télé décrypté par Canal+.'},
     {time:'22:00',title:'Film ou série en clair',genre:'film',badge:'film',desc:'Grande fiction en prime time sur Canal+.'},
     {time:'00:00',title:'Late Canal+',genre:'magazine',badge:'',desc:'Magazine de fin de soirée Canal+.'}
   ]},
   { id:'canalbo', name:'Canal+ Box Office', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#AFA9EC',fg:'#26215C'}, programs:[
     {time:'11:00',title:'Film récent',genre:'film',badge:'film',desc:'Films récents en avant-première sur Canal+ Box Office.'},
     {time:'15:00',title:'Film de l\'après-midi',genre:'film',badge:'film',desc:'Seconde diffusion d\'un film Box Office.'},
+    {time:'18:30',title:'Film en avant-soirée',genre:'film',badge:'film',desc:'Avant-première Box Office en début de soirée.'},
     {time:'22:00',title:'Film en soirée',genre:'film',badge:'film',desc:'Film récemment sorti en salle, en avant-première.'}
   ]},
   { id:'canalcine', name:'Canal+ Cinéma(s)', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#7F77DD',fg:'#EEEDFE'}, programs:[
     {time:'10:00',title:'Film classique',genre:'film',badge:'film',desc:'Classique du cinéma mondial en matinée.'},
     {time:'15:00',title:'Film français',genre:'film',badge:'film',desc:'Film français contemporain ou culte.'},
+    {time:'18:30',title:'Film du soir',genre:'film',badge:'film',desc:'Film en début de soirée sur Canal+ Cinéma(s).'},
     {time:'22:00',title:'Film en soirée',genre:'film',badge:'film',desc:'Grand film de cinéma en prime time.'},
     {time:'00:15',title:'Film de nuit',genre:'film',badge:'film',desc:'Film en deuxième partie de soirée.'}
   ]},
   { id:'canaldocs', name:'Canal+ Docs', cat:'fr', subcats:['fr'], logo:{bg:'#534AB7',fg:'#EEEDFE'}, programs:[
     {time:'09:00',title:'Documentaire nature',genre:'doc',badge:'doc',desc:'Documentaire animalier ou environnemental.'},
     {time:'13:00',title:'Docu société',genre:'doc',badge:'doc',desc:'Reportage de société ou enquête.'},
+    {time:'16:00',title:'Docu nature',genre:'doc',badge:'doc',desc:'Documentaire animalier ou environnemental en après-midi.'},
+    {time:'19:30',title:'Docu histoire',genre:'doc',badge:'doc',desc:'Documentaire historique en avant-soirée.'},
     {time:'22:00',title:'Grand documentaire',genre:'doc',badge:'doc',desc:'Documentaire en prime time — histoire, science ou société.'}
   ]},
   { id:'canalfoot', name:'Canal+ Foot', cat:'fr', subcats:['fr','sport'], logo:{bg:'#3C3489',fg:'#EEEDFE'}, programs:[
     {time:'09:00',title:'Foot Mercato',genre:'sport',badge:'',desc:'Transferts, rumeurs et actualités du football mondial.'},
     {time:'13:00',title:'Canal Football Club',genre:'sport',badge:'',desc:'Magazine football : analyses et interviews.'},
+    {time:'16:00',title:'Avant-match',genre:'sport',badge:'',desc:'Préparation, compositions et analyses avant le match du soir.'},
+    {time:'19:30',title:'Match de la soirée',genre:'sport',badge:'live',desc:'Football européen en direct — Ligue 1 ou Champions League.'},
     {time:'22:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Match de Ligue 1, Champions League ou Liga en direct.'}
   ]},
   { id:'canalge', name:'Canal+ Grand Écran', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#26215C',fg:'#CECBF6'}, programs:[
     {time:'10:00',title:'Grand film du matin',genre:'film',badge:'film',desc:'Chef-d\'œuvre du cinéma mondial en matinée.'},
     {time:'15:00',title:'Film de l\'après-midi',genre:'film',badge:'film',desc:'Film en grand format pour l\'après-midi.'},
+    {time:'18:30',title:'Film grand écran soirée',genre:'film',badge:'film',desc:'Chef-d\'œuvre en début de soirée sur Canal+ Grand Écran.'},
     {time:'22:00',title:'Film du soir',genre:'film',badge:'film',desc:'Grand film en prime time sur Canal+ Grand Écran.'}
   ]},
   { id:'canalkids', name:'Canal+ Kids', cat:'fr', subcats:['fr'], logo:{bg:'#F5C4B3',fg:'#4A1B0C'}, programs:[
@@ -336,36 +345,44 @@ const CHANNELS = [
   { id:'canalsport', name:'Canal+ Sport', cat:'fr', subcats:['fr','sport'], logo:{bg:'#D85A30',fg:'#FAECE7'}, programs:[
     {time:'09:00',title:'Morning Sport',genre:'sport',badge:'',desc:'Actualités sportives du matin.'},
     {time:'13:00',title:'Magazine sport',genre:'sport',badge:'',desc:'Résultats et analyses des compétitions.'},
+    {time:'16:00',title:'Sport de l\'après-midi',genre:'sport',badge:'live',desc:'Compétition en direct en après-midi.'},
+    {time:'19:30',title:'Avant-soirée sportive',genre:'sport',badge:'',desc:'Résumés et analyses avant le grand match.'},
     {time:'22:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Retransmission en direct d\'un match.'}
   ]},
   { id:'canalsport360', name:'Canal+ Sport 360', cat:'fr', subcats:['fr','sport'], logo:{bg:'#993C1D',fg:'#FAECE7'}, programs:[
     {time:'10:00',title:'Sport en continu',genre:'sport',badge:'live',desc:'Sports en direct et différé toute la journée.'},
     {time:'15:00',title:'Cyclisme / Tennis',genre:'sport',badge:'live',desc:'Retransmission de compétitions internationales.'},
+    {time:'18:30',title:'Sport en continu',genre:'sport',badge:'live',desc:'Compétitions sportives en début de soirée.'},
     {time:'22:00',title:'Sport en soirée',genre:'sport',badge:'live',desc:'Grand événement sportif en prime time.'}
   ]},
   { id:'cineclassic', name:'Ciné+ Classic', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#888780',fg:'#F1EFE8'}, programs:[
     {time:'10:00',title:'Classique du cinéma',genre:'film',badge:'film',desc:'Chef-d\'œuvre du 7e art, films de patrimoine.'},
     {time:'15:30',title:'Film années 70-80',genre:'film',badge:'film',desc:'Cinéma classique français et étranger.'},
+    {time:'18:30',title:'Classique du soir',genre:'film',badge:'film',desc:'Film de patrimoine en début de soirée.'},
     {time:'22:00',title:'Grand classique',genre:'film',badge:'film',desc:'Film culte en prime time.'}
   ]},
   { id:'cineemotion', name:'Ciné+ Émotion', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#B4B2A9',fg:'#2C2C2A'}, programs:[
     {time:'10:00',title:'Comédie romantique',genre:'film',badge:'film',desc:'Films d\'émotion et d\'amour en matinée.'},
     {time:'15:00',title:'Drame',genre:'film',badge:'film',desc:'Film dramatique de l\'après-midi.'},
+    {time:'18:30',title:'Film émotion soirée',genre:'film',badge:'film',desc:'Film romantique ou dramatique en début de soirée.'},
     {time:'22:00',title:'Film d\'émotion',genre:'film',badge:'film',desc:'Grand film touchant en prime time.'}
   ]},
   { id:'cinefamily', name:'Ciné+ Family', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#D3D1C7',fg:'#2C2C2A'}, programs:[
     {time:'10:00',title:'Film famille matin',genre:'film',badge:'film',desc:'Film pour toute la famille en matinée.'},
     {time:'15:00',title:'Animation',genre:'film',badge:'film',desc:'Long-métrage d\'animation.'},
+    {time:'18:30',title:'Film famille soirée',genre:'film',badge:'film',desc:'Film pour toute la famille en début de soirée.'},
     {time:'22:00',title:'Film famille soir',genre:'film',badge:'film',desc:'Film familial en prime time.'}
   ]},
   { id:'cinefestival', name:'Ciné+ Festival', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#F1EFE8',fg:'#2C2C2A'}, programs:[
     {time:'10:00',title:'Film de festival',genre:'film',badge:'film',desc:'Film primé dans les grands festivals mondiaux.'},
     {time:'15:00',title:'Cinéma du monde',genre:'film',badge:'film',desc:'Film international en après-midi.'},
+    {time:'18:30',title:'Film festival soirée',genre:'film',badge:'film',desc:'Film primé en début de soirée sur Ciné+ Festival.'},
     {time:'22:00',title:'Avant-première festival',genre:'film',badge:'new',desc:'Découverte d\'un film primé en prime time.'}
   ]},
   { id:'cinefrisson', name:'Ciné+ Frisson', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#444441',fg:'#D3D1C7'}, programs:[
     {time:'10:00',title:'Thriller du matin',genre:'film',badge:'film',desc:'Film d\'horreur ou thriller en matinée.'},
     {time:'15:00',title:'Horreur classique',genre:'film',badge:'film',desc:'Classique du cinéma d\'épouvante.'},
+    {time:'18:30',title:'Thriller soirée',genre:'film',badge:'film',desc:'Film de suspense ou horreur en début de soirée.'},
     {time:'22:00',title:'Film de frisson',genre:'film',badge:'film',desc:'Grand film d\'horreur ou thriller en prime time.'},
     {time:'00:00',title:'Horreur de nuit',genre:'film',badge:'film',desc:'Film d\'horreur en deuxième partie de soirée.'}
   ]},
@@ -398,11 +415,14 @@ const CHANNELS = [
   { id:'eurosport2', name:'Eurosport 2', cat:'fr', subcats:['fr','sport'], logo:{bg:'#3B6D11',fg:'#EAF3DE'}, programs:[
     {time:'09:00',title:'Sport matinal',genre:'sport',badge:'',desc:'Sports moins médiatisés en direct.'},
     {time:'15:00',title:'Compétitions live',genre:'sport',badge:'live',desc:'Événements sportifs en direct.'},
+    {time:'18:30',title:'Sport soirée Eurosport 2',genre:'sport',badge:'live',desc:'Compétitions de sports moins médiatisés en soirée.'},
     {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
   ]},
   { id:'infosport', name:'Infosport+', cat:'fr', subcats:['fr','sport'], logo:{bg:'#185FA5',fg:'#E6F1FB'}, programs:[
     {time:'08:00',title:'Matinale sport',genre:'sport',badge:'live',desc:'Revue de sport et résultats.'},
     {time:'13:00',title:'Journal sportif',genre:'sport',badge:'live',desc:'Actualités des sports en direct.'},
+    {time:'16:00',title:'Sport de l\'après-midi',genre:'sport',badge:'live',desc:'Résumés et compétitions en après-midi.'},
+    {time:'19:30',title:'Infosport Soir',genre:'sport',badge:'live',desc:'Journal sportif du soir avec résultats.'},
     {time:'22:00',title:'Magazine sport',genre:'sport',badge:'',desc:'Analyses et résumés des compétitions.'}
   ]},
   { id:'bein1', name:'beIN Sports 1', cat:'fr', subcats:['fr','sport'], logo:{bg:'#E24B4A',fg:'#FCEBEB'}, programs:[
@@ -414,6 +434,7 @@ const CHANNELS = [
   { id:'bein2', name:'beIN Sports 2', cat:'fr', subcats:['fr','sport'], logo:{bg:'#A32D2D',fg:'#FCEBEB'}, programs:[
     {time:'10:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Football ou basket en direct le matin.'},
     {time:'15:00',title:'Tennis / Basket',genre:'sport',badge:'live',desc:'Compétition en direct ou différé.'},
+    {time:'18:30',title:'Football soirée beIN 2',genre:'sport',badge:'live',desc:'Match en début de soirée sur beIN Sports 2.'},
     {time:'22:00',title:'Match du soir',genre:'sport',badge:'live',desc:'Match de football ou autre sport en prime time.'}
   ]},
   { id:'bein3', name:'beIN Sports 3', cat:'fr', subcats:['fr','sport'], logo:{bg:'#791F1F',fg:'#F7C1C1'}, programs:[
@@ -426,6 +447,8 @@ const CHANNELS = [
   { id:'laune', name:'La Une', cat:'be', subcats:['be'], logo:{bg:'#FAC775',fg:'#412402'}, programs:[
     {time:'08:00',title:'Télématin RTBF',genre:'magazine',badge:'',desc:'Magazine matinal belge avec actus et météo.'},
     {time:'13:00',title:'Journal de midi',genre:'info',badge:'live',desc:'Journal télévisé de la RTBF à 13h.'},
+    {time:'15:00',title:'Téléfilm de l\'après-midi',genre:'film',badge:'film',desc:'Téléfilm ou série en après-midi sur La Une.'},
+    {time:'18:00',title:'Série belge',genre:'série',badge:'',desc:'Série belge ou coproduction européenne en début de soirée.'},
     {time:'20:30',title:'Journal télévisé',genre:'info',badge:'live',desc:'JT de 19h30 de La Une — actualités belges et internationales.'},
     {time:'21:30',title:'Série ou film belge',genre:'série',badge:'',desc:'Production belge ou coproduction européenne en prime time.'},
     {time:'23:30',title:'Questions à la une',genre:'doc',badge:'doc',desc:'Magazine d\'investigation de la RTBF.'}
@@ -433,11 +456,13 @@ const CHANNELS = [
   { id:'tipik', name:'Tipik', cat:'be', subcats:['be'], logo:{bg:'#F09595',fg:'#501313'}, programs:[
     {time:'10:00',title:'Séries jeunesse',genre:'série',badge:'',desc:'Séries pour jeunes adultes en matinée.'},
     {time:'15:00',title:'Clip TV',genre:'divertissement',badge:'',desc:'Vidéos musicales et émissions tendances.'},
+    {time:'18:00',title:'Séries soirée Tipik',genre:'série',badge:'',desc:'Séries en début de soirée sur Tipik.'},
     {time:'21:30',title:'Série tendance',genre:'série',badge:'new',desc:'Série en vogue en prime time sur Tipik.'}
   ]},
   { id:'latrois', name:'La Trois', cat:'be', subcats:['be'], logo:{bg:'#9FE1CB',fg:'#04342C'}, programs:[
     {time:'10:00',title:'Documentaires',genre:'doc',badge:'doc',desc:'Documentaires culturels et de société.'},
     {time:'15:00',title:'Culturama',genre:'magazine',badge:'',desc:'Magazine culturel de La Trois.'},
+    {time:'18:00',title:'Documentaire soirée',genre:'doc',badge:'doc',desc:'Documentaire culturel ou historique en début de soirée.'},
     {time:'21:30',title:'Grand documentaire',genre:'doc',badge:'doc',desc:'Documentaire en prime time.'}
   ]},
   { id:'rtltvi', name:'RTL tvi', cat:'be', subcats:['be','info'], logo:{bg:'#E24B4A',fg:'#FCEBEB'}, programs:[
@@ -448,72 +473,99 @@ const CHANNELS = [
   ]},
   { id:'rtlclub', name:'RTL club', cat:'be', subcats:['be'], logo:{bg:'#F09595',fg:'#501313'}, programs:[
     {time:'10:00',title:'Séries comédies',genre:'série',badge:'',desc:'Comédies en matinée.'},
+    {time:'14:00',title:'Séries après-midi',genre:'série',badge:'',desc:'Séries américaines en après-midi sur RTL club.'},
+    {time:'18:00',title:'Soirée RTL club',genre:'série',badge:'',desc:'Série en début de soirée.'},
     {time:'21:30',title:'Film ou série',genre:'film',badge:'film',desc:'Film ou série en prime time sur RTL club.'}
   ]},
   { id:'ln24', name:'LN24', cat:'be', subcats:['be','info'], logo:{bg:'#B5D4F4',fg:'#042C53'}, programs:[
     {time:'07:00',title:'LN24 Matin',genre:'info',badge:'live',desc:'Information belge en continu dès 7h.'},
     {time:'13:00',title:'LN24 Midi',genre:'info',badge:'live',desc:'Journal et analyses de midi.'},
+    {time:'17:00',title:'LN24 Après-midi',genre:'info',badge:'live',desc:'Info en continu : faits du jour et analyses.'},
+    {time:'19:00',title:'LN24 Journal',genre:'info',badge:'live',desc:'Journal de début de soirée sur LN24.'},
     {time:'21:00',title:'LN24 Soir',genre:'info',badge:'live',desc:'Journal du soir et débats d\'actualité.'}
   ]},
   { id:'be1', name:'Be 1', cat:'be', subcats:['be'], logo:{bg:'#C0DD97',fg:'#173404'}, programs:[
     {time:'10:00',title:'Magazine matin',genre:'magazine',badge:'',desc:'Émission de divertissement matinal.'},
     {time:'14:00',title:'Film après-midi',genre:'film',badge:'film',desc:'Film en après-midi sur Be 1.'},
+    {time:'17:00',title:'Série Be 1',genre:'série',badge:'',desc:'Série en fin d\'après-midi.'},
+    {time:'19:00',title:'Magazine soirée',genre:'magazine',badge:'',desc:'Émission de divertissement en début de soirée sur Be 1.'},
     {time:'21:30',title:'Soirée Be 1',genre:'série',badge:'',desc:'Série ou divertissement en prime time.'}
   ]},
   { id:'becine', name:'Be Ciné', cat:'be', subcats:['be','cinema'], logo:{bg:'#AFA9EC',fg:'#26215C'}, programs:[
     {time:'10:00',title:'Cinéma belge',genre:'film',badge:'film',desc:'Films belges ou coproductions en matinée.'},
     {time:'15:00',title:'Film classique',genre:'film',badge:'film',desc:'Classique du cinéma mondial.'},
+    {time:'18:30',title:'Film Be Ciné soirée',genre:'film',badge:'film',desc:'Film en début de soirée sur Be Ciné.'},
     {time:'22:00',title:'Film du soir',genre:'film',badge:'film',desc:'Grand film en prime time sur Be Ciné.'}
   ]},
   { id:'beseries', name:'Be Séries', cat:'be', subcats:['be'], logo:{bg:'#CECBF6',fg:'#26215C'}, programs:[
     {time:'10:00',title:'Série matinale',genre:'série',badge:'',desc:'Série en début de journée.'},
     {time:'15:00',title:'Série après-midi',genre:'série',badge:'',desc:'Série américaine ou européenne.'},
+    {time:'18:30',title:'Série soirée Be Séries',genre:'série',badge:'',desc:'Série en début de soirée sur Be Séries.'},
     {time:'22:00',title:'Série prime time',genre:'série',badge:'new',desc:'Série en prime time sur Be Séries.'}
   ]},
   { id:'voosport1', name:'VOOsport World 1', cat:'be', subcats:['be','sport'], logo:{bg:'#5DCAA5',fg:'#04342C'}, programs:[
     {time:'09:00',title:'Sport matinal',genre:'sport',badge:'',desc:'Sports en direct le matin.'},
     {time:'14:00',title:'Football belge',genre:'sport',badge:'live',desc:'Match de Pro League belge en direct.'},
+    {time:'17:00',title:'Sport VOO après-midi',genre:'sport',badge:'live',desc:'Compétition sportive en fin d\'après-midi.'},
+    {time:'19:30',title:'Résumés et analyses',genre:'sport',badge:'',desc:'Retour sur les matchs du jour, interviews.'},
     {time:'22:00',title:'Grand match',genre:'sport',badge:'live',desc:'Match en prime time sur VOOsport World 1.'}
   ]},
   { id:'voosport2', name:'VOOsport World 2', cat:'be', subcats:['be','sport'], logo:{bg:'#1D9E75',fg:'#E1F5EE'}, programs:[
     {time:'11:00',title:'Sport 2',genre:'sport',badge:'live',desc:'Compétition sportive en direct.'},
+    {time:'15:00',title:'Sport VOO 2 après-midi',genre:'sport',badge:'live',desc:'Deuxième compétition de l\'après-midi.'},
+    {time:'18:30',title:'Sport VOO 2 soirée',genre:'sport',badge:'live',desc:'Événement sportif en début de soirée.'},
     {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
   ]},
   { id:'voosport3', name:'VOOsport World 3', cat:'be', subcats:['be','sport'], logo:{bg:'#0F6E56',fg:'#E1F5EE'}, programs:[
     {time:'11:00',title:'Sport 3',genre:'sport',badge:'live',desc:'Compétition en direct ou différé.'},
+    {time:'15:00',title:'Sport VOO 3 après-midi',genre:'sport',badge:'live',desc:'Troisième compétition de l\'après-midi.'},
+    {time:'18:30',title:'Sport VOO 3 soirée',genre:'sport',badge:'live',desc:'Événement sportif en début de soirée.'},
     {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match en prime time sur VOOsport World 3.'}
   ]},
   { id:'proximus', name:'Proximus Sports', cat:'be', subcats:['be','sport'], logo:{bg:'#085041',fg:'#9FE1CB'}, programs:[
     {time:'09:00',title:'Proximus Matin',genre:'sport',badge:'',desc:'Actus sport et compétitions matinales.'},
+    {time:'13:00',title:'Proximus Midi',genre:'sport',badge:'',desc:'Résultats et analyses de midi.'},
+    {time:'16:00',title:'Proximus Après-midi',genre:'sport',badge:'live',desc:'Compétition sportive en après-midi.'},
+    {time:'19:30',title:'Proximus Soirée',genre:'sport',badge:'live',desc:'Match en avant-soirée sur Proximus Sports.'},
     {time:'22:00',title:'Match Proximus',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
   ]},
   { id:'epl1', name:'Eleven Pro League 1', cat:'be', subcats:['be','sport'], logo:{bg:'#F7C1C1',fg:'#501313'}, programs:[
     {time:'14:00',title:'Pro League Live',genre:'sport',badge:'live',desc:'Match de la Jupiler Pro League en direct.'},
+    {time:'17:00',title:'Pro League 1 soirée',genre:'sport',badge:'live',desc:'Deuxième match de Pro League en fin d\'après-midi.'},
+    {time:'19:30',title:'Analyse Pro League',genre:'sport',badge:'',desc:'Résumés et analyses des matchs de la journée.'},
     {time:'22:00',title:'Pro League Soir',genre:'sport',badge:'live',desc:'Match de football belge en prime time.'}
   ]},
   { id:'epl2', name:'Eleven Pro League 2', cat:'be', subcats:['be','sport'], logo:{bg:'#F09595',fg:'#501313'}, programs:[
     {time:'15:00',title:'Pro League 2',genre:'sport',badge:'live',desc:'Deuxième match de Pro League en direct.'},
+    {time:'18:30',title:'EPL 2 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Pro League 2.'},
     {time:'22:00',title:'Football soir',genre:'sport',badge:'live',desc:'Match de football en prime time.'}
   ]},
   { id:'epl3', name:'Eleven Pro League 3', cat:'be', subcats:['be','sport'], logo:{bg:'#E24B4A',fg:'#FCEBEB'}, programs:[
     {time:'16:00',title:'Pro League 3',genre:'sport',badge:'live',desc:'Troisième match de journée en direct.'},
+    {time:'19:30',title:'EPL 3 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Pro League 3.'},
     {time:'22:00',title:'Match de nuit',genre:'sport',badge:'live',desc:'Match tardif de football.'}
   ]},
   { id:'eleven1', name:'Eleven Sports 1', cat:'be', subcats:['be','sport'], logo:{bg:'#A32D2D',fg:'#FCEBEB'}, programs:[
     {time:'13:00',title:'Football international',genre:'sport',badge:'live',desc:'Compétition internationale en direct.'},
+    {time:'16:00',title:'Eleven Sports 1 après-midi',genre:'sport',badge:'live',desc:'Deuxième compétition de l\'après-midi.'},
+    {time:'19:30',title:'Eleven Sports 1 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée.'},
     {time:'22:00',title:'Grand match Eleven',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 1.'}
   ]},
   { id:'eleven2', name:'Eleven Sports 2', cat:'be', subcats:['be','sport'], logo:{bg:'#791F1F',fg:'#F7C1C1'}, programs:[
     {time:'14:00',title:'Sport live',genre:'sport',badge:'live',desc:'Compétition sportive en direct.'},
+    {time:'18:30',title:'Eleven Sports 2 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Sports 2.'},
     {time:'22:00',title:'Match soirée',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 2.'}
   ]},
   { id:'eleven3', name:'Eleven Sports 3', cat:'be', subcats:['be','sport'], logo:{bg:'#501313',fg:'#F09595'}, programs:[
     {time:'15:00',title:'Sport continu',genre:'sport',badge:'live',desc:'Événements sportifs en direct.'},
+    {time:'18:30',title:'Eleven Sports 3 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Sports 3.'},
     {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 3.'}
   ]},
   { id:'ladeux', name:'La Deux', cat:'be', subcats:['be'], logo:{bg:'#EF9F27',fg:'#412402'}, programs:[
     {time:'09:00',title:'Magazine RTBF',genre:'magazine',badge:'',desc:'Émission culturelle ou de société en matinée.'},
     {time:'13:00',title:'Midi en direct',genre:'info',badge:'live',desc:'Magazine d\'information de La Deux.'},
+    {time:'16:00',title:'Documentaires La Deux',genre:'doc',badge:'doc',desc:'Documentaires en après-midi sur La Deux.'},
+    {time:'19:00',title:'Magazine soirée La Deux',genre:'magazine',badge:'',desc:'Magazine culturel ou de société en début de soirée.'},
     {time:'21:30',title:'Grand documentaire',genre:'doc',badge:'doc',desc:'Documentaire de société ou historique en prime time.'},
     {time:'23:30',title:'Débat',genre:'magazine',badge:'',desc:'Magazine de débat en deuxième partie de soirée.'}
   ]},
@@ -531,6 +583,8 @@ const CHANNELS = [
   { id:'reshet13', name:'Reshet 13', cat:'il', subcats:['il'], logo:{bg:'#9FE1CB',fg:'#04342C'}, programs:[
     {time:'08:00',title:'בוקר טוב',genre:'magazine',badge:'',desc:'Magazine matinal de Reshet 13.'},
     {time:'13:00',title:'חדשות 13',genre:'info',badge:'live',desc:'Journal de midi sur la chaîne 13.'},
+    {time:'15:00',title:'סדרה אמריקאית',genre:'série',badge:'',desc:'Série américaine en après-midi sur Reshet 13.'},
+    {time:'17:30',title:'ריאליטי / בידור',genre:'divertissement',badge:'',desc:'Émission de divertissement ou télé-réalité en fin d\'après-midi.'},
     {time:'20:00',title:'מבט',genre:'info',badge:'live',desc:'Journal du soir — actualités israéliennes et internationales.'},
     {time:'21:00',title:'אח גדול / פריים',genre:'divertissement',badge:'',desc:'Big Brother Israël ou grand format en prime time.'},
     {time:'23:00',title:'סדרה ישראלית',genre:'série',badge:'',desc:'Série israélienne originale en deuxième partie de soirée.'}
@@ -539,6 +593,9 @@ const CHANNELS = [
     {time:'08:00',title:'תאגיד חדשות',genre:'info',badge:'live',desc:'Journal du service public Kan — information indépendante.'},
     {time:'09:00',title:'כאן 11 בוקר',genre:'magazine',badge:'',desc:'Magazine culturel et société du matin.'},
     {time:'13:00',title:'חדשות הצהריים',genre:'info',badge:'live',desc:'Journal de midi du service public israélien.'},
+    {time:'15:00',title:'תכנית תרבות',genre:'magazine',badge:'',desc:'Magazine culturel ou documentaire en après-midi sur Kan 11.'},
+    {time:'17:00',title:'כאן 11 אחה"צ',genre:'magazine',badge:'',desc:'Émission d\'actualité et société en fin d\'après-midi.'},
+    {time:'19:00',title:'חדשות הערב',genre:'info',badge:'live',desc:'Journal de début de soirée du service public.'},
     {time:'21:00',title:'מהות החיים',genre:'doc',badge:'doc',desc:'Documentaire ou magazine culturel en prime time sur Kan.'},
     {time:'22:30',title:'פסטיבל / תיאטרון',genre:'culture',badge:'',desc:'Diffusion d\'un spectacle, concert ou événement culturel.'}
   ]}
