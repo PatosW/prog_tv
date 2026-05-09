@@ -324,11 +324,11 @@ const CHANNELS = [
     {time:'22:00',title:'Grand documentaire',genre:'doc',badge:'doc',desc:'Documentaire en prime time — histoire, science ou société.'}
   ]},
   { id:'canalfoot', name:'Canal+ Foot', cat:'fr', subcats:['fr','sport'], logo:{bg:'#3C3489',fg:'#EEEDFE'}, programs:[
-    {time:'09:00',title:'Foot Mercato',genre:'sport',badge:'',desc:'Transferts, rumeurs et actualités du football mondial.'},
-    {time:'13:00',title:'Canal Football Club',genre:'sport',badge:'',desc:'Magazine football : analyses et interviews.'},
-    {time:'16:00',title:'Avant-match',genre:'sport',badge:'',desc:'Préparation, compositions et analyses avant le match du soir.'},
-    {time:'19:30',title:'Match de la soirée',genre:'sport',badge:'live',desc:'Football européen en direct — Ligue 1 ou Champions League.'},
-    {time:'22:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Match de Ligue 1, Champions League ou Liga en direct.'}
+    {time:'09:00',title:'Foot Mercato',genre:'sport',badge:'',desc:'Magazine quotidien sur les transferts, rumeurs et coulisses du foot mondial — agents, dirigeants, journalistes spécialisés.'},
+    {time:'13:00',title:'Canal Football Club',genre:'sport',badge:'',desc:'Magazine de référence : analyses tactiques, interviews d\'entraîneurs, revue de Ligue 1 et des coupes d\'Europe de la semaine.'},
+    {time:'16:00',title:'Avant-match',genre:'sport',badge:'',desc:'Compositions probables, stats de confrontation, historique des équipes et pronostics — tout pour préparer le match du soir.'},
+    {time:'19:30',title:'Match de la soirée',genre:'sport',badge:'live',desc:'Football européen en direct — Ligue 1 McDonald\'s, Champions League ou Ligue Europa. Commentateurs Canal+, consultant plateau, stats live.'},
+    {time:'22:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Deuxième match de soirée — Liga espagnole, Serie A italienne, Bundesliga ou Coupe d\'Europe. Ralentis, analyses et réactions après le coup de sifflet final.'}
   ]},
   { id:'canalge', name:'Canal+ Grand Écran', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#26215C',fg:'#CECBF6'}, programs:[
     {time:'10:00',title:'Grand film du matin',genre:'film',badge:'film',desc:'Chef-d\'œuvre du cinéma mondial en matinée.'},
@@ -343,17 +343,17 @@ const CHANNELS = [
     {time:'21:00',title:'Film famille',genre:'film',badge:'film',desc:'Film pour toute la famille en soirée.'}
   ]},
   { id:'canalsport', name:'Canal+ Sport', cat:'fr', subcats:['fr','sport'], logo:{bg:'#D85A30',fg:'#FAECE7'}, programs:[
-    {time:'09:00',title:'Morning Sport',genre:'sport',badge:'',desc:'Actualités sportives du matin.'},
-    {time:'13:00',title:'Magazine sport',genre:'sport',badge:'',desc:'Résultats et analyses des compétitions.'},
-    {time:'16:00',title:'Sport de l\'après-midi',genre:'sport',badge:'live',desc:'Compétition en direct en après-midi.'},
-    {time:'19:30',title:'Avant-soirée sportive',genre:'sport',badge:'',desc:'Résumés et analyses avant le grand match.'},
-    {time:'22:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Retransmission en direct d\'un match.'}
+    {time:'09:00',title:'Morning Sport',genre:'sport',badge:'',desc:'Tour d\'horizon sportif du matin : résultats de la nuit (NBA, MLB), actu des vestiaires, mercato et agenda des compétitions du jour.'},
+    {time:'13:00',title:'Magazine sport',genre:'sport',badge:'',desc:'Résumés vidéo des matchs et compétitions de la veille, analyses tactiques, interviews exclusives et classements mis à jour.'},
+    {time:'16:00',title:'Sport de l\'après-midi',genre:'sport',badge:'live',desc:'Compétition en direct selon le calendrier : rugby TOP 14, tennis ATP/WTA, cyclisme, natation ou autre sport selon la saison.'},
+    {time:'19:30',title:'Avant-soirée sportive',genre:'sport',badge:'',desc:'Résumés des compétitions de l\'après-midi et préparation du match du soir — consultants, stats, présentation des enjeux.'},
+    {time:'22:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Grand match ou compétition en prime time sur Canal+ Sport — foot, rugby, basket ou boxe selon le calendrier. Intégrale avec plateau d\'avant et d\'après-match.'}
   ]},
   { id:'canalsport360', name:'Canal+ Sport 360', cat:'fr', subcats:['fr','sport'], logo:{bg:'#993C1D',fg:'#FAECE7'}, programs:[
-    {time:'10:00',title:'Sport en continu',genre:'sport',badge:'live',desc:'Sports en direct et différé toute la journée.'},
-    {time:'15:00',title:'Cyclisme / Tennis',genre:'sport',badge:'live',desc:'Retransmission de compétitions internationales.'},
-    {time:'18:30',title:'Sport en continu',genre:'sport',badge:'live',desc:'Compétitions sportives en début de soirée.'},
-    {time:'22:00',title:'Sport en soirée',genre:'sport',badge:'live',desc:'Grand événement sportif en prime time.'}
+    {time:'10:00',title:'Sport en continu',genre:'sport',badge:'live',desc:'Flux live et différé toute la journée : sports olympiques, compétitions mondiales et événements mineurs non diffusés sur Canal+ Sport principal.'},
+    {time:'15:00',title:'Cyclisme / Tennis',genre:'sport',badge:'live',desc:'Retransmission intégrale d\'une étape cycliste (Tour, Giro, Vuelta) ou d\'un match de tennis (Masters, Grand Chelem, Coupe Davis).'},
+    {time:'18:30',title:'Sport en continu',genre:'sport',badge:'live',desc:'Deuxième événement sportif de la soirée — souvent un sport de niche ou une compétition internationale décalée horaire.'},
+    {time:'22:00',title:'Sport en soirée',genre:'sport',badge:'live',desc:'Grand événement sportif en prime time — peut être un match de Ligue des champions en parallèle de Canal+ Foot ou une compétition exclusive.'}
   ]},
   { id:'cineclassic', name:'Ciné+ Classic', cat:'fr', subcats:['fr','cinema'], logo:{bg:'#888780',fg:'#F1EFE8'}, programs:[
     {time:'10:00',title:'Classique du cinéma',genre:'film',badge:'film',desc:'Chef-d\'œuvre du 7e art, films de patrimoine.'},
@@ -401,46 +401,46 @@ const CHANNELS = [
     {time:'23:00',title:'Nuit BFM',genre:'info',badge:'live',desc:'Information en continu toute la nuit.'}
   ]},
   { id:'lequipe', name:'L\'Équipe', cat:'fr', subcats:['fr','sport'], logo:{bg:'#639922',fg:'#EAF3DE'}, programs:[
-    {time:'08:00',title:'Matinale sport',genre:'sport',badge:'',desc:'Revue de presse sportive et résultats de la nuit.'},
-    {time:'13:00',title:'Journal du Sport',genre:'sport',badge:'live',desc:'Actualités sportives de midi.'},
-    {time:'19:30',title:'Journal du Sport',genre:'sport',badge:'live',desc:'Journal sportif du soir.'},
-    {time:'22:00',title:'Match ou magazine',genre:'sport',badge:'live',desc:'Match en direct ou grand magazine sport.'}
+    {time:'08:00',title:'Matinale sport',genre:'sport',badge:'',desc:'Revue de presse sportive avec journalistes du quotidien L\'Équipe — résultats de la nuit (Amérique), unes des journaux et agenda du jour toutes disciplines.'},
+    {time:'13:00',title:'Journal du Sport',genre:'sport',badge:'live',desc:'Journal télévisé sportif de midi : résultats, conférences de presse, déclarations des entraîneurs et classements en temps réel — foot, rugby, basket, tennis, F1.'},
+    {time:'19:30',title:'Journal du Sport',genre:'sport',badge:'live',desc:'Grand journal du soir de la chaîne L\'Équipe — résumés vidéo des matchs du jour, analyses, interviews exclusives et tops/flops de la journée sportive.'},
+    {time:'22:00',title:'Match ou magazine',genre:'sport',badge:'live',desc:'Selon le soir : match de Ligue 2, rugby Pro D2 ou National en direct, ou grand magazine d\'investigation sport — affaires, coulisses de clubs, portraits d\'athlètes.'}
   ]},
   { id:'eurosport1', name:'Eurosport 1', cat:'fr', subcats:['fr','sport'], logo:{bg:'#97C459',fg:'#173404'}, programs:[
-    {time:'08:00',title:'Eurosport Matin',genre:'sport',badge:'',desc:'Actualités et compétitions en direct le matin.'},
-    {time:'13:00',title:'Tennis / Cyclisme',genre:'sport',badge:'live',desc:'Compétition sportive en direct ou en différé.'},
-    {time:'19:00',title:'Résultats du jour',genre:'sport',badge:'',desc:'Bilan des compétitions et analyses.'},
-    {time:'22:00',title:'Grand événement sportif',genre:'sport',badge:'live',desc:'Retransmission en prime time.'}
+    {time:'08:00',title:'Eurosport Matin',genre:'sport',badge:'',desc:'Résultats de la nuit et compétitions matinales — tennis asiatique, cyclisme, biathlon ou ski selon saison. Eurosport détient les droits TV des Jeux Olympiques en Europe.'},
+    {time:'13:00',title:'Tennis / Cyclisme',genre:'sport',badge:'live',desc:'Retransmission intégrale selon saison : Roland-Garros, Wimbledon, US Open, Tour de France, Paris-Roubaix, Liège-Bastogne-Liège. Commentateurs experts, ralentis, stats.'},
+    {time:'19:00',title:'Résultats du jour',genre:'sport',badge:'',desc:'Bilan des compétitions de la journée avec résumés vidéo, interviews d\'athlètes, records battus et classements en temps réel — toutes disciplines.'},
+    {time:'22:00',title:'Grand événement sportif',genre:'sport',badge:'live',desc:'Retransmission intégrale en prime time — tennis nocturne (US Open), meeting d\'athlétisme international, Jeux Olympiques ou finale de cyclisme.'}
   ]},
   { id:'eurosport2', name:'Eurosport 2', cat:'fr', subcats:['fr','sport'], logo:{bg:'#3B6D11',fg:'#EAF3DE'}, programs:[
-    {time:'09:00',title:'Sport matinal',genre:'sport',badge:'',desc:'Sports moins médiatisés en direct.'},
-    {time:'15:00',title:'Compétitions live',genre:'sport',badge:'live',desc:'Événements sportifs en direct.'},
-    {time:'18:30',title:'Sport soirée Eurosport 2',genre:'sport',badge:'live',desc:'Compétitions de sports moins médiatisés en soirée.'},
-    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
+    {time:'09:00',title:'Sport matinal',genre:'sport',badge:'',desc:'Sports moins médiatisés en direct : biathlon, ski alpin, patinage artistique, tir à l\'arc, natation en meeting mondial ou sports motorisés (WRC, MotoGP).'},
+    {time:'15:00',title:'Compétitions live',genre:'sport',badge:'live',desc:'Événement différent d\'Eurosport 1 : snooker (Crucible), badminton, escrime, équitation, cyclisme sur piste ou beach-volley en championnat du monde.'},
+    {time:'18:30',title:'Sport soirée Eurosport 2',genre:'sport',badge:'live',desc:'Compétition internationale en début de soirée — souvent un tournoi de snooker, une étape de biathlon nordique ou une compétition de sports d\'hiver.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Grand événement sportif en prime time — pendant les Jeux Olympiques, Eurosport 2 diffuse en simultané une deuxième compétition en parallèle d\'Eurosport 1.'}
   ]},
   { id:'infosport', name:'Infosport+', cat:'fr', subcats:['fr','sport'], logo:{bg:'#185FA5',fg:'#E6F1FB'}, programs:[
-    {time:'08:00',title:'Matinale sport',genre:'sport',badge:'live',desc:'Revue de sport et résultats.'},
-    {time:'13:00',title:'Journal sportif',genre:'sport',badge:'live',desc:'Actualités des sports en direct.'},
-    {time:'16:00',title:'Sport de l\'après-midi',genre:'sport',badge:'live',desc:'Résumés et compétitions en après-midi.'},
-    {time:'19:30',title:'Infosport Soir',genre:'sport',badge:'live',desc:'Journal sportif du soir avec résultats.'},
-    {time:'22:00',title:'Magazine sport',genre:'sport',badge:'',desc:'Analyses et résumés des compétitions.'}
+    {time:'08:00',title:'Matinale sport',genre:'sport',badge:'live',desc:'Premier journal sportif du matin — résultats complets toutes disciplines : foot, rugby, basket, tennis, F1. Format flashs répétés toutes les 30 minutes.'},
+    {time:'13:00',title:'Journal sportif',genre:'sport',badge:'live',desc:'Journal de midi avec résumés vidéo des matchs de matinée, interviews post-entraînement et actu des vestiaires de Ligue 1 et Ligue 2.'},
+    {time:'16:00',title:'Sport de l\'après-midi',genre:'sport',badge:'live',desc:'Résumés en continu des compétitions de l\'après-midi — basketball Betclic Élite, volley Pro A, handball Starligue, rugby Top 14 et coupes d\'Europe.'},
+    {time:'19:30',title:'Infosport Soir',genre:'sport',badge:'live',desc:'Journal sportif du soir de référence — résultats Ligue 1, Ligue 2, coupes d\'Europe, interviews post-match et analyses tactiques des consultants en plateau.'},
+    {time:'22:00',title:'Magazine sport',genre:'sport',badge:'',desc:'Magazine de fond après les matchs : coulisses de clubs, dossiers thématiques, débats entre consultants et best-of des moments marquants de la journée.'}
   ]},
   { id:'bein1', name:'beIN Sports 1', cat:'fr', subcats:['fr','sport'], logo:{bg:'#E24B4A',fg:'#FCEBEB'}, programs:[
-    {time:'09:00',title:'beIN Sports News',genre:'sport',badge:'live',desc:'Actualités sportives mondiales en direct.'},
-    {time:'13:30',title:'Football Live',genre:'sport',badge:'live',desc:'Match de championnat européen en direct.'},
-    {time:'19:00',title:'La Liga / Premier League',genre:'sport',badge:'live',desc:'Match de football européen en direct.'},
-    {time:'22:00',title:'Match du soir',genre:'sport',badge:'live',desc:'Grand match de football — Liga, Serie A ou autre.'}
+    {time:'09:00',title:'beIN Sports News',genre:'sport',badge:'live',desc:'Journal sportif mondial en continu — résultats de la nuit (MLS, NBA, MLB, J-League), mercato, conférences de presse, réactions des entraîneurs en exclusivité.'},
+    {time:'13:30',title:'Football Live',genre:'sport',badge:'live',desc:'Match de championnat européen en direct — La Liga (Real Madrid, Barça, Atletico) ou Premier League (Man City, Arsenal, Liverpool). Plateau experts, stats live, ralentis.'},
+    {time:'19:00',title:'La Liga / Premier League',genre:'sport',badge:'live',desc:'Grand match du soir depuis les plus grands stades européens — souvent le choc de la journée : El Clásico, derby londonien ou match de Ligue des Champions.'},
+    {time:'22:00',title:'Match du soir',genre:'sport',badge:'live',desc:'Deuxième match de soirée — Serie A (Inter, Juventus, Napoli), Bundesliga (Bayern, Dortmund) ou compétition internationale. Analyse complète après le coup de sifflet final.'}
   ]},
   { id:'bein2', name:'beIN Sports 2', cat:'fr', subcats:['fr','sport'], logo:{bg:'#A32D2D',fg:'#FCEBEB'}, programs:[
-    {time:'10:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Football ou basket en direct le matin.'},
-    {time:'15:00',title:'Tennis / Basket',genre:'sport',badge:'live',desc:'Compétition en direct ou différé.'},
-    {time:'18:30',title:'Football soirée beIN 2',genre:'sport',badge:'live',desc:'Match en début de soirée sur beIN Sports 2.'},
-    {time:'22:00',title:'Match du soir',genre:'sport',badge:'live',desc:'Match de football ou autre sport en prime time.'}
+    {time:'10:00',title:'Match en direct',genre:'sport',badge:'live',desc:'Match matinal sur beIN 2 — rencontre de Ligue 1 à heure française, Championship anglais, ou EuroLeague de basket selon le calendrier de la semaine.'},
+    {time:'15:00',title:'Tennis / Basket',genre:'sport',badge:'live',desc:'Sport alternatif selon calendrier : ATP 250/500, EuroLeague basket ou Ligue des Champions féminine. Couverture intégrale avec commentateurs spécialisés.'},
+    {time:'18:30',title:'Football soirée beIN 2',genre:'sport',badge:'live',desc:'Match en début de soirée — Liga Portugaise (Benfica, Porto, Sporting), Eredivisie néerlandaise (Ajax, PSV) ou rencontre de Ligue 1 Conforama.'},
+    {time:'22:00',title:'Match du soir',genre:'sport',badge:'live',desc:'Deuxième rencontre en parallèle de beIN 1 — match décalé de Serie A, Liga ou Bundesliga. Retransmission intégrale jusqu\'au coup de sifflet final.'}
   ]},
   { id:'bein3', name:'beIN Sports 3', cat:'fr', subcats:['fr','sport'], logo:{bg:'#791F1F',fg:'#F7C1C1'}, programs:[
-    {time:'11:00',title:'Sport en direct',genre:'sport',badge:'live',desc:'Compétition internationale en direct.'},
-    {time:'17:00',title:'Replay',genre:'sport',badge:'',desc:'Rediffusion d\'un grand match.'},
-    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
+    {time:'11:00',title:'Sport en direct',genre:'sport',badge:'live',desc:'Troisième chaîne beIN — compétitions moins médiatisées : Turkish Süper Lig, Saudi Pro League, compétitions africaines (CAF) et asiatiques (AFC Champions League).'},
+    {time:'17:00',title:'Replay',genre:'sport',badge:'',desc:'Rediffusion du grand match de la veille ou de la semaine — intégrale sans coupures avec commentaire original. Idéal si vous avez manqué le direct.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match ou compétition en prime time sur beIN 3 — troisième rencontre de soirée ou replay enrichi d\'un match de l\'après-midi avec analyse complémentaire.'}
   ]},
 
   // BELGES
@@ -504,62 +504,62 @@ const CHANNELS = [
     {time:'22:00',title:'Série prime time',genre:'série',badge:'new',desc:'Série en prime time sur Be Séries.'}
   ]},
   { id:'voosport1', name:'VOOsport World 1', cat:'be', subcats:['be','sport'], logo:{bg:'#5DCAA5',fg:'#04342C'}, programs:[
-    {time:'09:00',title:'Sport matinal',genre:'sport',badge:'',desc:'Sports en direct le matin.'},
-    {time:'14:00',title:'Football belge',genre:'sport',badge:'live',desc:'Match de Pro League belge en direct.'},
-    {time:'17:00',title:'Sport VOO après-midi',genre:'sport',badge:'live',desc:'Compétition sportive en fin d\'après-midi.'},
-    {time:'19:30',title:'Résumés et analyses',genre:'sport',badge:'',desc:'Retour sur les matchs du jour, interviews.'},
-    {time:'22:00',title:'Grand match',genre:'sport',badge:'live',desc:'Match en prime time sur VOOsport World 1.'}
+    {time:'09:00',title:'Sport matinal',genre:'sport',badge:'',desc:'Magazine sportif belge du matin — résultats Pro League, actu des clubs belges (Anderlecht, Club Bruges, Standard, Genk) et agenda des compétitions du jour.'},
+    {time:'14:00',title:'Football belge',genre:'sport',badge:'live',desc:'Match de la Jupiler Pro League belge en direct — le championnat avec Anderlecht, Club Bruges, Standard de Liège, Gent, AA Gent. Commentaires en français.'},
+    {time:'17:00',title:'Sport VOO après-midi',genre:'sport',badge:'live',desc:'Compétition sportive en fin d\'après-midi — cyclisme (Flandriennes classiques), basket Proximus League ou volley Liga A selon le calendrier.'},
+    {time:'19:30',title:'Résumés et analyses',genre:'sport',badge:'',desc:'Retour sur les matchs Pro League du jour — buts, stats, interviews des entraîneurs et classement mis à jour. Analyse tactique avec consultants belges.'},
+    {time:'22:00',title:'Grand match',genre:'sport',badge:'live',desc:'Match en prime time sur VOOsport World 1 — souvent un match européen de Club Bruges ou d\'Anderlecht (Conference League, Europa League) ou rediffusion.'}
   ]},
   { id:'voosport2', name:'VOOsport World 2', cat:'be', subcats:['be','sport'], logo:{bg:'#1D9E75',fg:'#E1F5EE'}, programs:[
-    {time:'11:00',title:'Sport 2',genre:'sport',badge:'live',desc:'Compétition sportive en direct.'},
-    {time:'15:00',title:'Sport VOO 2 après-midi',genre:'sport',badge:'live',desc:'Deuxième compétition de l\'après-midi.'},
-    {time:'18:30',title:'Sport VOO 2 soirée',genre:'sport',badge:'live',desc:'Événement sportif en début de soirée.'},
-    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
+    {time:'11:00',title:'Sport 2',genre:'sport',badge:'live',desc:'Deuxième compétition du matin sur VOOsport 2 — souvent un match de football de divisions inférieures belges (D1B, D2) ou un sport collectif (basket, volley).'},
+    {time:'15:00',title:'Sport VOO 2 après-midi',genre:'sport',badge:'live',desc:'Deuxième rencontre sportive de l\'après-midi en parallèle de VOOsport 1 — match de Pro League différent ou compétition internationale.'},
+    {time:'18:30',title:'Sport VOO 2 soirée',genre:'sport',badge:'live',desc:'Événement sportif en début de soirée — souvent cyclisme belge (classiques flamandes, Tour de Wallonie) ou match de football de coupe de Belgique.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match ou compétition en prime time sur VOOsport 2 — en parallèle de VOOsport 1 pour couvrir deux rencontres simultanées de Pro League.'}
   ]},
   { id:'voosport3', name:'VOOsport World 3', cat:'be', subcats:['be','sport'], logo:{bg:'#0F6E56',fg:'#E1F5EE'}, programs:[
-    {time:'11:00',title:'Sport 3',genre:'sport',badge:'live',desc:'Compétition en direct ou différé.'},
-    {time:'15:00',title:'Sport VOO 3 après-midi',genre:'sport',badge:'live',desc:'Troisième compétition de l\'après-midi.'},
-    {time:'18:30',title:'Sport VOO 3 soirée',genre:'sport',badge:'live',desc:'Événement sportif en début de soirée.'},
-    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match en prime time sur VOOsport World 3.'}
+    {time:'11:00',title:'Sport 3',genre:'sport',badge:'live',desc:'Troisième chaîne VOO — souvent un replay ou une compétition de sport moins médiatisée : hockey sur gazon (Red Lions, Red Panthers), natation ou athlétisme.'},
+    {time:'15:00',title:'Sport VOO 3 après-midi',genre:'sport',badge:'live',desc:'Troisième rencontre de l\'après-midi — permet de couvrir simultanément trois matchs de Pro League lors des journées où tous les clubs jouent en même temps.'},
+    {time:'18:30',title:'Sport VOO 3 soirée',genre:'sport',badge:'live',desc:'Événement sportif en début de soirée sur VOOsport 3 — match de Coupe de Belgique (Croky Cup), match amical de l\'équipe nationale ou sport féminin.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match en prime time sur VOOsport 3 — troisième rencontre en simultané ou rediffusion enrichie d\'un grand match belge de la semaine.'}
   ]},
   { id:'proximus', name:'Proximus Sports', cat:'be', subcats:['be','sport'], logo:{bg:'#085041',fg:'#9FE1CB'}, programs:[
-    {time:'09:00',title:'Proximus Matin',genre:'sport',badge:'',desc:'Actus sport et compétitions matinales.'},
-    {time:'13:00',title:'Proximus Midi',genre:'sport',badge:'',desc:'Résultats et analyses de midi.'},
-    {time:'16:00',title:'Proximus Après-midi',genre:'sport',badge:'live',desc:'Compétition sportive en après-midi.'},
-    {time:'19:30',title:'Proximus Soirée',genre:'sport',badge:'live',desc:'Match en avant-soirée sur Proximus Sports.'},
-    {time:'22:00',title:'Match Proximus',genre:'sport',badge:'live',desc:'Événement sportif en prime time.'}
+    {time:'09:00',title:'Proximus Matin',genre:'sport',badge:'',desc:'Magazine sport matinal de Proximus — résultats belges et internationaux, actu des clubs de Pro League, transferts et agenda de la journée.'},
+    {time:'13:00',title:'Proximus Midi',genre:'sport',badge:'',desc:'Résultats et analyses de midi — résumés des matchs joués le matin, classements mis à jour et interviews d\'entraîneurs et joueurs de Pro League.'},
+    {time:'16:00',title:'Proximus Après-midi',genre:'sport',badge:'live',desc:'Compétition sportive en direct — football belge, rugby (Belfius Premiership), basket (Proximus League) ou volleyball selon le calendrier.'},
+    {time:'19:30',title:'Proximus Soirée',genre:'sport',badge:'live',desc:'Match en avant-soirée sur Proximus Sports — Proximus est partenaire officiel des Diables Rouges et diffuse certains matchs de l\'équipe nationale belge.'},
+    {time:'22:00',title:'Match Proximus',genre:'sport',badge:'live',desc:'Grand événement sportif en prime time — match de Pro League, Diables Rouges, ou rencontre européenne d\'un club belge selon les droits Proximus.'}
   ]},
   { id:'epl1', name:'Eleven Pro League 1', cat:'be', subcats:['be','sport'], logo:{bg:'#F7C1C1',fg:'#501313'}, programs:[
-    {time:'14:00',title:'Pro League Live',genre:'sport',badge:'live',desc:'Match de la Jupiler Pro League en direct.'},
-    {time:'17:00',title:'Pro League 1 soirée',genre:'sport',badge:'live',desc:'Deuxième match de Pro League en fin d\'après-midi.'},
-    {time:'19:30',title:'Analyse Pro League',genre:'sport',badge:'',desc:'Résumés et analyses des matchs de la journée.'},
-    {time:'22:00',title:'Pro League Soir',genre:'sport',badge:'live',desc:'Match de football belge en prime time.'}
+    {time:'14:00',title:'Pro League Live',genre:'sport',badge:'live',desc:'Match de la Jupiler Pro League en direct sur Eleven — la chaîne officielle du championnat belge. Club Bruges, Anderlecht, Standard, Gent, Union Saint-Gilloise.'},
+    {time:'17:00',title:'Pro League 1 soirée',genre:'sport',badge:'live',desc:'Deuxième match de Pro League en fin d\'après-midi — les journées de championnat belge comptent souvent 4-5 matchs simultanés, un par chaîne Eleven.'},
+    {time:'19:30',title:'Analyse Pro League',genre:'sport',badge:'',desc:'Résumés complets des matchs du jour — buts en vidéo, stats de possession, xG, cartons, interviews des deux équipes et tableau des buteurs mis à jour.'},
+    {time:'22:00',title:'Pro League Soir',genre:'sport',badge:'live',desc:'Match de Pro League en soirée — souvent le match à forts enjeux du soir (derby, haut de tableau) ou match européen d\'un club belge en coupe d\'Europe.'}
   ]},
   { id:'epl2', name:'Eleven Pro League 2', cat:'be', subcats:['be','sport'], logo:{bg:'#F09595',fg:'#501313'}, programs:[
-    {time:'15:00',title:'Pro League 2',genre:'sport',badge:'live',desc:'Deuxième match de Pro League en direct.'},
-    {time:'18:30',title:'EPL 2 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Pro League 2.'},
-    {time:'22:00',title:'Football soir',genre:'sport',badge:'live',desc:'Match de football en prime time.'}
+    {time:'15:00',title:'Pro League 2',genre:'sport',badge:'live',desc:'Deuxième match simultané de Pro League — quand Club Bruges joue en même temps qu\'Anderlecht, chaque rencontre est sur une chaîne Eleven différente.'},
+    {time:'18:30',title:'EPL 2 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Pro League 2 — souvent Gent, Standard, Genk ou Cercle Bruges dans un match de milieu de tableau important.'},
+    {time:'22:00',title:'Football soir',genre:'sport',badge:'live',desc:'Match de football belge ou européen en prime time sur EPL 2 — peut être un match en retard, une Coupe de Belgique ou un qualificatif de coupe d\'Europe.'}
   ]},
   { id:'epl3', name:'Eleven Pro League 3', cat:'be', subcats:['be','sport'], logo:{bg:'#E24B4A',fg:'#FCEBEB'}, programs:[
-    {time:'16:00',title:'Pro League 3',genre:'sport',badge:'live',desc:'Troisième match de journée en direct.'},
-    {time:'19:30',title:'EPL 3 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Pro League 3.'},
-    {time:'22:00',title:'Match de nuit',genre:'sport',badge:'live',desc:'Match tardif de football.'}
+    {time:'16:00',title:'Pro League 3',genre:'sport',badge:'live',desc:'Troisième match simultané de Pro League — les journées à 8 matchs nécessitent 3 chaînes Eleven en parallèle pour couvrir l\'intégralité des rencontres.'},
+    {time:'19:30',title:'EPL 3 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Pro League 3 — clubs de milieu ou bas de classement, ou match de D1B (deuxième division belge).'},
+    {time:'22:00',title:'Match de nuit',genre:'sport',badge:'live',desc:'Match tardif de football — peut être un match européen joué à 21h (heure belge) : Conference League, Europa League ou Champions League.'}
   ]},
   { id:'eleven1', name:'Eleven Sports 1', cat:'be', subcats:['be','sport'], logo:{bg:'#A32D2D',fg:'#FCEBEB'}, programs:[
-    {time:'13:00',title:'Football international',genre:'sport',badge:'live',desc:'Compétition internationale en direct.'},
-    {time:'16:00',title:'Eleven Sports 1 après-midi',genre:'sport',badge:'live',desc:'Deuxième compétition de l\'après-midi.'},
-    {time:'19:30',title:'Eleven Sports 1 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée.'},
-    {time:'22:00',title:'Grand match Eleven',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 1.'}
+    {time:'13:00',title:'Football international',genre:'sport',badge:'live',desc:'Football international en direct sur Eleven Sports — Premier League anglaise, Serie A italienne, ou compétitions africaines selon les droits de diffusion belges.'},
+    {time:'16:00',title:'Eleven Sports 1 après-midi',genre:'sport',badge:'live',desc:'Deuxième compétition internationale de l\'après-midi — Liga espagnole, Bundesliga ou Ligue des Nations selon le calendrier et les droits disponibles.'},
+    {time:'19:30',title:'Eleven Sports 1 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée — souvent le grand match international du soir : Champions League, Europa League ou rencontre de haut niveau en Angleterre.'},
+    {time:'22:00',title:'Grand match Eleven',genre:'sport',badge:'live',desc:'Grand événement sportif en prime time sur Eleven Sports 1 — match de Champions League, rencontre internationale ou compétition exclusive aux droits Eleven.'}
   ]},
   { id:'eleven2', name:'Eleven Sports 2', cat:'be', subcats:['be','sport'], logo:{bg:'#791F1F',fg:'#F7C1C1'}, programs:[
-    {time:'14:00',title:'Sport live',genre:'sport',badge:'live',desc:'Compétition sportive en direct.'},
-    {time:'18:30',title:'Eleven Sports 2 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Sports 2.'},
-    {time:'22:00',title:'Match soirée',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 2.'}
+    {time:'14:00',title:'Sport live',genre:'sport',badge:'live',desc:'Compétition sportive en direct sur Eleven 2 — match en parallèle d\'Eleven 1 pour couvrir deux rencontres simultanées : rugby, basket ou football international.'},
+    {time:'18:30',title:'Eleven Sports 2 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven 2 — deuxième rencontre internationale de soirée, souvent Liga Conférence ou Europa Conference League.'},
+    {time:'22:00',title:'Match soirée',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven 2 — en parallèle d\'Eleven 1 pour couvrir deux matchs européens ou internationaux en même temps.'}
   ]},
   { id:'eleven3', name:'Eleven Sports 3', cat:'be', subcats:['be','sport'], logo:{bg:'#501313',fg:'#F09595'}, programs:[
-    {time:'15:00',title:'Sport continu',genre:'sport',badge:'live',desc:'Événements sportifs en direct.'},
-    {time:'18:30',title:'Eleven Sports 3 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven Sports 3.'},
-    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven Sports 3.'}
+    {time:'15:00',title:'Sport continu',genre:'sport',badge:'live',desc:'Troisième chaîne Eleven — sports alternatifs ou troisième match en simultané : rugby, MMA, sports americains (NFL highlights), ou padel de haut niveau.'},
+    {time:'18:30',title:'Eleven Sports 3 soirée',genre:'sport',badge:'live',desc:'Match en début de soirée sur Eleven 3 — troisième rencontre simultanée de soirée ou replay enrichi d\'un match important de la journée.'},
+    {time:'22:00',title:'Soirée sport',genre:'sport',badge:'live',desc:'Match en prime time sur Eleven 3 — troisième événement en simultané ou rediffusion du match de la soirée avec analyses et commentaires supplémentaires.'}
   ]},
   { id:'ladeux', name:'La Deux', cat:'be', subcats:['be'], logo:{bg:'#EF9F27',fg:'#412402'}, programs:[
     {time:'09:00',title:'Magazine RTBF',genre:'magazine',badge:'',desc:'Émission culturelle ou de société en matinée.'},
@@ -607,100 +607,180 @@ const CHANNELS = [
 
 const POOLS = {
   recent: [
-    {title:'Dune : Deuxième Partie',    desc:'Paul Atreides mène les Fremen dans une guerre sacrée contre la maison Harkonnen. Épopée spectaculaire de Denis Villeneuve.'},
-    {title:'Oppenheimer',               desc:'Le père de la bombe atomique entre génie et remords. Christopher Nolan signe un monument de 3 heures avec Cillian Murphy.'},
-    {title:'Le Comte de Monte-Cristo',  desc:'Edmond Dantès emprisonné pour trahison prépare sa vengeance. Adaptation épique du roman de Dumas avec Pierre Niney.'},
-    {title:'Anatomie d\'une chute',     desc:'Palme d\'or 2023. Un mari retrouvé mort dans la neige — sa femme accusée du meurtre, son fils aveugle seul témoin.'},
-    {title:'Killers of the Flower Moon',desc:'Scorsese raconte les meurtres Osage des années 1920 pour leur pétrole. Avec Leonardo DiCaprio et Robert De Niro.'},
-    {title:'Poor Things',               desc:'Lion d\'or 2023. Emma Stone ressuscitée avec le cerveau d\'un enfant explore le monde dans un conte déjanté de Lanthimos.'},
-    {title:'The Substance',             desc:'Une star de fitness prend une substance interdite qui crée une version plus jeune d\'elle-même. Body-horror viscéral.'},
-    {title:'Civil War',                 desc:'Des journalistes traversent une Amérique en guerre civile pour rejoindre Washington. Film-choc d\'Alex Garland.'},
-    {title:'Anora',                     desc:'Palme d\'or 2024. Une escort new-yorkaise épouse en secret le fils d\'un oligarque russe. Sean Baker au sommet.'},
-    {title:'Wonka',                     desc:'Les origines du chocolatier magicien avant Charlie et la Chocolaterie. Timothée Chalamet dans un musical enchanté.'},
+    {title:'Dune : Deuxième Partie',    desc:'Épopée SF de Denis Villeneuve (2024) avec Timothée Chalamet.',
+     long:'Denis Villeneuve, 2024. Paul Atreides (Timothée Chalamet) s\'unit aux Fremen pour venger son père et accomplir sa destinée prophétique sur Arrakis. Face à l\'implacable Feyd-Rautha Harkonnen (Austin Butler), il doit choisir entre l\'amour de Chani et la guerre sainte qui pourrait embraser l\'univers. Suite directe de Dune 2021, plus grand et plus sombre — une des plus belles épopées SF jamais réalisées. 2h46.'},
+    {title:'Oppenheimer',               desc:'Le père de la bombe atomique entre génie et remords. Christopher Nolan, 3h, 7 Oscars.',
+     long:'Christopher Nolan, 2023. J. Robert Oppenheimer (Cillian Murphy) dirige le projet Manhattan dans le désert du Nouveau-Mexique pour créer la première bombe atomique avant les nazis. Le film alterne entre la création de la bombe pendant la Seconde Guerre mondiale et le procès politique de l\'ère McCarthy qui cherche à le détruire. Avec Emily Blunt, Matt Damon, Robert Downey Jr. — 7 Oscars dont Meilleur Film et Meilleur Réalisateur. 3h.'},
+    {title:'Le Comte de Monte-Cristo',  desc:'Edmond Dantès emprisonné 13 ans prépare une vengeance implacable. Pierre Niney, 2024.',
+     long:'Alexandre de la Patellière & Matthieu Delaporte, 2024. Edmond Dantès (Pierre Niney), marin injustement accusé de bonapartisme, est emprisonné 13 ans au château d\'If. Il s\'évade avec l\'aide de l\'abbé Faria, découvre un trésor fabuleux et revient à Paris sous l\'identité du mystérieux comte de Monte-Cristo pour ruiner un à un ses trois traîtres. Adaptation épique du roman de Dumas, plus grand succès du cinéma français en 2024. 2h58.'},
+    {title:'Anatomie d\'une chute',     desc:'Palme d\'or 2023 — un mari mort dans la neige, une femme accusée, un fils aveugle seul témoin.',
+     long:'Justine Triet, 2023. Samuel est retrouvé mort au pied de son chalet dans les Alpes. Sa femme Sandra (Sandra Hüller), romancière allemande, est accusée de meurtre. Leur fils aveugle de 11 ans, Daniel, est le seul à avoir peut-être entendu quelque chose. Le procès déchire le couple et expose les failles d\'un mariage. Palme d\'or à Cannes, César du Meilleur Film. 2h31.'},
+    {title:'Killers of the Flower Moon',desc:'Scorsese raconte les meurtres Osage des années 1920. DiCaprio, De Niro. 3h26.',
+     long:'Martin Scorsese, 2023. Dans l\'Oklahoma des années 1920, la nation Osage est assise sur les plus grandes réserves de pétrole d\'Amérique. Les membres de la tribu sont assassinés les uns après les autres dans ce qui deviendra l\'une des premières enquêtes du FBI. Ernest Burkhart (Leonardo DiCaprio), marié à une femme Osage, est au cœur du complot orchestré par son oncle William Hale (Robert De Niro). Une fresque épique sur la cupidité et le génocide. 3h26.'},
+    {title:'Poor Things',               desc:'Lion d\'or 2023. Emma Stone ressuscitée avec un cerveau d\'enfant explore le monde. Conte déjanté de Lanthimos.',
+     long:'Yorgos Lanthimos, 2023. Bella Baxter (Emma Stone) est une femme ramenée à la vie par un chirurgien excentrique (Willem Dafoe) avec le cerveau de son propre enfant à naître. Ignorante des conventions sociales, elle s\'échappe de son créateur pour parcourir le monde — Lisbonne, Paris, Alexandrie — en quête d\'expériences et de liberté absolue. Conte féministe délirant inspiré de Frankenstein. Lion d\'or à Venise, Oscar Meilleure Actrice pour Emma Stone. 2h21.'},
+    {title:'The Substance',             desc:'Une star de fitness prend une substance interdite qui crée une version plus jeune d\'elle-même. Body-horror viscéral.',
+     long:'Coralie Fargeat, 2024. Elisabeth Sparkle (Demi Moore), star de fitness de 50 ans renvoyée pour son âge, injecte une mystérieuse substance qui génère une version plus jeune et parfaite d\'elle-même, Sue (Margaret Qualley). Mais les deux corps ne peuvent pas coexister sans règles strictes — et Elisabeth commence à les transgresser. Body-horror féministe et déchaîné sur l\'obsession de la jeunesse. Prix du Meilleur Scénario à Cannes 2024. 2h21.'},
+    {title:'Civil War',                 desc:'Des journalistes traversent une Amérique en guerre civile pour rejoindre Washington.',
+     long:'Alex Garland, 2024. Les États-Unis sont en guerre civile. Une équipe de photojournalistes, dont Lee (Kirsten Dunst), traverse un pays déchiré pour rejoindre Washington avant que les forces rebelles ne prennent la Maison Blanche. Road-movie de guerre brutal et sans manichéisme qui interroge le rôle des journalistes face à la violence. Tourné comme un vrai film de guerre. 1h49.'},
+    {title:'Anora',                     desc:'Palme d\'or 2024. Une escort new-yorkaise épouse en secret le fils d\'un oligarque russe.',
+     long:'Sean Baker, 2024. Anora (Mikey Madison), jeune femme d\'origine ouzbèke travaillant dans un club de strip-tease à Brooklyn, épouse en secret Vanya, le fils fêtard d\'un oligarque russe. Mais quand les parents apprennent la nouvelle depuis Moscou, ils envoient leurs hommes de main pour faire annuler le mariage. Palme d\'or à Cannes — une comédie d\'amour chaotique et émouvante sur l\'illusion du rêve américain. 2h19.'},
+    {title:'Wonka',                     desc:'Les origines du chocolatier magicien. Timothée Chalamet dans un musical enchanté.',
+     long:'Paul King, 2023. Avant d\'ouvrir sa chocolaterie légendaire, le jeune Willy Wonka (Timothée Chalamet) débarque dans une grande ville avec un chapeau magique et des rêves plein la tête. Mais un cartel de chocolatiers corrompus veut l\'empêcher de s\'établir. Préquel musical enchanté au roman de Roald Dahl et aux films qui ont suivi. Avec Olivia Colman, Hugh Grant en Oompa Loompa. 1h56.'},
   ],
   french: [
-    {title:'La Grande Illusion',        desc:'Jean Renoir, 1937. Des officiers français prisonniers de guerre en Allemagne. Un chef-d\'œuvre sur la fraternité humaine.'},
-    {title:'Le Cercle rouge',           desc:'Melville réunit Alain Delon, Yves Montand et Bourvil pour le casse de joaillerie le plus élégant du cinéma.'},
-    {title:'Le Samouraï',               desc:'Melville — Alain Delon en tueur à gages solitaire, silencieux et impassible. L\'essence même du polar.'},
-    {title:'Les Diaboliques',           desc:'Clouzot, 1955. La femme et la maîtresse d\'un directeur d\'école s\'allient pour le tuer. Hitchcock en était jaloux.'},
-    {title:'Le Salaire de la peur',     desc:'Clouzot — Yves Montand conduit un camion de nitroglycérine sur une piste de montagne. Tension insupportable.'},
-    {title:'À bout de souffle',         desc:'Godard, 1960. Jean-Paul Belmondo en voyou parisien qui imite Humphrey Bogart. La Nouvelle Vague en un film.'},
-    {title:'La Haine',                  desc:'Mathieu Kassovitz, 1995. 24 heures dans la vie de trois jeunes des cités après une nuit d\'émeutes. Un choc.'},
-    {title:'Portrait de la jeune fille en feu', desc:'Céline Sciamma — Bretagne, 1760. Une peintre et son modèle, une passion interdite. Film d\'une beauté rare.'},
-    {title:'Intouchables',              desc:'François Cluzet et Omar Sy dans l\'amitié improbable entre un aristocrate tétraplégique et son aide à domicile.'},
-    {title:'Trois hommes et un couffin',desc:'Coline Serreau, 1985. Trois célibataires endurcis se retrouvent avec un bébé sur les bras. Comédie culte.'},
+    {title:'La Grande Illusion',        desc:'Jean Renoir, 1937. Des prisonniers de guerre français en Allemagne — chef-d\'œuvre sur la fraternité humaine.',
+     long:'Jean Renoir, 1937. Pendant la Première Guerre mondiale, des officiers français (Jean Gabin, Pierre Fresnay) sont prisonniers dans un camp allemand commandé par l\'aristocrate von Rauffenstein (Erich von Stroheim). Ils préparent leur évasion tout en nouant des liens improbables par-delà les frontières de classe et de nationalité. Le film le plus profondément humaniste du cinéma français, sélectionné aux Oscars comme Meilleur Film — chose rarissime pour un film étranger à l\'époque. 1h54.'},
+    {title:'Le Cercle rouge',           desc:'Melville — Alain Delon, Yves Montand et Bourvil pour le casse de joaillerie le plus élégant du cinéma.',
+     long:'Jean-Pierre Melville, 1970. Corey (Alain Delon), tout juste sorti de prison, croise le fugitif Vogel (Gian Maria Volonté) et retrouve l\'ex-flic alcoolique Jansen (Yves Montand) pour préparer le braquage d\'une bijouterie place Vendôme. Face à eux, le commissaire Mattei (Bourvil dans son dernier rôle). Polar minimaliste et hypnotique — le film culte de Melville sur la fatalité masculine. 2h20.'},
+    {title:'Le Samouraï',               desc:'Melville — Alain Delon en tueur à gages solitaire et impassible. L\'essence même du polar.',
+     long:'Jean-Pierre Melville, 1967. Jef Costello (Alain Delon) est un tueur à gages solitaire qui vit dans un appartement dépouillé avec un oiseau en cage. Après un contrat, une seule témoin — la pianiste d\'un club de jazz — refuse de l\'identifier à la police. Mais ses commanditaires veulent l\'éliminer. Film-culte du polar international, modèle revendiqué de John Woo et Jim Jarmusch. Atmosphère unique, dialogue minimal. 1h45.'},
+    {title:'Les Diaboliques',           desc:'Clouzot, 1955. La femme et la maîtresse d\'un directeur d\'école s\'allient pour le tuer. Hitchcock en était jaloux.',
+     long:'Henri-Georges Clouzot, 1955. Christina (Véra Clouzot), épouse soumise d\'un directeur d\'école cruel, s\'allie à Nicole (Simone Signoret), sa maîtresse, pour le noyer dans une baignoire et jeter le corps dans la piscine de l\'école. Mais le cadavre disparaît. Hitchcock regrettait amèrement de ne pas avoir acheté les droits avant Clouzot. Twist final dévastateur — ne lisez rien de plus avant de voir le film. 1h54.'},
+    {title:'Le Salaire de la peur',     desc:'Clouzot — Yves Montand conduit de la nitroglycérine sur une piste de montagne. Tension insupportable.',
+     long:'Henri-Georges Clouzot, 1953. Dans un village d\'Amérique du Sud, des hommes sans papiers végètent dans la misère. Une compagnie pétrolière américaine propose une fortune à qui transportera deux camions de nitroglycérine sur 500 km de piste défoncée pour éteindre un puits en feu. Mario (Yves Montand) et ses trois compagnons acceptent — sachant que le moindre choc peut tout faire exploser. Grand Prix à Cannes. Thriller d\'une tension insoutenable. 2h23.'},
+    {title:'À bout de souffle',         desc:'Godard, 1960. Jean-Paul Belmondo en voyou parisien. La Nouvelle Vague en un film.',
+     long:'Jean-Luc Godard, 1960. Michel Poiccard (Jean-Paul Belmondo), petit voyou qui vole des voitures et imite Humphrey Bogart, tue un policier sur une route et se réfugie à Paris auprès de Patricia (Jean Seberg), étudiante américaine qui vend le Herald Tribune sur les Champs-Élysées. La police resserre l\'étau. Film fondateur de la Nouvelle Vague, tourné caméra à l\'épaule dans les rues de Paris avec un budget dérisoire. 1h27.'},
+    {title:'La Haine',                  desc:'Kassovitz, 1995. 24 heures dans la vie de trois jeunes des cités après une nuit d\'émeutes. Un choc.',
+     long:'Mathieu Kassovitz, 1995. Vinz (Vincent Cassel), Hubert (Hubert Koundé) et Saïd (Saïd Taghmaoui) passent 24 heures dans leur cité de banlieue au lendemain d\'une nuit d\'émeutes — un jeune a été grièvement blessé par la police. Vinz a récupéré l\'arme d\'un flic et jure de tuer un policier si leur ami meurt. Film en noir et blanc, César du Meilleur Film 1996 — un choc cinématographique et social toujours d\'une brûlante actualité. 1h38.'},
+    {title:'Portrait de la jeune fille en feu', desc:'Céline Sciamma — Bretagne, 1760. Une peintre et son modèle, une passion interdite.',
+     long:'Céline Sciamma, 2019. En Bretagne, à la fin du XVIIIe siècle, Marianne (Noémie Merlant), peintre, est chargée de réaliser le portrait de mariage de Héloïse (Adèle Haenel), une jeune femme qui refuse de poser. Marianne doit l\'observer en secret le jour, et peindre la nuit — jusqu\'à ce que leurs regards se croisent vraiment. Hymne à la création féminine et au désir interdit. Prix du Scénario à Cannes 2019. 1h59.'},
+    {title:'Intouchables',              desc:'Philippe (François Cluzet) et Driss (Omar Sy) — l\'amitié impossible entre un tétraplégique et son aide.',
+     long:'Olivier Nakache & Éric Toledano, 2011. Philippe (François Cluzet), aristocrate tétraplégique après un accident de parapente, engage comme aide à domicile Driss (Omar Sy), jeune banlieusard qui vient chercher un refus pour ses allocations. Une amitié improbable et irrésistible se noue entre ces deux hommes que tout oppose. Inspiré d\'une histoire vraie. Plus grand succès mondial du cinéma français avec 51 millions d\'entrées. 1h52.'},
+    {title:'Trois hommes et un couffin',desc:'Coline Serreau, 1985. Trois célibataires endurcis se retrouvent avec un bébé sur les bras. Comédie culte.',
+     long:'Coline Serreau, 1985. Pierre, Jacques et Michel, trois célibataires parisiens partageant un appartement, découvrent un bébé abandonné sur leur palier — avec une note laconique laissée par la mère. Aucun d\'eux ne sait changer une couche. Comédie culte sur la paternité improvisée, remakée à Hollywood sous le titre Three Men and a Baby. César du Meilleur Film 1986. 1h46.'},
   ],
   classic: [
-    {title:'Citizen Kane',              desc:'Orson Welles, 1941. La vie d\'un magnat de la presse racontée à rebours. Considéré comme le meilleur film de l\'histoire.'},
-    {title:'Vertigo',                   desc:'Hitchcock, 1958. Un détective vertigineux obsédé par une femme mystérieuse à San Francisco. Pur chef-d\'œuvre.'},
-    {title:'2001 : L\'Odyssée de l\'espace', desc:'Kubrick, 1968. De l\'aube de l\'humanité à Jupiter — une exploration philosophique de l\'intelligence et de l\'infini.'},
-    {title:'Casablanca',                desc:'Bogart et Bergman dans le café d\'Humphrey à Casablanca pendant la guerre. Le film romantique absolu.'},
-    {title:'Psychose',                  desc:'Hitchcock, 1960. Une fugitive s\'arrête dans un motel isolé tenu par un jeune homme étrange. La douche inoubliable.'},
-    {title:'Le Parrain',                desc:'Coppola, 1972. La saga de la famille Corleone — le meilleur film de mafia jamais réalisé avec Marlon Brando.'},
-    {title:'Apocalypse Now',            desc:'Coppola, 1979. Un capitaine remonte un fleuve cambodgien pour éliminer un colonel devenu fou. Palme d\'or Cannes.'},
-    {title:'Taxi Driver',               desc:'Scorsese, 1976. Un ancien militaire insomniaque sillonne New York de nuit. De Niro au sommet, Herrmann à la baguette.'},
-    {title:'Le Voleur de bicyclette',   desc:'De Sica, 1948. Un père et son fils cherchent dans Rome le vélo volé dont dépend leur survie. Néoréalisme pur.'},
-    {title:'8½',                        desc:'Fellini, 1963. Un réalisateur en crise creuse dans ses souvenirs et fantasmes pour trouver son prochain film.'},
+    {title:'Citizen Kane',              desc:'Orson Welles, 1941. La vie d\'un magnat de la presse racontée à rebours. Considéré comme le meilleur film de l\'histoire.',
+     long:'Orson Welles, 1941. Charles Foster Kane, magnat de la presse, meurt seul dans son château en murmurant "Rosebud". Un journaliste enquête sur sa vie en interrogeant ses proches — et reconstruit par fragments l\'ascension et la chute d\'un homme qui voulait tout posséder. Innovations techniques révolutionnaires pour l\'époque (profondeur de champ, angles extrêmes, flashbacks croisés). Régulièrement élu meilleur film de l\'histoire du cinéma. 1h59.'},
+    {title:'Vertigo',                   desc:'Hitchcock, 1958. Un détective vertigineux obsédé par une femme mystérieuse à San Francisco.',
+     long:'Alfred Hitchcock, 1958. Scottie Ferguson (James Stewart), détective de la police de San Francisco atteint de vertige, est engagé pour surveiller Madeleine (Kim Novak), la femme mystérieuse d\'un ami. Il tombe éperdument amoureux d\'elle — mais Madeleine semble hantée par une morte qui lui ressemble. L\'un des films les plus complexes et dérangeants de Hitchcock sur l\'obsession, le désir et l\'identité. Élu meilleur film de l\'histoire par le BFI en 2012. 2h8.'},
+    {title:'2001 : L\'Odyssée de l\'espace', desc:'Kubrick, 1968. De l\'aube de l\'humanité à Jupiter — une exploration de l\'intelligence et de l\'infini.',
+     long:'Stanley Kubrick, 1968. Du premier outil utilisé par un hominidé préhistorique à une mission spatiale vers Jupiter guidée par l\'ordinateur HAL 9000, Kubrick explore l\'évolution de l\'intelligence et la place de l\'humanité dans le cosmos. Aucun dialogue pendant les 25 premières minutes — une expérience cinématographique totale. Effets spéciaux révolutionnaires qui ont tenu jusqu\'aux années 2000. L\'une des œuvres les plus importantes de l\'histoire du cinéma. 2h29.'},
+    {title:'Casablanca',                desc:'Bogart et Bergman à Casablanca pendant la guerre. Le film romantique absolu.',
+     long:'Michael Curtiz, 1942. Rick Blaine (Humphrey Bogart) tient un café à Casablanca en 1941, dans le Maroc sous occupation de Vichy. Il y retrouve Ilsa (Ingrid Bergman), la femme qu\'il aimait à Paris et qui l\'a quitté sans explication — accompagnée de son mari, chef de la Résistance tchèque. Rick doit choisir entre son amour et la cause. 3 Oscars dont Meilleur Film. Répliques cultes. 1h42.'},
+    {title:'Psychose',                  desc:'Hitchcock, 1960. Une fugitive s\'arrête dans un motel isolé. La scène de douche qui a changé le cinéma.',
+     long:'Alfred Hitchcock, 1960. Marion Crane (Janet Leigh) vole 40 000 dollars à son employeur et prend la fuite. Elle s\'arrête pour la nuit au Bates Motel, tenu par le timide Norman (Anthony Perkins) et sa mère dominatrice. La scène de la douche — 45 secondes, 70 plans — a révolutionné le cinéma d\'horreur et le montage. Le premier film mainstream à tuer sa star à 47 minutes. 1h49.'},
+    {title:'Le Parrain',                desc:'Coppola, 1972. La saga des Corleone — Marlon Brando, Al Pacino. Le plus grand film de mafia jamais réalisé.',
+     long:'Francis Ford Coppola, 1972. Don Vito Corleone (Marlon Brando), chef de la plus puissante famille mafieuse de New York, refuse d\'entrer dans le trafic de drogue — ce qui déclenche une guerre entre les cinq familles. Son fils Michael (Al Pacino), vétéran idéaliste, se voit contraint de prendre les rênes. Adaptation du roman de Mario Puzo. 3 Oscars dont Meilleur Film. Le film de gangsters qui a tout défini après lui. 2h55.'},
+    {title:'Apocalypse Now',            desc:'Coppola, 1979. Un capitaine remonte un fleuve jusqu\'à un colonel devenu fou. Palme d\'or. 2h33.',
+     long:'Francis Ford Coppola, 1979. Pendant la guerre du Vietnam, le capitaine Willard (Martin Sheen) reçoit une mission secrète : remonter le fleuve Nung au Cambodge pour éliminer le colonel Kurtz (Marlon Brando), officier des bérets verts brillant devenu fou et adoré comme un dieu par des indigènes. Adapté de Au cœur des ténèbres de Conrad. Palme d\'or à Cannes, tournage cauchemardesque aux Philippines. Expérience cinématographique unique. 2h33.'},
+    {title:'Taxi Driver',               desc:'Scorsese, 1976. Travis Bickle sillonne New York de nuit. De Niro hallucinant dans un film-monstre.',
+     long:'Martin Scorsese, 1976. Travis Bickle (Robert De Niro), ancien Marine insomniaque, conduit un taxi de nuit dans un New York sordide des années 1970. Obsédé par la corruption qui l\'entoure, il se construit une mission purificatrice et s\'équipe d\'armes. Avec Jodie Foster en prostituée de 12 ans et Cybill Shepherd. Palme d\'or à Cannes, musique de Bernard Herrmann. L\'un des plus grands films américains jamais réalisés. 1h53.'},
+    {title:'Le Voleur de bicyclette',   desc:'De Sica, 1948. Un père et son fils cherchent dans Rome le vélo volé dont dépend leur survie. Néoréalisme pur.',
+     long:'Vittorio De Sica, 1948. Antonio (Lamberto Maggiorani), chômeur depuis des années, décroche enfin un emploi de colleur d\'affiches à Rome — mais son vélo indispensable est volé dès le premier jour. Avec son jeune fils Bruno, il parcourt la ville toute la journée pour le retrouver. Tourné avec des acteurs non professionnels dans les rues de Rome d\'après-guerre. Film fondateur du néoréalisme italien, Oscar du Meilleur Film Étranger. 1h29.'},
+    {title:'8½',                        desc:'Fellini, 1963. Un réalisateur en crise creuse dans ses souvenirs et fantasmes pour trouver son prochain film.',
+     long:'Federico Fellini, 1963. Guido Anselmi (Marcello Mastroianni), réalisateur célèbre en panne d\'inspiration, fuit dans une station thermale pour préparer son prochain film de science-fiction. Entouré de sa femme, de sa maîtresse et de producteurs impatients, il se perd dans ses rêves, souvenirs d\'enfance et fantasmes. Film autobiographique sur le cinéma et la création — l\'œuvre la plus personnelle et la plus libre de Fellini. Oscar du Meilleur Film Étranger. 2h18.'},
   ],
   horror: [
-    {title:'Hereditary',                desc:'Ari Aster, 2018. Après la mort de la grand-mère, une famille découvre son sinistre héritage. La peur à l\'état pur.'},
-    {title:'Midsommar',                 desc:'Ari Aster — un couple part en Suède pour un festival de solstice qui vire à l\'horreur en plein soleil de minuit.'},
-    {title:'The VVitch',                desc:'Robert Eggers, 1630. Une famille puritaine bannie de sa colonie est terrorisée par une présence dans la forêt.'},
-    {title:'Get Out',                   desc:'Jordan Peele, 2017. Un jeune Noir rencontre la famille de sa petite amie blanche et découvre une terreur indicible.'},
-    {title:'It Follows',                desc:'Une entité invisible, transmise par contact, suit inlassablement sa victime. Métaphore glaçante sur le désir.'},
-    {title:'Talk to Me',                desc:'Des lycéens trouvent une main embaumée qui permet de communiquer avec les morts. L\'addiction à la terreur.'},
-    {title:'Longlegs',                  desc:'Maika Monroe en agent du FBI traque un tueur en série qui laisse des messages sataniques. Atmosphère oppressante.'},
-    {title:'Alien : Romulus',           desc:'Des colons spatiaux explorent une station abandonnée de Weyland-Yutani et réveillent ce qu\'ils ne devaient pas trouver.'},
-    {title:'Speak No Evil',             desc:'Un couple européen accepte une invitation chez des inconnus charmants. L\'hospitalité peut avoir un prix terrible.'},
-    {title:'The Substance',             desc:'Demi Moore prend une substance interdite qui génère une version plus jeune d\'elle-même. Body-horror déchaîné.'},
+    {title:'Hereditary',                desc:'Ari Aster, 2018. Après la mort de la grand-mère, une famille découvre son sinistre héritage familial.',
+     long:'Ari Aster, 2018. Annie Graham (Toni Collette) perd sa mère mystérieuse avec qui elle entretenait une relation complexe. Peu après, des événements terrifiants commencent à affecter toute la famille — particulièrement la jeune fille Charlie. Film de terreur psychologique qui progresse lentement avant de tout faire exploser dans un final dévastateur. Toni Collette offre l\'une des performances les plus intenses de l\'histoire du genre. 2h7.'},
+    {title:'Midsommar',                 desc:'Ari Aster — un couple part en Suède pour un festival qui vire à l\'horreur en plein soleil de minuit.',
+     long:'Ari Aster, 2019. Dani (Florence Pugh), après une tragédie familiale, part en Suède avec son petit ami et des amis pour assister à un festival folklorique dans un village isolé de Hälsingland qui n\'a lieu que tous les 90 ans. Ce qui commence comme un voyage estival idyllique vire progressivement à l\'horreur — en plein soleil, car le soleil ne se couche jamais. Horreur folk unique filmée dans une lumière éclatante. 2h27.'},
+    {title:'The VVitch',                desc:'Robert Eggers, 1630. Une famille puritaine bannie de sa colonie terrorisée par une présence dans la forêt.',
+     long:'Robert Eggers, 2015. Nouvelle-Angleterre, 1630. Une famille puritaine est bannie de sa colonie et s\'installe en lisière d\'une forêt dense et menaçante. Le bébé disparaît. Les récoltes pourrissent. Thomasin, l\'aînée, est soupçonnée. Film entièrement écrit dans le vieil anglais du XVIIe siècle, tourné à la lumière naturelle et aux chandelles. L\'horreur vient de la désolation, du fanatisme religieux et du doute. Atmosphère unique. 1h32.'},
+    {title:'Get Out',                   desc:'Jordan Peele, 2017. Un jeune Noir visite la famille blanche de sa petite amie. La terreur derrière la bienveillance.',
+     long:'Jordan Peele, 2017. Chris (Daniel Kaluuya) accompagne sa petite amie blanche Rose pour rencontrer ses parents dans leur grande propriété rurale. Tout semble parfait — mais les comportements des rares Noirs présents sont étranges, et Chris commence à percevoir quelque chose de profondément perturbant derrière les sourires. Horreur sociale sur le racisme américain contemporain. Oscar du Meilleur Scénario. 1h44.'},
+    {title:'It Follows',                desc:'Une entité invisible transmise par contact sexuel suit inlassablement sa victime. Métaphore glaçante.',
+     long:'David Robert Mitchell, 2014. Après une rencontre sexuelle, Jay (Maika Monroe) est poursuivie par une entité invisible qui prend l\'apparence d\'inconnus ou de proches — et qui marche vers elle lentement, inexorablement. La seule façon de s\'en débarrasser est de la "transmettre" à quelqu\'un d\'autre. Thriller d\'horreur à la photographie soignée qui fonctionne comme une métaphore sur la transmission, le désir et la mortalité. 1h40.'},
+    {title:'Talk to Me',                desc:'Des lycéens trouvent une main embaumée qui permet de communiquer avec les morts. L\'addiction à la terreur.',
+     long:'Danny et Michael Philippou, 2022. Un groupe de lycéens australiens découvre une main humaine embaumée qui permet, en la tenant, d\'être possédé brièvement par un esprit des morts. Ce qui commence comme un jeu viral et addictif devient incontrôlable quand Mia (Sophie Wilde) cherche à contacter sa mère décédée. Horreur intense et lucide sur le deuil, les réseaux sociaux et l\'addiction. Révélation du cinéma d\'horreur indépendant. 1h35.'},
+    {title:'Longlegs',                  desc:'Maika Monroe agent du FBI traque un tueur en série satanique. Atmosphère oppressante à la Silence des agneaux.',
+     long:'Osgood Perkins, 2024. Lee Harker (Maika Monroe), jeune agent du FBI aux intuitions surnaturelles, est assignée à une affaire froide : des familles entières se sont suicidées depuis les années 1970, laissant des messages codés signés "Longlegs". Nicolas Cage joue le tueur dans une performance physiquement transformée et dérangeante. Thriller d\'horreur atmosphérique qui puise dans The Silence of the Lambs et le cinéma de David Lynch. 1h41.'},
+    {title:'Alien : Romulus',           desc:'De jeunes colons explorent une station Weyland-Yutani abandonnée et réveillent ce qu\'il ne fallait pas.',
+     long:'Fede Álvarez, 2024. Un groupe de jeunes colons spatiaux, cherchant à fuir leur planète minière oppressive, s\'infiltre dans une station spatiale abandonnée de la corporation Weyland-Yutani pour récupérer du matériel. Ils ignorent qu\'elle renferme les créatures les plus mortelles de la galaxie — et les expériences qui les ont produites. Retour aux sources de la franchise, entre Alien (1979) et Aliens (1986). Le meilleur Alien depuis des décennies. 1h59.'},
+    {title:'Speak No Evil',             desc:'Un couple européen accepte une invitation chez des inconnus charmants. L\'hospitalité peut cacher le pire.',
+     long:'James Watkins, 2024. Remake américain du film danois. Ben et Louise (James McAvoy, Mackenzie Davis) acceptent l\'invitation de Paddy et Ciara, un couple rencontré en vacances, pour un week-end à la campagne en Angleterre. Tout est parfait en surface — mais les petits malaises s\'accumulent, et les hôtes poussent toujours un peu plus loin les limites. Thriller psychologique sur la politesse, la faiblesse et les prédateurs. Oppressant jusqu\'au bout. 1h50.'},
+    {title:'The Substance',             desc:'Demi Moore prend une substance qui génère une version plus jeune d\'elle-même. Body-horror féministe déchaîné.',
+     long:'Coralie Fargeat, 2024. Elisabeth Sparkle (Demi Moore), star de fitness de 50 ans renvoyée pour son âge, injecte "The Substance" qui génère une version plus jeune et parfaite d\'elle-même (Margaret Qualley). Les deux corps doivent alterner une semaine chacun — mais Elisabeth commence à voler du temps à Sue. Satire féroce de l\'industrie du divertissement et de la misogynie, avec des scènes de body-horror explicites qui choquent et marquent. 2h21.'},
   ],
   world: [
-    {title:'Parasite',                  desc:'Bong Joon-ho, Palme d\'or 2019. Une famille pauvre infiltre méthodiquement le foyer d\'une famille riche. Génial.'},
-    {title:'Drive My Car',              desc:'Ryusuke Hamaguchi. Un metteur en scène en deuil confie sa voiture à une jeune chauffeuse. Traversée du Japon et de la perte.'},
-    {title:'La Vie des autres',         desc:'Berlin-Est, 1984. Un agent de la Stasi surveille un dramaturge et tombe sous le charme de son œuvre. César du meilleur film étranger.'},
-    {title:'Roma',                      desc:'Alfonso Cuarón — Mexico, 1971. La vie d\'une domestique au cœur d\'une famille de la classe moyenne. Lion d\'or Venise.'},
-    {title:'A Separation',              desc:'Asghar Farhadi — Téhéran. Un couple iranien décide de se séparer mais la garde de leurs parents complique tout.'},
-    {title:'Toni Erdmann',              desc:'Un père espiègle s\'invite dans la vie sérieuse de sa fille cadre d\'entreprise en Roumanie. Comédie bouleversante.'},
-    {title:'The Wailing',               desc:'Un policier d\'un village coréen enquête sur des meurtres après l\'arrivée d\'un mystérieux étranger dans les montagnes.'},
-    {title:'Burning',                   desc:'Lee Chang-dong — un jeune homme rencontre une fille mystérieuse et son riche ami qui brûle des serres. Envoûtant.'},
-    {title:'Perfect Days',              desc:'Wim Wenders à Tokyo. Un préposé aux toilettes publiques mène une vie simple et contemplative. Zen et bouleversant.'},
-    {title:'Capernaüm',                 desc:'Nadine Labaki — Beyrouth. Un enfant de 12 ans poursuit ses parents en justice pour l\'avoir mis au monde dans la misère.'},
+    {title:'Parasite',                  desc:'Bong Joon-ho, Palme d\'or 2019. Une famille pauvre infiltre méthodiquement une famille riche. Génial.',
+     long:'Bong Joon-ho, 2019. La famille Kim, pauvre et débrouillarde, réussit à placer ses quatre membres comme employés de la riche famille Park — tuteur, tutrice, chauffeur, gouvernante — en cachant leurs liens familiaux. Mais ils découvrent que l\'ancienne gouvernante dissimule elle-même un secret dans la maison. Comédie noire, thriller, film social — le film change de genre sans prévenir. Palme d\'or à Cannes, Oscar du Meilleur Film — premier non anglophone. 2h12.'},
+    {title:'Drive My Car',              desc:'Hamaguchi, 3h. Un metteur en scène en deuil traverse le Japon avec une chauffeuse silencieuse. Bouleversant.',
+     long:'Ryusuke Hamaguchi, 2021. Yusuke Kafuku (Hidetoshi Nishijima), acteur et metteur en scène de théâtre, n\'a pas digéré la mort soudaine de sa femme deux ans plus tôt. Engagé pour monter Oncle Vanya à Hiroshima, il se voit imposer une chauffeuse, Misaki (Tôko Miura), 23 ans, taisseuse et mystérieuse. Ils parcourent des centaines de kilomètres ensemble dans la Saab rouge de Kafuku. Adapté de Murakami, Grand Prix à Cannes, Oscar Meilleur Film Étranger. 2h59.'},
+    {title:'La Vie des autres',         desc:'Berlin-Est, 1984. Un agent de la Stasi surveille un dramaturge et est transformé par son œuvre.',
+     long:'Florian Henckel von Donnersmarck, 2006. Berlin-Est, 1984. Gerd Wiesler (Ulrich Mühe), officier de la Stasi rigoureux et sans états d\'âme, est chargé de surveiller le dramaturge Georg Dreyman (Sebastian Koch) et sa compagne actrice. En écoutant leur vie quotidienne, il commence à être touché par leur humanité et leur art — et doit choisir entre le système et sa conscience. Oscar du Meilleur Film Étranger 2007. 2h17.'},
+    {title:'Roma',                      desc:'Alfonso Cuarón — Mexico, 1971. La vie d\'une domestique au cœur d\'une famille bourgeoise. Lion d\'or Venise.',
+     long:'Alfonso Cuarón, 2018. Mexico, 1970-1971. Cleo (Yalitza Aparicio), jeune domestique d\'origine Mixtèque, travaille pour une famille de la classe moyenne dans le quartier Roma. Pendant que la mère gère l\'abandon de son mari, Cleo fait face à une grossesse non désirée. Film en noir et blanc, tourné caméra 65mm, inspiré des souvenirs d\'enfance de Cuarón. Lion d\'or à Venise, 3 Oscars dont Meilleur Réalisateur et Meilleur Film Étranger. 2h15.'},
+    {title:'A Separation',              desc:'Asghar Farhadi — Téhéran. Un couple iranien se sépare mais un accident révèle les contradictions d\'une société.',
+     long:'Asghar Farhadi, 2011. À Téhéran, Nader et Simin veulent divorcer — elle veut émigrer pour le bien de leur fille, lui refuse de laisser son père atteint d\'Alzheimer. Nader engage une femme religieuse pour s\'occuper de son père — et un accident mineur déclenche une cascade de mensonges, accusations et dilemmes moraux qui impliquent deux familles de classes différentes. Oscar et Golden Globe du Meilleur Film Étranger. Magistral. 2h3.'},
+    {title:'Toni Erdmann',              desc:'Un père espiègle s\'invite dans la vie de sa fille cadre d\'entreprise en Roumanie. Comédie-drame bouleversante.',
+     long:'Maren Ade, 2016. Winfried (Peter Simonischek), professeur de piano excentrique et farceur, rend visite à Ines (Sandra Hüller), sa fille cadre d\'entreprise en mission à Bucarest. Voyant à quel point le monde du travail l\'a déshumanisée, il s\'incruste dans sa vie professionnelle déguisé en Toni Erdmann, le "coach d\'entreprise". Comédie d\'une liberté et d\'une émotion rares. Unanimement plébiscitée par la critique mondiale. 2h42.'},
+    {title:'The Wailing',               desc:'Corée du Sud. Un policier enquête sur des meurtres dans un village après l\'arrivée d\'un étranger.',
+     long:'Na Hong-jin, 2016. Dans un village de montagne coréen, une série de meurtres mystérieux commence après l\'arrivée d\'un vieil homme japonais taciturne. Jong-goo (Kwak Do-won), policier peu compétent, enquête — et voit sa propre fille sombrer dans une folie meurtrière. Film de 2h36 qui commence comme un policier rural, passe par le film de possession et finit dans un vertige métaphysique absolu. L\'un des grands films de genre des années 2010.'},
+    {title:'Burning',                   desc:'Lee Chang-dong — un jeune homme rencontre une fille mystérieuse et un riche ami qui brûle des serres. Envoûtant.',
+     long:'Lee Chang-dong, 2018. Jong-su (Yoo Ah-in), jeune aspirant écrivain qui vit dans une ferme isolée, retrouve Haemi, une fille du quartier qu\'il aimait enfant. Elle revient d\'un voyage en Afrique avec Ben (Steven Yeun), jeune homme riche, mystérieux et charmant, qui confie à Jong-su qu\'il a l\'habitude de brûler des serres abandonnées. Adapté de Murakami. Thriller psychologique d\'une tension et d\'une beauté rares. Prix FIPRESCI à Cannes. 2h28.'},
+    {title:'Perfect Days',              desc:'Wim Wenders à Tokyo. Un nettoyeur de toilettes mène une vie simple et contemplative. Zen et bouleversant.',
+     long:'Wim Wenders, 2023. Hirayama (Kôji Yakusho) nettoie chaque jour les toilettes publiques de Tokyo pour un projet d\'architecture. Sa vie est d\'une simplicité monastique : musique des années 70 dans sa camionnette, photos de feuilles sur la pellicule argentique, livres de poche le soir. Mais cette vie choisie cache quelque chose. Film de contemplation pure, hommage à Tokyo et au temps qui passe. Prix d\'interprétation masculine à Cannes 2023. 2h4.'},
+    {title:'Capernaüm',                 desc:'Nadine Labaki — Beyrouth. Un enfant poursuit ses parents en justice pour l\'avoir mis au monde dans la misère.',
+     long:'Nadine Labaki, 2018. Zain (Zain Al Rafeea), 12 ans, vit dans la misère à Beyrouth avec ses parents et ses nombreux frères et sœurs. Après une fugue, il se retrouve à s\'occuper d\'un nourrisson dont la mère est en prison. Depuis sa cellule — car il a poignardé un homme — il attaque ses parents en justice pour lui avoir donné la vie sans être capable de le nourrir. Tourné avec des acteurs non professionnels, en grande partie improvised. Prix du Jury à Cannes. 2h6.'},
   ],
   family: [
-    {title:'Coco',                      desc:'Pixar — Miguel pénètre le royaume des morts pour retrouver ses origines musicales et percer le mystère familial.'},
-    {title:'Encanto',                   desc:'Une famille colombienne dotée de pouvoirs magiques, sauf Mirabel — qui devra pourtant tous les sauver.'},
-    {title:'Ratatouille',               desc:'Remy, un rat passionné de gastronomie, guide en secret un apprenti cuisinier au célèbre restaurant Gusteau\'s.'},
-    {title:'Kiki la petite sorcière',   desc:'Miyazaki — une jeune sorcière s\'installe seule dans une ville côtière pour accomplir son apprentissage annuel.'},
-    {title:'Soul',                      desc:'Un musicien new-yorkais meurt le jour de sa grande chance et doit retrouver sa raison d\'être dans l\'au-delà.'},
-    {title:'Mon voisin Totoro',         desc:'Miyazaki — deux sœurs découvrent dans la forêt derrière leur maison les créatures magiques gardées par Totoro.'},
-    {title:'Les Indestructibles',       desc:'Bob Parr, super-héros à la retraite reconverti en assureur, repart au combat pour sauver le monde une dernière fois.'},
-    {title:'Toy Story',                 desc:'Woody le cowboy et Buzz l\'Éclair rivalise pour l\'affection d\'Andy — la première révolution de l\'animation numérique.'},
-    {title:'Up',                        desc:'Un vieil homme attache 10 000 ballons à sa maison et s\'envole vers l\'Amérique du Sud avec un scout clandestin.'},
-    {title:'Elemental',                 desc:'Dans une ville habitée par les éléments, Flamme et Flot découvrent qu\'ils ont plus en commun qu\'ils ne le pensent.'},
+    {title:'Coco',                      desc:'Pixar — Miguel pénètre le royaume des morts pour trouver ses origines musicales. Magnifique.',
+     long:'Lee Unkrich & Adrian Molina, Pixar, 2017. Miguel, 12 ans, rêve de devenir musicien comme son idole Ernesto de la Cruz — mais la musique est bannie dans sa famille depuis des générations. Le Jour des Morts, il se retrouve projeté dans le Royaume des Morts, où il doit obtenir la bénédiction d\'un ancêtre avant l\'aube. Film sur la famille, la mémoire et la passion — visuellement éblouissant. Oscar du Meilleur Film d\'Animation et de la Meilleure Chanson. 1h49.'},
+    {title:'Encanto',                   desc:'Une famille colombienne dotée de pouvoirs magiques — sauf Mirabel, qui devra pourtant tous les sauver.',
+     long:'Jared Bush & Byron Howard, Disney, 2021. La famille Madrigal vit dans les montagnes colombiennes dans une Casita magique. Chaque enfant reçoit à ses 5 ans un don extraordinaire — sauf Mirabel, qui n\'en a pas. Quand la magie de la famille commence à disparaître, c\'est elle qui doit tout sauver. Musiques de Lin-Manuel Miranda (Hamilton), animation luxuriante, message sur la pression familiale. Oscar du Meilleur Film d\'Animation. 1h42.'},
+    {title:'Ratatouille',               desc:'Remy, un rat passionné de gastronomie, guide en secret un apprenti cuisinier au restaurant Gusteau\'s.',
+     long:'Brad Bird, Pixar, 2007. Remy, un rat parisien doté d\'un palais extraordinaire, rêve de cuisiner comme son idole le grand chef Gusteau. Il se retrouve dans les cuisines du restaurant Gusteau\'s à Paris où il guide en secret Linguini, un maladroit apprenti cuisinier, en tirant sur ses cheveux comme des manettes. Réflexion sur le talent, l\'authenticité et le snobisme culinaire. César du Meilleur Film d\'Animation, Oscar de la même catégorie. 1h51.'},
+    {title:'Kiki la petite sorcière',   desc:'Miyazaki — une jeune sorcière s\'installe seule dans une ville côtière pour son apprentissage annuel.',
+     long:'Hayao Miyazaki, Studio Ghibli, 1989. Kiki, 13 ans, part seule avec son chat noir Jiji pour s\'installer dans une nouvelle ville pendant un an — rituel de passage pour toute jeune sorcière. Elle ouvre un service de livraison à balai dans une ville côtière inspirée de Stockholm. Mais quand sa confiance en elle vacille, ses pouvoirs l\'abandonnent. Conte d\'apprentissage doux et profond sur l\'identité et la créativité. L\'un des chefs-d\'œuvre du Studio Ghibli. 1h43.'},
+    {title:'Soul',                      desc:'Un musicien meurt le jour de sa grande chance et cherche sa raison d\'être dans l\'au-delà. Pixar émotionnel.',
+     long:'Pete Docter, Pixar, 2020. Joe Gardner (Jamie Foxx), professeur de musique new-yorkais qui rêve de jazz professionnel, décroche enfin le concert de sa vie — et tombe dans une bouche d\'égout. Son âme se retrouve dans le Grand Avant, l\'endroit où les âmes trouvent leur étincelle de vie avant de naître. Film philosophique de Pixar sur ce qui donne un sens à l\'existence. Visuel extraordinaire, musique de Jon Batiste et Trent Reznor/Atticus Ross. 2 Oscars. 1h47.'},
+    {title:'Mon voisin Totoro',         desc:'Miyazaki — deux sœurs découvrent les créatures magiques de la forêt, gardées par Totoro.',
+     long:'Hayao Miyazaki, Studio Ghibli, 1988. Satsuki (10 ans) et Mei (4 ans) s\'installent avec leur père dans une vieille maison rurale près d\'un hôpital où est soignée leur mère malade. Elles découvrent que la forêt voisine abrite des créatures magiques — dont le grand Totoro, esprit de la forêt qui voyage dans un Chatbus. Film d\'une douceur absolue, sans méchant, sans climax dramatique — juste la magie du quotidien et de l\'enfance. Icône mondiale. 1h26.'},
+    {title:'Les Indestructibles',       desc:'La famille de super-héros à la retraite remobilisée pour sauver le monde. Pixar au sommet.',
+     long:'Brad Bird, Pixar, 2004. Bob Parr alias M. Indestructible vit une vie ordinaire de col blanc avec sa famille — tous des super-héros contraints à la retraite forcée par une loi. Quand il reçoit une mission secrète sur une île mystérieuse, toute la famille est bientôt impliquée. Film d\'action familial qui parodie les codes du film d\'espionnage tout en explorant les thèmes de l\'identité, de la médiocrité et du talent. Oscar du Meilleur Film d\'Animation. 1h55.'},
+    {title:'Toy Story',                 desc:'Woody et Buzz rivalisent pour l\'affection d\'Andy. La première révolution de l\'animation numérique.',
+     long:'John Lasseter, Pixar, 1995. Woody (Tom Hanks), cowboy en chef et jouet préféré d\'Andy, voit son statut menacé par l\'arrivée de Buzz l\'Éclair (Tim Allen), astronaute high-tech qui croit sincèrement ne pas être un jouet. Leur rivalité les entraîne hors de la chambre d\'Andy dans une course pour rentrer avant le déménagement. Premier long-métrage entièrement en images de synthèse — une révolution qui a changé l\'animation pour toujours. 1h21.'},
+    {title:'Up',                        desc:'Un vieil homme attache 10 000 ballons à sa maison et s\'envole vers l\'Amérique du Sud. Pixar, 1h36.',
+     long:'Pete Docter, Pixar, 2009. Carl Fredricksen, 78 ans, veuf depuis peu, attache des milliers de ballons à sa maison pour s\'envoler vers les chutes du Paradis au Venezuela — le rêve d\'enfance partagé avec sa femme Éllie. Il découvre à bord un passager clandestin : Russell, 8 ans, scout maladroit. Les premières 10 minutes, muettes, racontent la vie entière de Carl et Éllie — considérées comme la plus belle séquence d\'ouverture de l\'histoire de l\'animation. Palme de Cannes pour un film d\'animation. 1h36.'},
+    {title:'Elemental',                 desc:'Dans une ville des éléments, Flamme et Flot découvrent qu\'ils ont plus en commun qu\'ils ne le croient.',
+     long:'Peter Sohn, Pixar, 2023. Ember Lumen (voix de Leah Lewis), jeune femme de Feu vive et passionnée, travaille dans la boutique familiale d\'Element City. Sa rencontre accidentelle avec Wade Ripple (voix de Mamoudou Athie), un employé municipal d\'Eau sensible et empathique, remet en question ses certitudes et les frontières entre les communautés d\'éléments. Métaphore sur l\'immigration, les préjugés et les familles de première génération. Visuel somptueux. 1h41.'},
   ],
   emotion: [
-    {title:'Marriage Story',            desc:'Noah Baumbach — un couple de théâtre new-yorkais traverse un divorce douloureux. Scarlett Johansson et Adam Driver.'},
-    {title:'The Fabelmans',             desc:'Steven Spielberg raconte son enfance, sa passion pour le cinéma et la désintégration de sa famille. Autobiographique.'},
-    {title:'Past Lives',                desc:'Deux enfants coréens inséparables, séparés par l\'émigration, se retrouvent 20 ans plus tard à New York. Bouleversant.'},
-    {title:'Aftersun',                  desc:'Une femme adulte repasse des vidéos de vacances avec son père mort. La nostalgie comme forme de deuil.'},
-    {title:'Belfast',                   desc:'Kenneth Branagh — les Troubles en Irlande du Nord racontés à travers les yeux d\'un enfant de 9 ans. Noir et blanc.'},
-    {title:'La La Land',                desc:'Emma Stone et Ryan Gosling à Los Angeles — un musicien de jazz et une actrice rêvent de gloire dans une comédie musicale.'},
-    {title:'Mommy',                     desc:'Xavier Dolan — une mère veuve élève seule son fils violent et hyperactif dans un Québec proche. Déchirant.'},
-    {title:'Portrait de la jeune fille en feu', desc:'Céline Sciamma — Bretagne, 1760. Une peintre et son modèle, une passion interdite sur fond de mer déchaînée.'},
-    {title:'Call Me by Your Name',      desc:'Luca Guadagnino — Italie, été 1983. Elio, 17 ans, et Oliver, chercheur américain, vivent un amour brûlant et éphémère.'},
-    {title:'La Vie d\'Adèle',           desc:'Palme d\'or 2013. L\'éveil amoureux d\'une adolescente rencontrant Emma, artiste aux cheveux bleus. Intime et total.'},
+    {title:'Marriage Story',            desc:'Noah Baumbach — un couple de théâtre new-yorkais traverse un divorce douloureux. Scarlett Johansson, Adam Driver.',
+     long:'Noah Baumbach, 2019. Charlie (Adam Driver), metteur en scène new-yorkais, et Nicole (Scarlett Johansson), actrice qui veut recommencer sa vie à Los Angeles, traversent un divorce qui s\'enlise dans les avocats malgré leur amour persistant. Baumbach filme la douleur ordinaire de la séparation avec une précision chirurgicale. La scène de la dispute est anthologique. Lauréat de nombreux prix de la critique, 6 nominations aux Oscars. 2h16.'},
+    {title:'The Fabelmans',             desc:'Steven Spielberg raconte son enfance, sa passion pour le cinéma et la désintégration de sa famille.',
+     long:'Steven Spielberg, 2022. Sammy Fabelman, jeune garçon obsédé par le cinéma, filme tout ce qui l\'entoure dans l\'Arizona des années 1950-1960. En passant ses vieux films à l\'édition, il découvre un secret douloureux sur sa famille. Film autobiographique de Spielberg sur ses origines juives, le divorce de ses parents et sa vocation de cinéaste. Avec Michelle Williams et Paul Dano. Golden Globe du Meilleur Film, 7 nominations aux Oscars. 2h31.'},
+    {title:'Past Lives',                desc:'Deux enfants coréens séparés par l\'émigration se retrouvent 20 ans plus tard. Bouleversant.',
+     long:'Celine Song, 2023. Nora et Hae Sung sont inséparables à Séoul — puis Nora émigre au Canada avec sa famille à 12 ans. Ils se retrouvent sur Skype 12 ans plus tard, puis de nouveau à New York 12 ans après. Nora est mariée à un écrivain américain, et Hae Sung débarque pour la voir une dernière fois. Film sur le destin non vécu, les chemins non empruntés — d\'une retenue et d\'une profondeur rares pour un premier film. 2 nominations aux Oscars. 1h45.'},
+    {title:'Aftersun',                  desc:'Une femme adulte repasse des vidéos de vacances avec son père. La nostalgie comme forme de deuil.',
+     long:'Charlotte Wells, 2022. Sophie adulte repasse des vidéos Super 8 de vacances en Turquie avec son père Calum (Paul Mescal) — elle avait 11 ans, lui une trentaine. En regardant les images, elle perçoit ce qu\'elle ne pouvait pas voir enfant : la détresse silencieuse de son père. Deuil, mémoire, ce qu\'on ne dit pas. Premier long-métrage de Charlotte Wells, semi-autobiographique. Paul Mescal nommé aux Oscars pour ce rôle. 1h36.'},
+    {title:'Belfast',                   desc:'Kenneth Branagh — les Troubles en Irlande du Nord vus par un enfant de 9 ans. Noir et blanc.',
+     long:'Kenneth Branagh, 2021. Belfast, 1969. Buddy, 9 ans, vit dans une rue ouvrière protestante quand les Troubles éclatent — des émeutes entre catholiques et protestants déchirent le quartier. Sa famille doit décider de rester ou d\'émigrer en Angleterre. Film autobiographique de Kenneth Branagh, tourné en noir et blanc, sur l\'enfance, le déracinement et la perte d\'innocence. Avec Caitríona Balfe, Jamie Dornan, Judi Dench. Oscar du Meilleur Scénario. 1h38.'},
+    {title:'La La Land',                desc:'Emma Stone et Ryan Gosling à Los Angeles — jazz, rêves de gloire et amour entre deux artistes.',
+     long:'Damien Chazelle, 2016. Mia (Emma Stone), serveuse qui rêve d\'être actrice, et Sebastian (Ryan Gosling), pianiste de jazz ambitieux, tombent amoureux à Los Angeles. Mais la réussite professionnelle de l\'un empiète sur les rêves de l\'autre. Comédie musicale moderne qui rend hommage aux classiques de Hollywood tout en interrogeant le prix du rêve américain. 6 Oscars dont Meilleur Réalisateur, Meilleure Actrice — record ex-aequo avec All About Eve. 2h8.'},
+    {title:'Mommy',                     desc:'Xavier Dolan — une mère veuve élève seule son fils violent et hyperactif au Québec. Déchirant.',
+     long:'Xavier Dolan, 2014. Diane (Anne Dorval), veuve québécoise vive et désordonnée, récupère son fils Steve (Antoine Olivier Pilon), 15 ans, hyperactif et violent, renvoyé de son établissement spécialisé. Leur vie chaotique se stabilise grâce à Kyla (Suzanne Clément), leur voisine enseignante qui bégaie. Tourné en format 1:1 qui s\'ouvre parfois en 16/9 dans les moments de bonheur. Prix du Jury à Cannes 2014 (ex-aequo avec Godard). 2h19.'},
+    {title:'Portrait de la jeune fille en feu', desc:'Céline Sciamma — Bretagne, 1760. Une peintre et son modèle, une passion interdite.',
+     long:'Céline Sciamma, 2019. Bretagne, fin XVIIIe. Marianne (Noémie Merlant), peintre, est envoyée dans une demeure isolée pour réaliser en secret le portrait de mariage d\'Héloïse (Adèle Haenel), qui refuse de poser. Marianne l\'observe le jour, peint la nuit — jusqu\'à ce qu\'Héloïse le découvre et accepte de poser en échange : en regardant Marianne peindre. Film sur le regard, le désir et la création au féminin. Prix du Scénario à Cannes 2019. 1h59.'},
+    {title:'Call Me by Your Name',      desc:'Luca Guadagnino — Italie, 1983. Elio, 17 ans, et Oliver vivent un amour brûlant et éphémère.',
+     long:'Luca Guadagnino, 2017. Elio (Timothée Chalamet), 17 ans, passe l\'été avec ses parents intellectuels dans leur villa du Nord de l\'Italie. L\'arrivée d\'Oliver (Armie Hammer), doctorant américain de 24 ans qui aide son père, bouleverse tout. Un amour intense, charnel et fugace se noue dans la chaleur italienne de l\'été 1983. Film de la sensualité et de la nostalgie du désir adolescent. Oscar du Meilleur Scénario Adapté. 2h12.'},
+    {title:'La Vie d\'Adèle',           desc:'Palme d\'or 2013. L\'éveil amoureux d\'une adolescente. Adèle Exarchopoulos et Léa Seydoux.',
+     long:'Abdellatif Kechiche, 2013. Adèle (Adèle Exarchopoulos), lycéenne de 15 ans, tombe amoureuse d\'Emma (Léa Seydoux), étudiante en art aux cheveux bleus. Film en deux parties qui suit leur rencontre, leur passion et leur séparation sur plusieurs années. Kechiche filme les visages et les corps en très gros plans pendant 3 heures. Palme d\'or à Cannes, remise exceptionnellement aux deux actrices ainsi qu\'au réalisateur. Scandaleux, controversé, inoubliable. 3h.'},
   ],
   festival: [
-    {title:'Anora',                     desc:'Palme d\'or Cannes 2024. Sean Baker — une escort new-yorkaise épouse en secret le fils d\'un oligarque russe.'},
-    {title:'Anatomie d\'une chute',     desc:'Palme d\'or Cannes 2023. Justine Triet — un mari mort dans la neige, une femme accusée, un fils aveugle qui témoigne.'},
-    {title:'Triangle of Sadness',       desc:'Palme d\'or Cannes 2022. Östlund — des ultrariches sur un yacht de luxe, une tempête, une renversement de l\'ordre social.'},
-    {title:'Titane',                     desc:'Palme d\'or Cannes 2021. Julia Ducournau — une danseuse fuit son passé violent et s\'invente une nouvelle identité.'},
-    {title:'Parasite',                  desc:'Palme d\'or Cannes 2019. Bong Joon-ho — une famille pauvre infiltre méthodiquement le foyer d\'une famille riche.'},
-    {title:'Roma',                      desc:'Lion d\'or Venise 2018. Cuarón — Mexico, 1971. La vie d\'une domestique au cœur d\'une famille de la classe moyenne.'},
-    {title:'The Favourite',             desc:'Lion d\'or Venise 2018. Lanthimos — la reine Anne d\'Angleterre manipulée par deux cousines qui se disputent sa faveur.'},
-    {title:'Drive My Car',              desc:'Grand Prix Cannes 2021. Hamaguchi — un homme en deuil confie sa voiture à une chauffeuse silencieuse. Magnifique.'},
-    {title:'La Zone d\'intérêt',        desc:'Grand Prix Cannes 2023. Jonathan Glazer — la vie quotidienne du commandant d\'Auschwitz et sa famille dans leur villa.'},
-    {title:'Burning',                   desc:'Prix FIPRESCI Cannes 2018. Lee Chang-dong — un mystérieux riche brûle des serres. Thriller psychologique envoûtant.'},
+    {title:'Anora',                     desc:'Palme d\'or Cannes 2024. Sean Baker — une escort épouse le fils d\'un oligarque. Comédie chaotique.',
+     long:'Sean Baker, 2024. Anora (Mikey Madison), escort new-yorkaise d\'origine ouzbèke, épouse en secret Vanya, le fils fêtard et naïf d\'un milliardaire russe. Quand les parents de Moscou apprennent la nouvelle, ils envoient leurs hommes récupérer leur fils et annuler le mariage. Ce qui commence comme un conte de fées devient une nuit chaotique dans Brooklyn. Comédie romantique anarchique sur le rêve américain et ses illusions. Palme d\'or à Cannes 2024. 2h19.'},
+    {title:'Anatomie d\'une chute',     desc:'Palme d\'or 2023. Justine Triet — procès haletant d\'une femme accusée du meurtre de son mari.',
+     long:'Justine Triet, 2023. Samuel est retrouvé mort dans la neige au pied de leur chalet alpin. Sa femme Sandra Voyter (Sandra Hüller), romancière franco-allemande, est accusée de l\'avoir poussé. Leur fils Daniel, malvoyant, est l\'unique témoin potentiel. Le procès expose méthodiquement les failles et les secrets d\'un mariage. Thriller judiciaire magistral où chaque réplique révèle une nouvelle couche. Palme d\'or à Cannes, César du Meilleur Film, nomination aux Oscars. 2h31.'},
+    {title:'Triangle of Sadness',       desc:'Palme d\'or 2022. Östlund — des ultrariches sur un yacht, une tempête, le monde à l\'envers.',
+     long:'Ruben Östlund, 2022. Un mannequin et sa petite amie influenceuse se retrouvent sur un luxueux yacht de croisière avec des milliardaires. Le dîner de gala avec un capitaine marxiste alcoolique (Woody Harrelson) tourne au désastre, puis une tempête encore plus au désastre — jusqu\'au naufrage sur une île déserte où la hiérarchie sociale s\'inverse complètement. Satire féroce et hilarante du capitalisme et de la classe possédante. Palme d\'or à Cannes 2022. 2h27.'},
+    {title:'Titane',                     desc:'Palme d\'or 2021. Julia Ducournau — une danseuse fuit son passé violent et s\'invente une identité.',
+     long:'Julia Ducournau, 2021. Alexia (Agathe Rousselle), danseuse exotique avec une plaque de titane dans le crâne depuis un accident d\'enfance, prend la fuite après une série de meurtres. Elle se présente comme le fils disparu d\'un chef de pompiers (Vincent Lindon). Film de genre hybride — horreur, thriller, mélo — sur le corps transformé, l\'identité et la parentalité. Deuxième femme à remporter la Palme d\'or à Cannes après Jane Campion en 1993. 1h48.'},
+    {title:'Parasite',                  desc:'Palme d\'or 2019. Bong Joon-ho — une famille pauvre infiltre méthodiquement une famille riche.',
+     long:'Bong Joon-ho, 2019. Tout est dans la description du pool "world" — voir ci-dessus. Palme d\'or à Cannes 2019 et Oscar du Meilleur Film 2020, premier film non anglophone à décrocher la statuette suprême de l\'Académie. Film qui change de registre sans prévenir, de la comédie noire au thriller au film social — toujours brillant. 2h12.'},
+    {title:'Roma',                      desc:'Lion d\'or Venise 2018. Cuarón — Mexico 1971, la vie d\'une domestique au sein d\'une famille bourgeoise.',
+     long:'Alfonso Cuarón, 2018. Mexico, 1970-1971. Cleo (Yalitza Aparicio), jeune domestique Mixtèque, travaille pour une famille de la classe moyenne dans le quartier Roma. Alors que la mère gère l\'abandon de son mari, Cleo affronte une grossesse non désirée. Film en noir et blanc, 65mm, autobiographique. Lion d\'or à Venise, 3 Oscars (Meilleur Film Étranger, Meilleur Réalisateur, Meilleure Photo). Netflix refusa que le film soit en salles en France — polémique. 2h15.'},
+    {title:'The Favourite',             desc:'Lion d\'or Venise 2018. Lanthimos — la reine Anne manipulée par deux cousines rivales. Cruel et hilarant.',
+     long:'Yorgos Lanthimos, 2018. Angleterre, début XVIIIe. La reine Anne (Olivia Colman), malade et instable, est sous l\'emprise de son amie intime Lady Marlborough (Rachel Weisz). L\'arrivée d\'Abigail (Emma Stone), cousine déchue venue chercher un emploi, déclenche une guerre souterraine pour les faveurs royales. Comédie de mœurs cruelle et hilarante filmée à l\'objectif fisheye. 4 Oscars dont Meilleure Actrice pour Olivia Colman. 2h.'},
+    {title:'Drive My Car',              desc:'Grand Prix Cannes 2021. Hamaguchi — un homme en deuil et une chauffeuse silencieuse au Japon.',
+     long:'Ryusuke Hamaguchi, 2021. Yusuke Kafuku (Hidetoshi Nishijima), acteur et metteur en scène en deuil de sa femme morte soudainement, monte Oncle Vanya à Hiroshima avec des acteurs de plusieurs nationalités. Il se voit imposer une jeune chauffeuse, Misaki (Tôko Miura), qui parcourt chaque jour avec lui des centaines de kilomètres dans sa Saab rouge. Film sur le deuil, Tchekhov et le silence. Grand Prix à Cannes, Oscar Meilleur Film Étranger 2022. 2h59.'},
+    {title:'La Zone d\'intérêt',        desc:'Grand Prix Cannes 2023. Jonathan Glazer — la famille du commandant d\'Auschwitz dans leur villa.',
+     long:'Jonathan Glazer, 2023. Rudolf Höss, commandant d\'Auschwitz, mène une vie bourgeoise idyllique avec sa femme et ses enfants dans une villa jouxtant les murs du camp — jardin fleuri, piscine, enfants qui jouent. Le film ne montre jamais le camp directement : seulement les sons, la fumée, la lueur nocturne. L\'horreur absolue rendue banale par l\'ordinaire domestique. Grand Prix à Cannes, Oscar du Meilleur Film Étranger 2024. L\'un des films les plus marquants de la décennie. 1h45.'},
+    {title:'Burning',                   desc:'Prix FIPRESCI Cannes 2018. Lee Chang-dong — thriller psychologique envoûtant sur le mystère et le désir.',
+     long:'Lee Chang-dong, 2018. Jong-su (Yoo Ah-in), aspirant écrivain, retrouve Haemi, une fille de son quartier d\'enfance qui revient d\'Afrique avec Ben (Steven Yeun), jeune homme riche et mystérieux. Ben confie à Jong-su son passe-temps secret : brûler des serres abandonnées. Et Haemi disparaît. Adapté d\'une nouvelle de Murakami, le film crée un malaise croissant sans jamais répondre à ses questions. Prix FIPRESCI à Cannes 2018. 2h28.'},
   ],
 };
 
@@ -734,8 +814,9 @@ function initDailySchedule() {
       if (!poolName || !ch.programs[idx]) return;
       const pool = POOLS[poolName];
       const film = pool[(seed + idx * 7) % pool.length];
-      ch.programs[idx].title = film.title;
-      ch.programs[idx].desc  = film.desc;
+      ch.programs[idx].title    = film.title;
+      ch.programs[idx].desc     = film.desc;
+      ch.programs[idx].longDesc = film.long || film.desc;
     });
   }
 }
@@ -843,7 +924,7 @@ function renderChannels() {
         </div>
         <div class="prog-body">
           <div class="prog-title">${p.title}</div>
-          ${p.desc ? `<div class="prog-desc">${p.desc}</div>` : ''}
+          ${(p.longDesc || p.desc) ? `<div class="prog-desc">${p.longDesc || p.desc}</div>` : ''}
           <div class="badges">${badgeHTML(p.badge)}</div>
         </div>
       </div>`;
