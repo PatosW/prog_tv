@@ -2,7 +2,7 @@
   "name": "Guide TV Israël",
   "short_name": "TV Guide IL",
   "description": "Programmes TV en heure israélienne",
-  "start_url": "/tv-guide-israel/",
+  "start_url": "/prog_tv/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#185FA5",

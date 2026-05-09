@@ -1,10 +1,10 @@
-const CACHE = 'tv-guide-v1';
+const CACHE = 'tv-guide-v3';
 const ASSETS = [
-  '/tv-guide-israel/',
-  '/tv-guide-israel/index.html',
-  '/tv-guide-israel/manifest.json',
-  '/tv-guide-israel/icons/icon-192.png',
-  '/tv-guide-israel/icons/icon-512.png'
+  '/prog_tv/',
+  '/prog_tv/index.html',
+  '/prog_tv/manifest.json',
+  '/prog_tv/icons/icon-192.png',
+  '/prog_tv/icons/icon-512.png'
 ];
 
 self.addEventListener('install', e => {
