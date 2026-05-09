@@ -1,0 +1,16 @@
+{
+  "name": "Guide TV Israël",
+  "short_name": "TV Guide IL",
+  "description": "Programmes TV en heure israélienne — 53 chaînes françaises, belges et israéliennes",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#185FA5",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["entertainment", "news"],
+  "lang": "fr"
+}

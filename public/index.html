@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide TV Israël</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#185FA5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="TV Guide IL">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <header id="header">
+    <div class="header-left">
+      <div class="logo-tv" aria-label="TV Guide Israel">TV</div>
+      <div>
+        <h1>Guide TV Israël</h1>
+        <p class="header-sub">Heure locale (UTC+3)</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div id="clock" aria-live="polite">--:--:--</div>
+      <div class="clock-label">Heure IL</div>
+    </div>
+  </header>
+
+  <!-- ── Controls ───────────────────────────────────────── -->
+  <div class="controls">
+    <div class="search-row">
+      <input id="search" type="search" placeholder="🔍 Rechercher chaîne ou émission…"
+             autocomplete="off" spellcheck="false" aria-label="Rechercher">
+      <button id="btn-refresh" aria-label="Actualiser">↺ Actualiser</button>
+    </div>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Catégories">
+      <button class="tab active" data-tab="all"    role="tab" aria-selected="true">Toutes</button>
+      <button class="tab"        data-tab="fr"     role="tab">Françaises</button>
+      <button class="tab"        data-tab="be"     role="tab">Belges</button>
+      <button class="tab"        data-tab="il"     role="tab">Israéliennes</button>
+      <button class="tab"        data-tab="sport"  role="tab">Sport</button>
+      <button class="tab"        data-tab="cinema" role="tab">Cinéma</button>
+      <button class="tab"        data-tab="info"   role="tab">Info</button>
+      <button class="tab"        data-tab="fav"    role="tab">⭐ Favoris</button>
+    </nav>
+  </div>
+
+  <!-- ── Genre filters ──────────────────────────────────── -->
+  <div class="genre-filters" id="genre-filters" role="group" aria-label="Filtres genre">
+    <button class="gf active" data-genre="all">Tout</button>
+    <button class="gf" data-genre="film">Films</button>
+    <button class="gf" data-genre="série">Séries</button>
+    <button class="gf" data-genre="sport">Sport</button>
+    <button class="gf" data-genre="info">Info</button>
+    <button class="gf" data-genre="doc">Docs</button>
+  </div>
+
+  <!-- ── Loader ─────────────────────────────────────────── -->
+  <div id="loader" class="loader" role="status" aria-label="Chargement">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- ── Channel list ───────────────────────────────────── -->
+  <main id="channels-list" aria-live="polite"></main>
+
+  <!-- ── Empty state ────────────────────────────────────── -->
+  <div id="empty" class="empty" hidden>
+    <div class="empty-icon">📺</div>
+    <p>Aucune chaîne trouvée</p>
+  </div>
+
+</div>
+
+<!-- ── Program detail modal ───────────────────────────── -->
+<div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close" aria-label="Fermer">✕</button>
+    <div class="modal-meta" id="modal-meta"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <p  class="modal-desc"  id="modal-desc"></p>
+  </div>
+</div>
+
+<!-- ── App bootstrap ──────────────────────────────────── -->
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

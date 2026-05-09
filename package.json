@@ -1,0 +1,23 @@
+{
+  "name": "tv-guide-israel",
+  "version": "1.0.0",
+  "description": "Production-ready TV guide PWA for Israeli time zone",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start":      "node src/app.js",
+    "dev":        "node --watch src/app.js",
+    "db:migrate": "node database/migrate.js",
+    "db:seed":    "node database/seeds/seed.js",
+    "db:setup":   "npm run db:migrate && npm run db:seed"
+  },
+  "dependencies": {
+    "compression":        "^1.7.4",
+    "cors":               "^2.8.5",
+    "dotenv":             "^16.4.5",
+    "express":            "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet":             "^7.1.0",
+    "pg":                 "^8.11.5"
+  }
+}
