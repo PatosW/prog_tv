@@ -600,6 +600,147 @@ const CHANNELS = [
   ]}
 ];
 
+// ── DAILY FILM / SPORT ROTATION ──────────────────────────────────────────────
+// Chaque pool contient ~10 titres réels. La date du jour sert de graine
+// pour sélectionner un film différent chaque jour par slot.
+
+const POOLS = {
+  recent: [
+    {title:'Dune : Deuxième Partie',    desc:'Paul Atreides mène les Fremen dans une guerre sacrée contre la maison Harkonnen. Épopée spectaculaire de Denis Villeneuve.'},
+    {title:'Oppenheimer',               desc:'Le père de la bombe atomique entre génie et remords. Christopher Nolan signe un monument de 3 heures avec Cillian Murphy.'},
+    {title:'Le Comte de Monte-Cristo',  desc:'Edmond Dantès emprisonné pour trahison prépare sa vengeance. Adaptation épique du roman de Dumas avec Pierre Niney.'},
+    {title:'Anatomie d\'une chute',     desc:'Palme d\'or 2023. Un mari retrouvé mort dans la neige — sa femme accusée du meurtre, son fils aveugle seul témoin.'},
+    {title:'Killers of the Flower Moon',desc:'Scorsese raconte les meurtres Osage des années 1920 pour leur pétrole. Avec Leonardo DiCaprio et Robert De Niro.'},
+    {title:'Poor Things',               desc:'Lion d\'or 2023. Emma Stone ressuscitée avec le cerveau d\'un enfant explore le monde dans un conte déjanté de Lanthimos.'},
+    {title:'The Substance',             desc:'Une star de fitness prend une substance interdite qui crée une version plus jeune d\'elle-même. Body-horror viscéral.'},
+    {title:'Civil War',                 desc:'Des journalistes traversent une Amérique en guerre civile pour rejoindre Washington. Film-choc d\'Alex Garland.'},
+    {title:'Anora',                     desc:'Palme d\'or 2024. Une escort new-yorkaise épouse en secret le fils d\'un oligarque russe. Sean Baker au sommet.'},
+    {title:'Wonka',                     desc:'Les origines du chocolatier magicien avant Charlie et la Chocolaterie. Timothée Chalamet dans un musical enchanté.'},
+  ],
+  french: [
+    {title:'La Grande Illusion',        desc:'Jean Renoir, 1937. Des officiers français prisonniers de guerre en Allemagne. Un chef-d\'œuvre sur la fraternité humaine.'},
+    {title:'Le Cercle rouge',           desc:'Melville réunit Alain Delon, Yves Montand et Bourvil pour le casse de joaillerie le plus élégant du cinéma.'},
+    {title:'Le Samouraï',               desc:'Melville — Alain Delon en tueur à gages solitaire, silencieux et impassible. L\'essence même du polar.'},
+    {title:'Les Diaboliques',           desc:'Clouzot, 1955. La femme et la maîtresse d\'un directeur d\'école s\'allient pour le tuer. Hitchcock en était jaloux.'},
+    {title:'Le Salaire de la peur',     desc:'Clouzot — Yves Montand conduit un camion de nitroglycérine sur une piste de montagne. Tension insupportable.'},
+    {title:'À bout de souffle',         desc:'Godard, 1960. Jean-Paul Belmondo en voyou parisien qui imite Humphrey Bogart. La Nouvelle Vague en un film.'},
+    {title:'La Haine',                  desc:'Mathieu Kassovitz, 1995. 24 heures dans la vie de trois jeunes des cités après une nuit d\'émeutes. Un choc.'},
+    {title:'Portrait de la jeune fille en feu', desc:'Céline Sciamma — Bretagne, 1760. Une peintre et son modèle, une passion interdite. Film d\'une beauté rare.'},
+    {title:'Intouchables',              desc:'François Cluzet et Omar Sy dans l\'amitié improbable entre un aristocrate tétraplégique et son aide à domicile.'},
+    {title:'Trois hommes et un couffin',desc:'Coline Serreau, 1985. Trois célibataires endurcis se retrouvent avec un bébé sur les bras. Comédie culte.'},
+  ],
+  classic: [
+    {title:'Citizen Kane',              desc:'Orson Welles, 1941. La vie d\'un magnat de la presse racontée à rebours. Considéré comme le meilleur film de l\'histoire.'},
+    {title:'Vertigo',                   desc:'Hitchcock, 1958. Un détective vertigineux obsédé par une femme mystérieuse à San Francisco. Pur chef-d\'œuvre.'},
+    {title:'2001 : L\'Odyssée de l\'espace', desc:'Kubrick, 1968. De l\'aube de l\'humanité à Jupiter — une exploration philosophique de l\'intelligence et de l\'infini.'},
+    {title:'Casablanca',                desc:'Bogart et Bergman dans le café d\'Humphrey à Casablanca pendant la guerre. Le film romantique absolu.'},
+    {title:'Psychose',                  desc:'Hitchcock, 1960. Une fugitive s\'arrête dans un motel isolé tenu par un jeune homme étrange. La douche inoubliable.'},
+    {title:'Le Parrain',                desc:'Coppola, 1972. La saga de la famille Corleone — le meilleur film de mafia jamais réalisé avec Marlon Brando.'},
+    {title:'Apocalypse Now',            desc:'Coppola, 1979. Un capitaine remonte un fleuve cambodgien pour éliminer un colonel devenu fou. Palme d\'or Cannes.'},
+    {title:'Taxi Driver',               desc:'Scorsese, 1976. Un ancien militaire insomniaque sillonne New York de nuit. De Niro au sommet, Herrmann à la baguette.'},
+    {title:'Le Voleur de bicyclette',   desc:'De Sica, 1948. Un père et son fils cherchent dans Rome le vélo volé dont dépend leur survie. Néoréalisme pur.'},
+    {title:'8½',                        desc:'Fellini, 1963. Un réalisateur en crise creuse dans ses souvenirs et fantasmes pour trouver son prochain film.'},
+  ],
+  horror: [
+    {title:'Hereditary',                desc:'Ari Aster, 2018. Après la mort de la grand-mère, une famille découvre son sinistre héritage. La peur à l\'état pur.'},
+    {title:'Midsommar',                 desc:'Ari Aster — un couple part en Suède pour un festival de solstice qui vire à l\'horreur en plein soleil de minuit.'},
+    {title:'The VVitch',                desc:'Robert Eggers, 1630. Une famille puritaine bannie de sa colonie est terrorisée par une présence dans la forêt.'},
+    {title:'Get Out',                   desc:'Jordan Peele, 2017. Un jeune Noir rencontre la famille de sa petite amie blanche et découvre une terreur indicible.'},
+    {title:'It Follows',                desc:'Une entité invisible, transmise par contact, suit inlassablement sa victime. Métaphore glaçante sur le désir.'},
+    {title:'Talk to Me',                desc:'Des lycéens trouvent une main embaumée qui permet de communiquer avec les morts. L\'addiction à la terreur.'},
+    {title:'Longlegs',                  desc:'Maika Monroe en agent du FBI traque un tueur en série qui laisse des messages sataniques. Atmosphère oppressante.'},
+    {title:'Alien : Romulus',           desc:'Des colons spatiaux explorent une station abandonnée de Weyland-Yutani et réveillent ce qu\'ils ne devaient pas trouver.'},
+    {title:'Speak No Evil',             desc:'Un couple européen accepte une invitation chez des inconnus charmants. L\'hospitalité peut avoir un prix terrible.'},
+    {title:'The Substance',             desc:'Demi Moore prend une substance interdite qui génère une version plus jeune d\'elle-même. Body-horror déchaîné.'},
+  ],
+  world: [
+    {title:'Parasite',                  desc:'Bong Joon-ho, Palme d\'or 2019. Une famille pauvre infiltre méthodiquement le foyer d\'une famille riche. Génial.'},
+    {title:'Drive My Car',              desc:'Ryusuke Hamaguchi. Un metteur en scène en deuil confie sa voiture à une jeune chauffeuse. Traversée du Japon et de la perte.'},
+    {title:'La Vie des autres',         desc:'Berlin-Est, 1984. Un agent de la Stasi surveille un dramaturge et tombe sous le charme de son œuvre. César du meilleur film étranger.'},
+    {title:'Roma',                      desc:'Alfonso Cuarón — Mexico, 1971. La vie d\'une domestique au cœur d\'une famille de la classe moyenne. Lion d\'or Venise.'},
+    {title:'A Separation',              desc:'Asghar Farhadi — Téhéran. Un couple iranien décide de se séparer mais la garde de leurs parents complique tout.'},
+    {title:'Toni Erdmann',              desc:'Un père espiègle s\'invite dans la vie sérieuse de sa fille cadre d\'entreprise en Roumanie. Comédie bouleversante.'},
+    {title:'The Wailing',               desc:'Un policier d\'un village coréen enquête sur des meurtres après l\'arrivée d\'un mystérieux étranger dans les montagnes.'},
+    {title:'Burning',                   desc:'Lee Chang-dong — un jeune homme rencontre une fille mystérieuse et son riche ami qui brûle des serres. Envoûtant.'},
+    {title:'Perfect Days',              desc:'Wim Wenders à Tokyo. Un préposé aux toilettes publiques mène une vie simple et contemplative. Zen et bouleversant.'},
+    {title:'Capernaüm',                 desc:'Nadine Labaki — Beyrouth. Un enfant de 12 ans poursuit ses parents en justice pour l\'avoir mis au monde dans la misère.'},
+  ],
+  family: [
+    {title:'Coco',                      desc:'Pixar — Miguel pénètre le royaume des morts pour retrouver ses origines musicales et percer le mystère familial.'},
+    {title:'Encanto',                   desc:'Une famille colombienne dotée de pouvoirs magiques, sauf Mirabel — qui devra pourtant tous les sauver.'},
+    {title:'Ratatouille',               desc:'Remy, un rat passionné de gastronomie, guide en secret un apprenti cuisinier au célèbre restaurant Gusteau\'s.'},
+    {title:'Kiki la petite sorcière',   desc:'Miyazaki — une jeune sorcière s\'installe seule dans une ville côtière pour accomplir son apprentissage annuel.'},
+    {title:'Soul',                      desc:'Un musicien new-yorkais meurt le jour de sa grande chance et doit retrouver sa raison d\'être dans l\'au-delà.'},
+    {title:'Mon voisin Totoro',         desc:'Miyazaki — deux sœurs découvrent dans la forêt derrière leur maison les créatures magiques gardées par Totoro.'},
+    {title:'Les Indestructibles',       desc:'Bob Parr, super-héros à la retraite reconverti en assureur, repart au combat pour sauver le monde une dernière fois.'},
+    {title:'Toy Story',                 desc:'Woody le cowboy et Buzz l\'Éclair rivalise pour l\'affection d\'Andy — la première révolution de l\'animation numérique.'},
+    {title:'Up',                        desc:'Un vieil homme attache 10 000 ballons à sa maison et s\'envole vers l\'Amérique du Sud avec un scout clandestin.'},
+    {title:'Elemental',                 desc:'Dans une ville habitée par les éléments, Flamme et Flot découvrent qu\'ils ont plus en commun qu\'ils ne le pensent.'},
+  ],
+  emotion: [
+    {title:'Marriage Story',            desc:'Noah Baumbach — un couple de théâtre new-yorkais traverse un divorce douloureux. Scarlett Johansson et Adam Driver.'},
+    {title:'The Fabelmans',             desc:'Steven Spielberg raconte son enfance, sa passion pour le cinéma et la désintégration de sa famille. Autobiographique.'},
+    {title:'Past Lives',                desc:'Deux enfants coréens inséparables, séparés par l\'émigration, se retrouvent 20 ans plus tard à New York. Bouleversant.'},
+    {title:'Aftersun',                  desc:'Une femme adulte repasse des vidéos de vacances avec son père mort. La nostalgie comme forme de deuil.'},
+    {title:'Belfast',                   desc:'Kenneth Branagh — les Troubles en Irlande du Nord racontés à travers les yeux d\'un enfant de 9 ans. Noir et blanc.'},
+    {title:'La La Land',                desc:'Emma Stone et Ryan Gosling à Los Angeles — un musicien de jazz et une actrice rêvent de gloire dans une comédie musicale.'},
+    {title:'Mommy',                     desc:'Xavier Dolan — une mère veuve élève seule son fils violent et hyperactif dans un Québec proche. Déchirant.'},
+    {title:'Portrait de la jeune fille en feu', desc:'Céline Sciamma — Bretagne, 1760. Une peintre et son modèle, une passion interdite sur fond de mer déchaînée.'},
+    {title:'Call Me by Your Name',      desc:'Luca Guadagnino — Italie, été 1983. Elio, 17 ans, et Oliver, chercheur américain, vivent un amour brûlant et éphémère.'},
+    {title:'La Vie d\'Adèle',           desc:'Palme d\'or 2013. L\'éveil amoureux d\'une adolescente rencontrant Emma, artiste aux cheveux bleus. Intime et total.'},
+  ],
+  festival: [
+    {title:'Anora',                     desc:'Palme d\'or Cannes 2024. Sean Baker — une escort new-yorkaise épouse en secret le fils d\'un oligarque russe.'},
+    {title:'Anatomie d\'une chute',     desc:'Palme d\'or Cannes 2023. Justine Triet — un mari mort dans la neige, une femme accusée, un fils aveugle qui témoigne.'},
+    {title:'Triangle of Sadness',       desc:'Palme d\'or Cannes 2022. Östlund — des ultrariches sur un yacht de luxe, une tempête, une renversement de l\'ordre social.'},
+    {title:'Titane',                     desc:'Palme d\'or Cannes 2021. Julia Ducournau — une danseuse fuit son passé violent et s\'invente une nouvelle identité.'},
+    {title:'Parasite',                  desc:'Palme d\'or Cannes 2019. Bong Joon-ho — une famille pauvre infiltre méthodiquement le foyer d\'une famille riche.'},
+    {title:'Roma',                      desc:'Lion d\'or Venise 2018. Cuarón — Mexico, 1971. La vie d\'une domestique au cœur d\'une famille de la classe moyenne.'},
+    {title:'The Favourite',             desc:'Lion d\'or Venise 2018. Lanthimos — la reine Anne d\'Angleterre manipulée par deux cousines qui se disputent sa faveur.'},
+    {title:'Drive My Car',              desc:'Grand Prix Cannes 2021. Hamaguchi — un homme en deuil confie sa voiture à une chauffeuse silencieuse. Magnifique.'},
+    {title:'La Zone d\'intérêt',        desc:'Grand Prix Cannes 2023. Jonathan Glazer — la vie quotidienne du commandant d\'Auschwitz et sa famille dans leur villa.'},
+    {title:'Burning',                   desc:'Prix FIPRESCI Cannes 2018. Lee Chang-dong — un mystérieux riche brûle des serres. Thriller psychologique envoûtant.'},
+  ],
+};
+
+// Config : pour chaque chaîne, quel pool utiliser pour chaque slot de programme
+const FILM_SLOTS = {
+  canalbo:      ['recent',  'recent',   'recent',  'recent'],
+  canalcine:    ['classic', 'french',   'world',   'emotion', 'world'],
+  canalge:      ['classic', 'classic',  'classic', 'classic'],
+  canalkids:    [null,      'family',   null,      'family'],   // null = garder le titre générique (dessins animés)
+  cineclassic:  ['classic', 'classic',  'classic', 'classic'],
+  cineemotion:  ['emotion', 'emotion',  'emotion', 'emotion'],
+  cinefamily:   ['family',  'family',   'family',  'family'],
+  cinefestival: ['festival','festival', 'festival','festival'],
+  cinefrisson:  ['horror',  'horror',   'horror',  'horror',   'horror'],
+  tf1sf:        [null,      'recent',   null,      'recent',   null],
+  canalplus:    [null,      null,       null,      null,       'recent',null],
+  rtlclub:      [null,      null,       null,      'recent'],
+  becine:       ['french',  'classic',  'recent',  'recent'],
+  w9:           [null,      null,       null,      null,       'recent'],
+};
+
+function initDailySchedule() {
+  const d = new Date();
+  // Graine basée sur la date — change chaque jour
+  const seed = d.getFullYear() * 366 + d.getMonth() * 31 + d.getDate();
+
+  for (const [id, slots] of Object.entries(FILM_SLOTS)) {
+    const ch = CHANNELS.find(c => c.id === id);
+    if (!ch) continue;
+    slots.forEach((poolName, idx) => {
+      if (!poolName || !ch.programs[idx]) return;
+      const pool = POOLS[poolName];
+      const film = pool[(seed + idx * 7) % pool.length];
+      ch.programs[idx].title = film.title;
+      ch.programs[idx].desc  = film.desc;
+    });
+  }
+}
+
+initDailySchedule();
+
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 
 function getILTime() {
