@@ -140,12 +140,23 @@
   .modal-overlay.open { display: flex; }
   .modal {
     background: #fff; border-radius: 16px 16px 0 0; padding: 20px;
-    max-width: 600px; width: 100%; max-height: 70vh; overflow-y: auto;
+    max-width: 600px; width: 100%; max-height: 75vh; overflow-y: auto;
   }
   .modal h3 { font-size: 16px; margin-bottom: 8px; }
-  .modal p { font-size: 14px; color: #4a5568; line-height: 1.5; }
-  .modal .meta { font-size: 12px; color: #718096; margin-bottom: 12px; }
+  .modal p { font-size: 14px; color: #4a5568; line-height: 1.6; }
+  .modal .meta { font-size: 12px; color: #718096; margin-bottom: 10px; }
   .modal-close { float: right; background: #e2e8f0; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 16px; }
+  /* Modal enriched data */
+  .modal-loading { font-size: 12px; color: #a0aec0; padding: 4px 0 8px; }
+  .modal-enriched { margin: 8px 0 10px; }
+  .modal-rating { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+  .tvmaze-stars { color: #F6AD2B; font-size: 17px; letter-spacing: 1px; }
+  .tvmaze-score { font-weight: 700; font-size: 15px; color: #1a1a2e; }
+  .tvmaze-max { font-size: 11px; color: #718096; font-weight: 400; }
+  .modal-genres { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 5px; }
+  .modal-genre-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: #f0f4f8; color: #4a5568; font-weight: 500; }
+  .modal-year-status { font-size: 12px; color: #718096; margin-bottom: 8px; }
+  .modal-source { font-size: 10px; color: #a0aec0; margin-top: 14px; text-align: right; }
 </style>
 </head>
 <body>
@@ -202,7 +213,14 @@
     <button class="modal-close" id="modal-close">✕</button>
     <div class="meta" id="modal-meta"></div>
     <h3 id="modal-title"></h3>
+    <div id="modal-loading" class="modal-loading" style="display:none">🔍 Recherche des infos…</div>
+    <div id="modal-enriched" class="modal-enriched" style="display:none">
+      <div class="modal-rating" id="modal-rating"></div>
+      <div class="modal-genres" id="modal-genres"></div>
+      <div class="modal-year-status" id="modal-year"></div>
+    </div>
     <p id="modal-desc"></p>
+    <div class="modal-source" id="modal-source"></div>
   </div>
 </div>
 
@@ -784,36 +802,180 @@ const POOLS = {
   ],
 };
 
-// Config : pour chaque chaîne, quel pool utiliser pour chaque slot de programme
+// Config : pour chaque chaîne cinéma, quel pool utiliser pour chaque slot de programme
+// (canalplus, w9 gérés par WEEKLY_PRIME)
 const FILM_SLOTS = {
   canalbo:      ['recent',  'recent',   'recent',  'recent'],
   canalcine:    ['classic', 'french',   'world',   'emotion', 'world'],
   canalge:      ['classic', 'classic',  'classic', 'classic'],
-  canalkids:    [null,      'family',   null,      'family'],   // null = garder le titre générique (dessins animés)
+  canalkids:    [null,      'family',   null,      'family'],
   cineclassic:  ['classic', 'classic',  'classic', 'classic'],
   cineemotion:  ['emotion', 'emotion',  'emotion', 'emotion'],
   cinefamily:   ['family',  'family',   'family',  'family'],
   cinefestival: ['festival','festival', 'festival','festival'],
   cinefrisson:  ['horror',  'horror',   'horror',  'horror',   'horror'],
   tf1sf:        [null,      'recent',   null,      'recent',   null],
-  canalplus:    [null,      null,       null,      null,       'recent',null],
-  rtlclub:      [null,      null,       null,      'recent'],
-  becine:       ['french',  'classic',  'recent',  'recent'],
-  w9:           [null,      null,       null,      null,       'recent'],
+  rtlclub:      [null,      'recent'],
+  becine:       ['french',  'classic',  'recent'],
+};
+
+// ── WEEKLY PRIME TIME — programmes par jour de semaine (0=dim, 1=lun … 6=sam) ─
+// Remplace le slot prime time de chaque chaîne avec un vrai programme du jour.
+// TVMaze enrichira ces titres automatiquement au clic.
+const WEEKLY_PRIME = {
+
+  // TF1 — slot 22:10 (= 21h10 heure Paris)
+  tf1: [
+    {title:'Camping Paradis',         genre:'série',         badge:'',    desc:'Laurent Ournac incarne Tom, l\'animateur vedette du Camping Paradis — comédie familiale culte de TF1.'},
+    {title:'Koh-Lanta',               genre:'divertissement',badge:'new', desc:'Denis Brogniart — aventuriers en pleine nature s\'affrontent pour l\'immunité. Trahisons, alliances et survie.'},
+    {title:'HPI',                     genre:'série',         badge:'new', desc:'Audrey Fleurot — Morgane, femme de ménage au QI exceptionnel, aide la brigade criminelle de Rouen sur ses affaires les plus déroutantes.'},
+    {title:'Ninja Warrior',           genre:'divertissement',badge:'',   desc:'Le parcours du combattant ultime — des candidats affrontent les obstacles légendaires Warped Wall, Salmon Ladder et Mega Wall.'},
+    {title:'Joséphine, Ange Gardien', genre:'film',          badge:'film',desc:'Mimie Mathy — Joséphine, ange maladroit mais au grand cœur, est envoyée en mission pour aider une famille en difficulté.'},
+    {title:'Danse avec les Stars',    genre:'divertissement',badge:'new', desc:'Des célébrités apprennent la danse avec des professionnels — jury de spécialistes et votes du public chaque semaine.'},
+    {title:'Top Gun : Maverick',      genre:'film',          badge:'film',desc:'Joseph Kosinski, 2022. Pete Mitchell reprend du service pour former une nouvelle génération de pilotes pour une mission extrême. Tom Cruise.'},
+  ],
+
+  // France 2 — slot 22:10
+  france2: [
+    {title:'Capitaine Marleau',       genre:'série',  badge:'',    desc:'Corinne Masiero — la commissaire excentrique et imprévisible enquête sur des meurtres mystérieux au cœur des régions de France.'},
+    {title:'Envoyé Spécial',          genre:'magazine',badge:'live',desc:'Magazine d\'investigation — reportages en France et dans le monde sur les grandes affaires qui secouent l\'actualité.'},
+    {title:'Stalk',                   genre:'série',  badge:'new', desc:'Série policière France 2 — un tracker d\'informations en fuite coopère avec une lieutenante de police sur des affaires troubles.'},
+    {title:'Complément d\'enquête',   genre:'magazine',badge:'',  desc:'Grand magazine d\'investigation — dossiers politiques, scandales financiers et sujets tabous disséqués par les journalistes de France 2.'},
+    {title:'Meurtres à...',           genre:'film',   badge:'film',desc:'Collection France 3 — un meurtre mystérieux dans une belle région française, résolu par un duo d\'enquêteurs atypique.'},
+    {title:'Astérix et Obélix : Mission Cléopâtre',genre:'film',badge:'film',desc:'Alain Chabat, 2002. Le druide Panoramix et ses amis gaulois doivent construire un palais en 3 mois pour Cléopâtre. Culte absolu.'},
+    {title:'Columbo',                 genre:'série',  badge:'',   desc:'Le lieutenant Columbo (Peter Falk) feint d\'être distrait pour piéger méthodiquement des coupables qui se croient au-dessus de tout soupçon.'},
+  ],
+
+  // M6 — slot 22:10
+  m6: [
+    {title:'Pékin Express',           genre:'divertissement',badge:'new', desc:'Des duos voyagent à travers l\'Asie avec seulement 1€ par jour — auto-stop, défis éliminatoires et rencontres humaines extraordinaires.'},
+    {title:'Mariés au premier regard',genre:'divertissement',badge:'',   desc:'Des inconnus acceptent de se marier avant de se connaître. Des experts sélectionnent les couples compatibles — le reste est une aventure.'},
+    {title:'Zone Interdite',          genre:'doc',           badge:'doc', desc:'Magazine de reportages immersifs M6 — enquêtes au cœur d\'univers méconnus, phénomènes sociaux et coulisses interdites au grand public.'},
+    {title:'The Voice',               genre:'divertissement',badge:'new', desc:'Le télé-crochet vocal — les Talents s\'affrontent à l\'aveugle pour convaincre les coachs. Battles, K.O. et grande finale en direct.'},
+    {title:'Capital',                 genre:'doc',           badge:'doc', desc:'Enquête économique M6 — coulisses des grandes enseignes, scandales financiers, arnaques et nouvelles tendances de consommation.'},
+    {title:'Les 100 jours pour réussir',genre:'divertissement',badge:'',desc:'Des entrepreneurs relèvent un défi ambitieux en 100 jours — investissements, stratégie et pression sous l\'œil des jurés experts.'},
+    {title:'Le Prince d\'Égypte',     genre:'film',          badge:'film',desc:'DreamWorks, 1998. L\'épopée de Moïse — frère adoptif du pharaon Ramsès II, il devient le libérateur du peuple hébreu. Animation épique.'},
+  ],
+
+  // W9 — slot 22:10
+  w9: [
+    {title:'Grey\'s Anatomy',         genre:'série',badge:'',   desc:'Les internes du Grey Sloan Memorial jonglent entre chirurgies d\'urgence dramatiques et vie personnelle tumultueuse à Seattle.'},
+    {title:'FBI',                     genre:'série',badge:'',   desc:'L\'équipe du bureau de New York du FBI enquête sur des affaires criminelles complexes aux enjeux nationaux.'},
+    {title:'Chicago Fire',            genre:'série',badge:'',   desc:'Les pompiers et paramedics de la caserne 51 de Chicago affrontent des situations extrêmes à chaque intervention.'},
+    {title:'NCIS : Los Angeles',      genre:'série',badge:'',   desc:'L\'unité d\'élite NCIS de Los Angeles résout des affaires d\'espionnage et de crime organisé sous couverture.'},
+    {title:'9-1-1',                   genre:'série',badge:'',   desc:'Les équipes d\'urgence de Los Angeles — pompiers, policiers, ambulanciers — face à des catastrophes inimaginables.'},
+    {title:'La La Land',              genre:'film', badge:'film',desc:'Damien Chazelle, 2016. Emma Stone et Ryan Gosling jouent deux artistes qui s\'aiment à Los Angeles en poursuivant leurs rêves. 6 Oscars.'},
+    {title:'Titanic',                 genre:'film', badge:'film',desc:'James Cameron, 1997. Jack et Rose vivent un amour impossible à bord du Titanic. Leonardo DiCaprio, Kate Winslet. Oscar du Meilleur Film.'},
+  ],
+
+  // Canal+ — slot 22:00 (remplace FILM_SLOTS pour ce canal)
+  canalplus: [
+    {title:'The Penguin',             genre:'série',badge:'new', desc:'Spin-off de Batman — Oz Cobb alias Le Pingouin (Colin Farrell) gravit les échelons du crime à Gotham après la chute du Joker. HBO.'},
+    {title:'Shōgun',                  genre:'série',badge:'',   desc:'Un navigateur anglais devient vassal d\'un seigneur de guerre dans le Japon féodal du XVIIe siècle. Acclamée universellement. FX/Hulu.'},
+    {title:'The Bear',                genre:'série',badge:'new', desc:'Un chef étoilé reprend le restaurant miteux de son frère décédé à Chicago — cuisine, chaos et quête obsessionnelle de perfection.'},
+    {title:'House of the Dragon',     genre:'série',badge:'',   desc:'Préquelle de Game of Thrones — la guerre fratricide de la maison Targaryen pour le Trône de Fer. HBO, effets spéciaux époustouflants.'},
+    {title:'Ripley',                  genre:'série',badge:'',   desc:'Andrew Scott incarne Tom Ripley dans l\'Italie des années 60 — arnaqueur de génie, usurpateur d\'identité, meurtrier sans remords.'},
+    {title:'Oppenheimer',             genre:'film', badge:'film',desc:'Christopher Nolan, 2023. La vie du père de la bombe atomique. Cillian Murphy, Robert Downey Jr. Oscar du Meilleur Film, Réalisateur, Acteur.'},
+    {title:'Succession',             genre:'série',badge:'',   desc:'La bataille finale pour l\'empire médiatique des Roy — saison 4. Série HBO unanimement saluée comme l\'une des meilleures de la décennie.'},
+  ],
+
+  // La Une (RTBF) — slot 21:30
+  laune: [
+    {title:'Demain, tout commence',   genre:'film', badge:'film',desc:'Hugo Gélin, 2016. Omar Sy se retrouve père célibataire d\'une petite fille en Angleterre. Comédie émouvante, 4 millions d\'entrées.'},
+    {title:'Professor T',             genre:'série',badge:'',   desc:'Koen De Bouw — un professeur de criminologie génial mais asocial aide la police à démêler des meurtres en Belgique flamande.'},
+    {title:'Questions à la une',      genre:'doc',  badge:'doc', desc:'Magazine d\'investigation RTBF — enquêtes sur les injustices, scandales et sujets qui bouleversent la Belgique en profondeur.'},
+    {title:'La Trêve',                genre:'série',badge:'',   desc:'Série policière belge primée — un inspecteur enquête dans les Ardennes enneigées sur un meurtre qui déchire une communauté.'},
+    {title:'Code 37',                 genre:'série',badge:'',   desc:'Série policière belge — une unité spéciale mène des enquêtes sur des crimes sexuels à Anvers avec une méthode controversée.'},
+    {title:'Intouchables',            genre:'film', badge:'film',desc:'Nakache & Toledano, 2011. L\'amitié entre Philippe, aristocrate tétraplégique, et Driss, ex-détenu. Avec Omar Sy. 19 millions d\'entrées.'},
+    {title:'Les Misérables',          genre:'série',badge:'',   desc:'Adaptation BBC de Victor Hugo — Jean Valjean (Dominic West) poursuivi sans relâche par l\'inspecteur Javert dans la France du XIXe siècle.'},
+  ],
+
+  // RTL tvi — slot 21:10
+  rtltvi: [
+    {title:'The Good Doctor',         genre:'série',badge:'',   desc:'Shaun Murphy, jeune chirurgien autiste et savant prodige, sauve des vies au San Jose St. Bonaventure Hospital malgré les préjugés.'},
+    {title:'Manifest',                genre:'série',badge:'',   desc:'Les passagers du vol 828, disparus pendant 5 ans, reprennent leur vie en découvrant qu\'ils entendent des voix mystérieuses qui les guident.'},
+    {title:'FBI : Most Wanted',       genre:'série',badge:'',   desc:'La task force traque les fugitifs les plus dangereux inscrits sur la liste des plus recherchés du FBI américain.'},
+    {title:'S.W.A.T.',                genre:'série',badge:'',   desc:'Hondo dirige son équipe SWAT d\'élite à Los Angeles — interventions tactiques et tensions communautaires dans les rues de la ville.'},
+    {title:'Les Feux de l\'Amour',    genre:'série',badge:'',   desc:'Le soap opera américain culte — les familles Abbott, Newman et Chancellor s\'affrontent depuis 1973 dans la ville fictive de Genoa City.'},
+    {title:'Intouchables',            genre:'film', badge:'film',desc:'Nakache & Toledano, 2011. Driss, ex-détenu sénégalais, devient l\'aide-soignant et ami du milliardaire tétraplégique Philippe Pozzo di Borgo.'},
+    {title:'Gran Turismo',            genre:'film', badge:'film',desc:'Neill Blomkamp, 2023. Jann Mardenborough passe de gamer à pilote de course professionnel grâce au programme GT Academy de Nissan.'},
+  ],
+
+  // Keshet 12 — slot 21:00
+  keshet12: [
+    {title:'ארץ נהדרת',              genre:'divertissement',badge:'',   desc:'תוכנית הסאטירה הפוליטית של ישראל — גיא פנס וצוות שחקנים מצחיקים ביקורת שבועית על פוליטיקה, חברה ותרבות ישראלית.'},
+    {title:'אח גדול',               genre:'divertissement',badge:'new', desc:'Big Brother ישראל — מתמודדים חיים יחד תחת מצלמות 24/7. מי ישרוד? הצבעת הצופים מכריעה בכל שבוע.'},
+    {title:'פאודה',                  genre:'série',         badge:'',   desc:'סדרת מתח ישראלית — יחידה מחתרתית של כוחות הביטחון פועלת מול ארגוני טרור. Lior Raz, Avi Issacharoff.'},
+    {title:'הברירה השנייה',          genre:'divertissement',badge:'new', desc:'כוכבים ישראלים אהובים חוזרים לתחרות — תוכנית בידור מרגשת בשידור חי עם הצבעת קהל בזמן אמת.'},
+    {title:'המשפחה',                 genre:'série',         badge:'',   desc:'דרמה משפחתית ישראלית — מאחורי החזות של משפחה מצליחה מסתתרים סודות, כסף ויחסי כוח שיכולים להרוס הכל.'},
+    {title:'Mission Impossible',     genre:'film',          badge:'film',desc:'טום קרוז כסוכן IMF Ethan Hunt — משימה בלתי אפשרית עם פעולה ומתח שלא נראו כמותם. אחד מסדרות הפעולה הטובות.'},
+    {title:'The Voice Israel',       genre:'divertissement',badge:'new', desc:'קול ישראל — מתמודדים מנסים לקנות מקום בצוות המאמנים הגדולים בביצועים מרגשים בפני קהל חי.'},
+  ],
+
+  // Reshet 13 — slot 21:00
+  reshet13: [
+    {title:'אנושיות',               genre:'divertissement',badge:'',   desc:'תוכנית ריאליטי חברתית — מחקר על ההתנהגות האנושית במצבים קיצוניים ומפתיעים שמגלים מה באמת מניע אנשים.'},
+    {title:'האח הגדול',             genre:'divertissement',badge:'new', desc:'גרסה ישראלית של Big Brother — הצגות, בריתות ובגידות בדירה הכי מפורסמת בישראל. הצבעת הצופים מכריעה.'},
+    {title:'עושים סדר',             genre:'magazine',      badge:'live',desc:'תוכנית ראיונות פוליטיים — עיתונאים מובילים מנתחים את אירועי השבוע ומתעמתים עם בעלי תפקידים.'},
+    {title:'פנים חדשות',            genre:'série',         badge:'new', desc:'סדרה ישראלית מקורית — קומדיה דרמטית על עולם התקשורת, המדיה הדיגיטלית והבידור בתל-אביב.'},
+    {title:'הרצוג',                 genre:'série',         badge:'',   desc:'ביוגרפיה דרמטית בת 6 פרקים על חיים הרצוג, נשיא ישראל השישי — שאול לוי בתפקיד ראשי.'},
+    {title:'The Dark Knight',        genre:'film',          badge:'film',desc:'כריסטופר נולאן, 2008. באטמן מול הג\'וקר — הת\'ית ל\'ג\'ר בתפקיד אגדי. נחשב לאחד מסרטי העל-על הטובים אי פעם.'},
+    {title:'גב ההר',                genre:'divertissement',badge:'',   desc:'ריאליטי הישרדות ישראלי — קבוצות מתמודדות בסביבה טבעית קשה עם אתגרים גופניים ונפשיים קיצוניים.'},
+  ],
+
+  // Kan 11 — slot 21:00
+  kan11: [
+    {title:'זמן אמת',               genre:'magazine',badge:'',   desc:'תוכנית השבת של כאן 11 — סיכום השבוע בגישה עיתונאית ביקורתית ועצמאית, מחוץ לפוליטיקה המפלגתית.'},
+    {title:'פגוש את העיתונות',      genre:'magazine',badge:'live',desc:'שידור ישיר — ראיון מעמיק עם מנהיג פוליטי בהגשת עיתונאים בכירים. השידור הפוליטי המרכזי של השבוע.'},
+    {title:'איי.אי — מה הלאה',     genre:'doc',    badge:'doc', desc:'סדרת תיעוד ישראלית — כיצד בינה מלאכותית תשנה את חיינו, עבודתנו ועתיד האנושות בעשורים הקרובים.'},
+    {title:'מגעים',                 genre:'série',  badge:'',   desc:'דרמה חברתית ישראלית — סיפורי פגישה, אהבה וחברות בין ישראלים ממגזרים ורקעים שונים לגמרי.'},
+    {title:'כאן 11 ספיישל',        genre:'doc',    badge:'doc', desc:'תכנית מיוחדת של כאן — תחקיר עומק, ריאיון בלעדי, או תיעוד של אירוע ישראלי חשוב בשנה האחרונה.'},
+    {title:'שלום פולן',             genre:'film',   badge:'film',desc:'סרט ישראלי — מסע רגשי לפולין בחיפוש אחר שורשים, זיכרון השואה ומה שנותר מהעולם שנחרב.'},
+    {title:'מוסיקה אחרת',          genre:'culture',badge:'',   desc:'תוכנית מוסיקה ישראלית — ביצועים חיים של אמנים ישראלים ושיחות מעמיקות על יצירה, זהות ומוסיקה.'},
+  ],
+};
+
+// Slot prime time par chaîne (heure israélienne)
+const PRIME_SLOT_TIME = {
+  tf1:     '22:10',
+  france2: '22:10',
+  m6:      '22:10',
+  w9:      '22:10',
+  canalplus:'22:00',
+  laune:   '21:30',
+  rtltvi:  '21:10',
+  keshet12:'21:00',
+  reshet13:'21:00',
+  kan11:   '21:00',
 };
 
 function initDailySchedule() {
-  const d = new Date();
-  // Graine basée sur la date — change chaque jour
-  const seed = d.getFullYear() * 366 + d.getMonth() * 31 + d.getDate();
+  const now  = new Date();
+  const dow  = now.getDay(); // 0=dim, 1=lun … 6=sam
+  // Numéro de jour dans l'année pour la rotation des films (unique chaque jour)
+  const doy  = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
 
+  // 1. Prime time hebdomadaire pour les grandes chaînes
+  for (const [chId, slotTime] of Object.entries(PRIME_SLOT_TIME)) {
+    const primes = WEEKLY_PRIME[chId];
+    if (!primes) continue;
+    const ch = CHANNELS.find(c => c.id === chId);
+    if (!ch) continue;
+    const idx = ch.programs.findIndex(p => p.time === slotTime);
+    if (idx === -1) continue;
+    const prime = primes[dow];
+    if (!prime) continue;
+    ch.programs[idx] = { ...ch.programs[idx], ...prime };
+  }
+
+  // 2. Rotation des films pour les chaînes cinéma (par numéro de jour)
   for (const [id, slots] of Object.entries(FILM_SLOTS)) {
     const ch = CHANNELS.find(c => c.id === id);
     if (!ch) continue;
     slots.forEach((poolName, idx) => {
       if (!poolName || !ch.programs[idx]) return;
       const pool = POOLS[poolName];
-      const film = pool[(seed + idx * 7) % pool.length];
+      const film = pool[(doy + idx * 7) % pool.length];
       ch.programs[idx].title    = film.title;
       ch.programs[idx].desc     = film.desc;
       ch.programs[idx].longDesc = film.long || film.desc;
@@ -856,6 +1018,41 @@ function badgeHTML(badge) {
   if (!badge) return '';
   const labels = { live:'EN DIRECT', new:'NOUVEAU', film:'FILM', doc:'DOC', sport:'SPORT' };
   return `<span class="badge badge-${badge}">${labels[badge] || badge.toUpperCase()}</span>`;
+}
+
+// ── TVMAZE ENRICHMENT ─────────────────────────────────────────────────────────
+
+const tvmazeCache = new Map();
+
+function stripHTML(html) {
+  if (!html) return '';
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+}
+
+async function enrichFromTVMaze(title) {
+  const key = title.toLowerCase().trim();
+  if (tvmazeCache.has(key)) return tvmazeCache.get(key);
+  try {
+    const res = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${encodeURIComponent(title)}`);
+    if (!res.ok) throw new Error('not found');
+    const d = await res.json();
+    const result = {
+      summary: stripHTML(d.summary || ''),
+      rating:  d.rating?.average || null,
+      genres:  d.genres || [],
+      year:    d.premiered ? d.premiered.slice(0, 4) : null,
+      status:  d.status || null,
+    };
+    tvmazeCache.set(key, result);
+    return result;
+  } catch {
+    tvmazeCache.set(key, null);
+    return null;
+  }
 }
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
@@ -978,7 +1175,7 @@ document.getElementById('channels-list').addEventListener('click', e => {
     return;
   }
 
-  // Program item click → show description modal
+  // Program item click → show description modal + TVMaze enrichment
   const progItem = e.target.closest('.program-item');
   if (progItem) {
     const chId = progItem.dataset.ch;
@@ -986,10 +1183,67 @@ document.getElementById('channels-list').addEventListener('click', e => {
     const ch = CHANNELS.find(c => c.id === chId);
     if (!ch) return;
     const p = ch.programs[progIdx];
+
+    // Affichage immédiat avec les infos de base
     document.getElementById('modal-title').textContent = p.title;
-    document.getElementById('modal-desc').textContent = p.desc;
-    document.getElementById('modal-meta').textContent = `${ch.name} — ${p.time} — ${p.genre}`;
+    document.getElementById('modal-desc').textContent  = p.longDesc || p.desc || '';
+    document.getElementById('modal-meta').textContent  = `${ch.name} · ${p.time} · ${p.genre}`;
+    document.getElementById('modal-rating').innerHTML  = '';
+    document.getElementById('modal-genres').innerHTML  = '';
+    document.getElementById('modal-year').textContent  = '';
+    document.getElementById('modal-source').textContent = '';
+
+    const loadingEl  = document.getElementById('modal-loading');
+    const enrichedEl = document.getElementById('modal-enriched');
+    enrichedEl.style.display = 'none';
+
+    // On n'enrichit pas les journaux télévisés, météo ou animation
+    const skipGenres = ['info', 'animation', 'magazine'];
+    const skip = skipGenres.includes(p.genre) || p.badge === 'live';
+
+    if (!skip) {
+      loadingEl.style.display = 'block';
+      enrichFromTVMaze(p.title).then(info => {
+        loadingEl.style.display = 'none';
+        if (info?.summary) {
+          document.getElementById('modal-desc').textContent = info.summary;
+          enrichedEl.style.display = 'block';
+
+          // Note sur 10 → étoiles sur 5
+          const ratingEl = document.getElementById('modal-rating');
+          if (info.rating) {
+            const filled = Math.round(info.rating / 2);
+            ratingEl.innerHTML =
+              `<span class="tvmaze-stars">${'★'.repeat(filled)}${'☆'.repeat(5 - filled)}</span>` +
+              `<span class="tvmaze-score">${info.rating}<span class="tvmaze-max">/10</span></span>`;
+          }
+
+          // Genres
+          const genresEl = document.getElementById('modal-genres');
+          if (info.genres.length) {
+            genresEl.innerHTML = info.genres
+              .map(g => `<span class="modal-genre-tag">${g}</span>`).join('');
+          }
+
+          // Année et statut
+          const yearEl = document.getElementById('modal-year');
+          if (info.year) {
+            yearEl.textContent = info.status === 'Ended'
+              ? `${info.year} — Terminée`
+              : info.status === 'Running'
+                ? `Depuis ${info.year} · En cours`
+                : `Depuis ${info.year}`;
+          }
+
+          document.getElementById('modal-source').textContent = 'Source : TVmaze.com';
+        }
+      });
+    } else {
+      loadingEl.style.display = 'none';
+    }
+
     document.getElementById('modal-overlay').classList.add('open');
+    return;
   }
 
   // Channel header click → expand
